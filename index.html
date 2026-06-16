@@ -1,0 +1,2654 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SVT电竞模拟</title>
+<link rel="stylesheet" href="//at.alicdn.com/t/font_中心平台.css">
+<style>
+:root {
+  --bg-primary: #f8f9fa;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --text-primary: #2c3e50;
+  --text-secondary: #7f8c8d;
+  --text-muted: #aab2bd;
+  --accent: #74b9ff;
+  --accent-light: #dfe6ed;
+  --success: #55a77a;
+  --warning: #fdcb6e;
+  --danger: #e17055;
+  --border: #e8ecf1;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-hover: 0 4px 20px rgba(0,0,0,0.1);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
+html, body { height: 100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 封面页 */
+#cover-page {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(180deg, #f8f9fa 0%, #e8ecf1 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  overflow-y: auto;
+}
+#cover-page.hidden { display: none; }
+
+.cover-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.game-title {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+.game-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.cover-section {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin: 10px 0;
+  width: 100%;
+  max-width: 360px;
+  box-shadow: var(--shadow);
+}
+
+.section-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.toggle-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+.toggle-label.active { color: var(--accent); font-weight: 500; }
+
+.switch {
+  position: relative;
+  width: 48px;
+  height: 26px;
+  background: var(--border);
+  border-radius: 13px;
+  cursor: pointer;
+  transition: all 0.3s;
+  border: none;
+}
+.switch.on { background: var(--accent); }
+.switch::after {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  background: #fff;
+  border-radius: 50%;
+  top: 2px;
+  left: 2px;
+  transition: all 0.3s;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+.switch.on::after { left: 24px; }
+
+.option-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+.option-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 12px 8px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.25s;
+  font-size: 0.85rem;
+  text-align: center;
+}
+.option-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.option-btn.selected {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 500;
+}
+
+.char-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
+  gap: 6px;
+}
+.char-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 10px 4px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.25s;
+  font-size: 0.65rem;
+  text-align: center;
+}
+.char-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.char-btn.selected {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.start-btn {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 50px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  margin-top: 24px;
+  letter-spacing: 2px;
+  transition: all 0.3s;
+  box-shadow: 0 4px 16px rgba(116, 185, 255, 0.35);
+}
+.start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(116, 185, 255, 0.45);
+}
+
+/* 主游戏界面 */
+#game-container {
+  display: none;
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+#game-container.active { display: flex; flex-direction: column; }
+
+/* 顶部栏 */
+.top-bar {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+}
+.top-left { display: flex; align-items: center; gap: 12px; }
+.game-logo {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+.day-badge {
+  background: var(--bg-primary);
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+.rank-badge {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  background: linear-gradient(135deg, #74b9ff22, #a29bfe22);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+.rank-icon { font-size: 0.9rem; }
+
+.top-center { display: flex; align-items: center; gap: 14px; }
+
+.stamina-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.stamina-icon { font-size: 1rem; color: var(--success); }
+.stamina-bar {
+  width: 70px;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.stamina-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--success), #81ecec);
+  transition: width 0.4s ease;
+  border-radius: 3px;
+}
+.stamina-fill.low { background: linear-gradient(90deg, var(--danger), #fd79a8); }
+.stamina-fill.med { background: linear-gradient(90deg, var(--warning), #fdcb6e); }
+.stamina-text { font-size: 0.7rem; color: var(--text-muted); min-width: 42px; }
+
+.top-right { display: flex; align-items: center; gap: 8px; }
+.icon-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all 0.25s;
+}
+.icon-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+
+/* 主舞台 */
+.main-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom));
+  max-width: 100%;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 状态面板 - 在输入区上方 */
+.status-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+}
+.status-section {
+  flex: 1;
+}
+.section-title {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.section-title::before {
+  content: '';
+  width: 3px;
+  height: 10px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* 四维属性 */
+.attr-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.attr-item {
+  text-align: center;
+  padding: 8px 4px;
+  background: var(--bg-primary);
+  border-radius: var(--radius-sm);
+}
+.attr-name {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.attr-val {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.attr-bar {
+  height: 3px;
+  background: var(--border);
+  border-radius: 2px;
+  margin-top: 6px;
+  overflow: hidden;
+}
+.attr-fill {
+  height: 100%;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* 羁绊列表 */
+.bond-mini {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.bond-tag {
+  font-size: 0.7rem;
+  padding: 4px 10px;
+  background: var(--bg-primary);
+  border-radius: 20px;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.bond-tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.bond-tag.lv0 { opacity: 0.5; }
+.bond-tag.lv1 { background: #74b9ff15; border-color: #74b9ff50; color: #0984e3; }
+.bond-tag.lv2 { background: #55efc415; border-color: #55efc450; color: #00b894; }
+.bond-tag.lv3 { background: #fdcb6e15; border-color: #fdcb6e50; color: #e17055; }
+.bond-tag.lv4 { background: #a29bfe15; border-color: #a29bfe50; color: #6c5ce7; }
+.bond-tag.lv5 { background: #fd79a815; border-color: #fd79a850; color: #e84393; }
+
+/* 记忆碎片 - 数字展示 */
+.fragment-num {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.fragment-num span { color: var(--text-muted); font-weight: 400; }
+
+/* 排名小面板 */
+.rank-mini {
+  text-align: center;
+}
+.rank-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.rank-pts {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* 剧情面板 */
+.story-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+.story-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.scene-title {
+  font-size: 0.8rem;
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.check-tag {
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  animation: popIn 0.4s ease;
+}
+@keyframes popIn {
+  0% { transform: scale(0); opacity: 0; }
+  70% { transform: scale(1.1); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.check-tag.success { background: #55efc415; color: var(--success); }
+.check-tag.fail { background: #fab1a015; color: var(--danger); }
+
+.story-text {
+  font-size: 0.92rem;
+  line-height: 1.75;
+  color: var(--text-primary);
+  min-height: 60px;
+}
+.story-message {
+  margin-bottom: 18px;
+  padding: 4px 0;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+.review-item {
+  display: flex;
+  gap: 12px;
+  padding: 12px 14px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  align-items: center;
+  min-height: 48px;
+}
+.review-item:hover {
+  border-color: var(--accent);
+  background: var(--bg-secondary);
+  transform: translateX(4px);
+}
+.review-index {
+  color: var(--accent);
+  font-weight: 600;
+  font-family: 'Courier New', monospace;
+  min-width: 60px;
+  flex-shrink: 0;
+}
+.review-preview {
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  flex: 1;
+  word-break: break-word;
+}
+.typewriter-cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--accent);
+  animation: blink 0.8s infinite;
+  vertical-align: middle;
+  margin-left: 2px;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.story-footer {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.char-tag {
+  font-size: 0.75rem;
+  color: var(--accent);
+}
+.story-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.tag {
+  background: var(--bg-primary);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+}
+
+/* 选项面板 */
+.options-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow);
+}
+.option-item {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+  padding: 14px 16px;
+  min-height: 52px;
+  border-radius: var(--radius-sm);
+  margin: 6px 0;
+  cursor: pointer;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+}
+.option-item:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateX(4px);
+}
+.option-item::before {
+  content: '◇';
+  color: var(--accent);
+  transition: all 0.25s;
+  font-size: 0.8rem;
+}
+.option-item:hover::before { content: '◆'; }
+
+/* 输入面板 - 最底部 */
+.input-panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow);
+  margin-top: auto;
+}
+.input-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.game-input {
+  flex: 1;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0 14px;
+  height: 48px;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  outline: none;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+}
+.game-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(116, 185, 255, 0.15);
+}
+.game-input::placeholder { color: var(--text-muted); }
+
+.send-btn {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  padding: 0 20px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.send-btn:hover {
+  background: #5fa8f5;
+  transform: translateY(-1px);
+}
+.clear-btn { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: transparent; border: 1px solid var(--border); color: var(--text-muted); cursor: pointer; transition: all 0.2s ease; border-radius: 6px; flex-shrink: 0; font-size: 14px; }
+.clear-btn:hover { border-color: var(--accent); color: var(--accent); }
+.quick-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.quick-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  padding: 6px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: all 0.25s;
+}
+.quick-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.input-hint {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  margin-top: 10px;
+  letter-spacing: 0.3px;
+}
+
+/* 模态框 */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 20px;
+}
+.modal-overlay.active { display: flex; }
+
+.modal-box {
+  background: var(--bg-card);
+  border-radius: var(--radius);
+  padding: 24px;
+  max-width: 480px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s;
+}
+.modal-close:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #fff;
+}
+.modal-title {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.modal-content { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+
+/* 地图网格 */
+.map-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+}
+.map-item {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.map-item:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+.map-icon { font-size: 1.8rem; margin-bottom: 8px; }
+.map-name { font-size: 0.8rem; color: var(--text-primary); margin-bottom: 3px; }
+.map-desc { font-size: 0.65rem; color: var(--text-muted); }
+
+/* 行动网格 */
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+}
+.action-item {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.action-item:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+.action-icon { font-size: 1.8rem; margin-bottom: 8px; }
+.action-name { font-size: 0.85rem; color: var(--text-primary); margin-bottom: 4px; }
+.action-cost { font-size: 0.7rem; color: var(--danger); }
+.action-desc { font-size: 0.65rem; color: var(--text-muted); margin-top: 3px; }
+
+/* 详情弹层 */
+.detail-header { text-align: center; margin-bottom: 18px; }
+.detail-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), #a29bfe);
+  margin: 0 auto 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(116, 185, 255, 0.35);
+}
+.detail-name { font-size: 1.2rem; color: var(--text-primary); margin-bottom: 4px; font-weight: 600; }
+.detail-id { font-size: 0.75rem; color: var(--text-muted); }
+.detail-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 16px 0;
+}
+.stat-card {
+  background: var(--bg-primary);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  text-align: center;
+}
+.stat-label { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-value { font-size: 1.1rem; color: var(--accent); font-weight: 700; }
+.detail-bio {
+  background: var(--bg-primary);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-top: 12px;
+}
+
+/* FAQ */
+.faq-item {
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.faq-q {
+  padding: 12px 14px;
+  color: var(--text-primary);
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+}
+.faq-a {
+  padding: 0 14px 12px;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  display: none;
+}
+.faq-item.open .faq-a { display: block; }
+.faq-item.open .faq-q::after { content: '▲'; font-size: 0.6rem; color: var(--accent); }
+.faq-q::after { content: '▼'; font-size: 0.6rem; color: var(--text-muted); }
+
+/* API设置 */
+.api-section { margin-bottom: 14px; }
+.api-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 6px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+.api-select, .api-input {
+  width: 100%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  margin-bottom: 8px;
+}
+.api-select:focus, .api-input:focus { border-color: var(--accent); outline: none; }
+
+/* 确认弹层 */
+.confirm-box { text-align: center; padding: 10px; }
+.confirm-msg { font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
+.confirm-btns { display: flex; gap: 12px; justify-content: center; }
+.confirm-btn {
+  padding: 10px 28px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: all 0.25s;
+  border: none;
+}
+.confirm-yes { background: var(--accent); color: #fff; }
+.confirm-yes:hover { background: #5fa8f5; }
+.confirm-no { background: var(--bg-primary); border: 1px solid var(--border); color: var(--text-secondary); }
+.confirm-no:hover { border-color: var(--danger); color: var(--danger); }
+
+/* 主题选择 */
+.theme-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.theme-item {
+  padding: 12px 8px;
+  border-radius: var(--radius-sm);
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+  border: 2px solid transparent;
+}
+.theme-item:hover { transform: scale(1.03); }
+.theme-item.selected { border-color: var(--accent); }
+.theme-preview { width: 100%; height: 36px; border-radius: 6px; margin-bottom: 6px; }
+.theme-name { font-size: 0.72rem; color: var(--text-secondary); }
+
+/* 天赋标签 */
+.talent-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+.talent-tag {
+  background: var(--bg-primary);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.65rem;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+/* 逻辑自检 */
+.logic-section {
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--border);
+}
+.logic-section:last-child { border-bottom: none; }
+.logic-title { font-size: 0.75rem; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.logic-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.82rem; }
+.logic-label { color: var(--text-secondary); }
+.logic-val { color: var(--text-primary); font-weight: 500; }
+.logic-val.ok { color: var(--success); }
+.logic-val.warn { color: var(--warning); }
+.logic-val.err { color: var(--danger); }
+
+/* 通知 */
+.notification {
+  position: fixed;
+  top: 70px;
+  right: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  z-index: 300;
+  transform: translateX(120%);
+  transition: transform 0.3s ease;
+  max-width: 280px;
+  box-shadow: var(--shadow-hover);
+}
+.notification.show { transform: translateX(0); }
+.notif-title { font-size: 0.8rem; color: var(--accent); margin-bottom: 3px; font-weight: 600; }
+.notif-msg { font-size: 0.78rem; color: var(--text-secondary); }
+
+/* 更新日志 */
+.changelog { max-height: 280px; overflow-y: auto; }
+.log-item {
+  border-left: 2px solid var(--accent);
+  padding-left: 14px;
+  margin-bottom: 14px;
+  position: relative;
+}
+.log-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+.log-version { font-size: 0.88rem; color: var(--accent); font-weight: 600; margin-bottom: 3px; }
+.log-date { font-size: 0.68rem; color: var(--text-muted); margin-bottom: 5px; }
+.log-content { font-size: 0.8rem; line-height: 1.6; }
+
+/* 滚动条 */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* 加载动画 */
+.loading {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .top-bar { padding: 8px 12px; }
+  .game-logo { font-size: 0.85rem; }
+  .day-badge, .rank-badge { font-size: 0.7rem; padding: 3px 8px; }
+  .stamina-bar { width: 55px; }
+  .main-stage { padding: 12px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+  .story-panel, .options-panel, .input-panel, .status-panel { padding: 14px; }
+  .option-item { padding: 15px 14px; min-height: 52px; font-size: 0.88rem; }
+  .game-input { height: 48px; font-size: 16px; }
+  .send-btn { height: 48px; padding: 0 16px; }
+  .icon-btn { width: 34px; height: 34px; font-size: 0.9rem; }
+  .modal-box { padding: 18px; margin: 10px; }
+  .action-grid { grid-template-columns: repeat(2, 1fr); }
+  .attr-grid { grid-template-columns: repeat(2, 1fr); }
+  .map-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* PC端侧栏 */
+@media (min-width: 1024px) {
+  .main-stage {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-top: 20px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- 封面页 -->
+<div id="cover-page">
+  <div class="cover-header">
+    <h1 class="game-title">SVT电竞</h1>
+    <p class="game-subtitle">平行世界记忆</p>
+  </div>
+
+  <div class="cover-section">
+    <div class="section-label">队内恋爱</div>
+    <div class="toggle-row">
+      <span class="toggle-label" id="romanceOff">关闭</span>
+      <div class="switch" id="romanceSwitch" onclick="toggleRomance()"></div>
+      <span class="toggle-label" id="romanceOn">开启</span>
+    </div>
+  </div>
+
+  <button class="start-btn" onclick="openSettings()">开始游戏</button>
+</div>
+
+<!-- 设置弹层 -->
+<div class="modal-overlay" id="settingsModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('settingsModal')">×</button>
+    <h2 class="modal-title">游戏设置</h2>
+    <div class="modal-content">
+      <div class="cover-section" style="box-shadow: none; border: none; padding: 0; margin: 0 0 14px 0;">
+        <div class="section-label">主攻游戏</div>
+        <div class="option-grid" id="gameSelect">
+          <div class="option-btn" data-value="王者荣耀">王者荣耀</div>
+          <div class="option-btn" data-value="英雄联盟">英雄联盟</div>
+          <div class="option-btn" data-value="CS2">CS2</div>
+          <div class="option-btn" data-value="瓦罗兰">瓦罗兰</div>
+        </div>
+      </div>
+
+      <div class="cover-section" style="box-shadow: none; border: none; padding: 0; margin: 0 0 14px 0;">
+        <div class="section-label">职业路线</div>
+        <div class="option-grid" id="careerSelect">
+          <div class="option-btn" data-value="竞技者">竞技者</div>
+          <div class="option-btn" data-value="幕后智者">幕后智者</div>
+          <div class="option-btn" data-value="内容王者">内容王者</div>
+          <div class="option-btn" data-value="建设者">建设者</div>
+        </div>
+      </div>
+
+      <div class="cover-section" style="box-shadow: none; border: none; padding: 0; margin: 0 0 14px 0;">
+        <div class="section-label">难度</div>
+        <div class="option-grid" id="difficultySelect">
+          <div class="option-btn" data-value="休闲">休闲</div>
+          <div class="option-btn" data-value="标准">标准</div>
+          <div class="option-btn" data-value="硬核">硬核</div>
+          <div class="option-btn" data-value="地狱">地狱</div>
+        </div>
+      </div>
+
+      <div class="cover-section" style="box-shadow: none; border: none; padding: 0; margin: 0 0 14px 0;">
+        <div class="section-label">选择角色</div>
+        <div class="option-grid" style="margin-bottom: 10px;">
+          <div class="option-btn" id="customCharBtn" onclick="selectCustomChar()">自定义</div>
+          <div class="option-btn" id="svtCharBtn" onclick="selectSVTChar()">SVT成员</div>
+        </div>
+        <div id="customCharInput" style="display:none;">
+          <input type="text" class="game-input" id="customName" placeholder="输入角色名" style="width:100%;margin-bottom:8px;height:42px;">
+        </div>
+        <div id="svtCharGrid" class="char-grid" style="display:none;">
+          <div class="char-btn" data-id="1" data-name="S.COUPS">SC</div>
+          <div class="char-btn" data-id="2" data-name="JEONGHAN">JH</div>
+          <div class="char-btn" data-id="3" data-name="JOSHUA">JS</div>
+          <div class="char-btn" data-id="4" data-name="JUN">JUN</div>
+          <div class="char-btn" data-id="5" data-name="HOSHI">HSH</div>
+          <div class="char-btn" data-id="6" data-name="WONWOO">WW</div>
+          <div class="char-btn" data-id="7" data-name="WOOZI">WZ</div>
+          <div class="char-btn" data-id="8" data-name="DK">DK</div>
+          <div class="char-btn" data-id="9" data-name="MINGYU">MG</div>
+          <div class="char-btn" data-id="10" data-name="THE8">T8</div>
+          <div class="char-btn" data-id="11" data-name="SEUNGKWAN">SK</div>
+          <div class="char-btn" data-id="12" data-name="VERNON">VRN</div>
+          <div class="char-btn" data-id="13" data-name="DINO">DN</div>
+        </div>
+      </div>
+
+      <button class="start-btn" onclick="startGame()" style="width:100%; margin-top:10px;">确认开始</button>
+    </div>
+  </div>
+</div>
+
+<!-- 主游戏界面 -->
+<div id="game-container">
+  <!-- 顶部栏 -->
+  <div class="top-bar">
+    <div class="top-left">
+      <span class="game-logo">SVT电竞</span>
+      <span class="day-badge" id="dayCounter">第 1 天</span>
+      <div class="rank-badge">
+        <span class="rank-icon">👑</span>
+        <span id="rankDisplay">青铜Ⅰ</span>
+      </div>
+    </div>
+    <div class="top-center">
+      <div class="stamina-wrap">
+        <span class="stamina-icon">⚡</span>
+        <div class="stamina-bar">
+          <div class="stamina-fill" id="staminaFill" style="width: 100%;"></div>
+        </div>
+        <span class="stamina-text" id="staminaText">100/100</span>
+      </div>
+    </div>
+    <div class="top-right">
+      <button class="icon-btn" onclick="toggleMenu('mapModal')" title="地图">🗺️</button>
+      <button class="icon-btn" onclick="toggleMenu('actionModal')" title="行动">⚡</button>
+      <button class="icon-btn" onclick="toggleMenu('themeModal')" title="主题">🎨</button>
+      <button class="icon-btn" onclick="openLogicModal()" title="自检">🔧</button>
+      <button class="icon-btn" onclick="toggleMenu('apiModal')" title="API">⚙️</button>
+    </div>
+  </div>
+
+  <!-- 主舞台 -->
+  <div class="main-stage">
+    <!-- 状态面板 -->
+    <div class="status-panel">
+      <div class="status-row">
+        <div class="status-section" style="flex:2;">
+          <div class="section-title">四维属性</div>
+          <div class="attr-grid">
+            <div class="attr-item">
+              <div class="attr-name">操作</div>
+              <div class="attr-val" id="attrOp">10</div>
+              <div class="attr-bar"><div class="attr-fill" id="attrOpBar" style="width:10%"></div></div>
+            </div>
+            <div class="attr-item">
+              <div class="attr-name">意识</div>
+              <div class="attr-val" id="attrCons">10</div>
+              <div class="attr-bar"><div class="attr-fill" id="attrConsBar" style="width:10%"></div></div>
+            </div>
+            <div class="attr-item">
+              <div class="attr-name">心态</div>
+              <div class="attr-val" id="attrMind">10</div>
+              <div class="attr-bar"><div class="attr-fill" id="attrMindBar" style="width:10%"></div></div>
+            </div>
+            <div class="attr-item">
+              <div class="attr-name">指挥</div>
+              <div class="attr-val" id="attrLead">10</div>
+              <div class="attr-bar"><div class="attr-fill" id="attrLeadBar" style="width:10%"></div></div>
+            </div>
+          </div>
+        </div>
+        <div class="status-section" style="flex:1.5;">
+          <div class="section-title">SVT羁绊</div>
+          <div class="bond-mini" id="bondMini"></div>
+        </div>
+      </div>
+      <div class="status-row" style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border);">
+        <div class="status-section">
+          <div class="section-title">记忆碎片</div>
+          <div class="fragment-num"><span id="fragCount">0</span> <span>/ 39</span></div>
+        </div>
+        <div class="status-section">
+          <div class="section-title">当前段位</div>
+          <div class="rank-mini">
+            <div class="rank-name" id="sidebarRank">青铜Ⅰ</div>
+            <div class="rank-pts"><span id="rankPoints">0</span> 胜点</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 剧情面板 -->
+    <div class="story-panel">
+      <div class="story-header">
+        <span class="scene-title" id="sceneTitle">训练基地</span>
+        <span class="check-tag" id="checkResult" style="display:none;"></span>
+      </div>
+      <div class="story-text" id="storyText"></div>
+      <div class="story-footer">
+        <span class="char-tag" id="charIndicator"></span>
+        <div class="story-tags" id="storyTags"></div>
+      </div>
+    </div>
+
+    <!-- 选项面板 -->
+    <div class="options-panel" id="optionsPanel"></div>
+
+    <!-- 输入面板 - 最底部 -->
+    <div class="input-panel">
+      <div class="input-row">
+        <input type="text" class="game-input" id="playerInput" placeholder="输入指令或对话..." onkeypress="handleInput(event)">
+        <button class="clear-btn" id="clear-btn" title="清空" style="display:none;">✕</button>
+        <button class="send-btn" onclick="sendInput()">发送</button>
+      </div>
+      <div class="quick-btns">
+        <button class="quick-btn" onclick="showQuickInfo('status')">状态</button>
+        <button class="quick-btn" onclick="showQuickInfo('bonds')">羁绊</button>
+        <button class="quick-btn" onclick="showQuickInfo('ranking')">排名</button>
+        <button class="quick-btn" onclick="showQuickInfo('fragments')">碎片</button>
+        <button class="quick-btn" onclick="toggleMenu('mapModal')">地图</button>
+        <button class="quick-btn" onclick="toggleMenu('actionModal')">行动</button>
+        <button class="quick-btn" onclick="showReviewModal()">回顾</button>
+        <button class="quick-btn" onclick="saveGame()">存档</button>
+      </div>
+      <div class="input-hint">◆ 自由输入你的行动或对话</div>
+    </div>
+  </div>
+</div>
+
+<!-- 地图弹层 -->
+<div class="modal-overlay" id="mapModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('mapModal')">×</button>
+    <h2 class="modal-title">地图选择</h2>
+    <div class="modal-content">
+      <div class="map-grid">
+        <div class="map-item" onclick="selectMap('训练基地')">
+          <div class="map-icon">🏋️</div>
+          <div class="map-name">训练基地</div>
+          <div class="map-desc">提升属性</div>
+        </div>
+        <div class="map-item" onclick="selectMap('天梯排位')">
+          <div class="map-icon">🏆</div>
+          <div class="map-name">天梯排位</div>
+          <div class="map-desc">获取胜点</div>
+        </div>
+        <div class="map-item" onclick="selectMap('线下赛馆')">
+          <div class="map-icon">🎪</div>
+          <div class="map-name">线下赛馆</div>
+          <div class="map-desc">大型赛事</div>
+        </div>
+        <div class="map-item" onclick="selectMap('网咖')">
+          <div class="map-icon">💻</div>
+          <div class="map-name">网咖</div>
+          <div class="map-desc">随机事件</div>
+        </div>
+        <div class="map-item" onclick="selectMap('直播区')">
+          <div class="map-icon">📺</div>
+          <div class="map-name">直播区</div>
+          <div class="map-desc">提升人气</div>
+        </div>
+        <div class="map-item" onclick="selectMap('商业区')">
+          <div class="map-icon">🏢</div>
+          <div class="map-name">商业区</div>
+          <div class="map-desc">商务合作</div>
+        </div>
+        <div class="map-item" onclick="selectMap('休整区')">
+          <div class="map-icon">🛋️</div>
+          <div class="map-name">休整区</div>
+          <div class="map-desc">恢复体力</div>
+        </div>
+        <div class="map-item" onclick="selectMap('神秘地点')">
+          <div class="map-icon">❓</div>
+          <div class="map-name">神秘地点</div>
+          <div class="map-desc">8094?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 行动菜单弹层 -->
+<div class="modal-overlay" id="actionModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('actionModal')">×</button>
+    <h2 class="modal-title">每日行动</h2>
+    <div class="modal-content">
+      <div class="action-grid" id="actionGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 主题弹层 -->
+<div class="modal-overlay" id="themeModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('themeModal')">×</button>
+    <h2 class="modal-title">主题切换</h2>
+    <div class="modal-content">
+      <div class="theme-grid">
+        <div class="theme-item selected" onclick="setTheme('default')">
+          <div class="theme-preview" style="background: linear-gradient(135deg, #74b9ff, #a29bfe);"></div>
+          <div class="theme-name">晴空蓝紫</div>
+        </div>
+        <div class="theme-item" onclick="setTheme('forest')">
+          <div class="theme-preview" style="background: linear-gradient(135deg, #55efc4, #00b894);"></div>
+          <div class="theme-name">翠竹青绿</div>
+        </div>
+        <div class="theme-item" onclick="setTheme('sunset')">
+          <div class="theme-preview" style="background: linear-gradient(135deg, #ffeaa7, #fdcb6e);"></div>
+          <div class="theme-name">暖阳金橙</div>
+        </div>
+        <div class="theme-item" onclick="setTheme('pink')">
+          <div class="theme-preview" style="background: linear-gradient(135deg, #fd79a8, #e84393);"></div>
+          <div class="theme-name">樱粉玫瑰</div>
+        </div>
+        <div class="theme-item" onclick="setTheme('mono')">
+          <div class="theme-preview" style="background: linear-gradient(135deg, #636e72, #b2bec3);"></div>
+          <div class="theme-name">静谧灰调</div>
+        </div>
+        <div class="theme-item" onclick="setTheme('dark')">
+          <div class="theme-preview" style="background: linear-gradient(135deg, #2d3436, #636e72);"></div>
+          <div class="theme-name">深夜炭灰</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ弹层 -->
+<div class="modal-overlay" id="faqModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('faqModal')">×</button>
+    <h2 class="modal-title">FAQ 帮助</h2>
+    <div class="modal-content">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">如何开始游戏？</div>
+        <div class="faq-a">在封面页点击"开始游戏"，在弹出的设置中选择游戏类型、职业路线、难度和角色后确认即可进入。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">四维属性是什么？</div>
+        <div class="faq-a">操作、意识、心态、指挥四项属性影响你在各类行动中的成功率。通过训练和实战可以提升。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">SVT羁绊有什么用？</div>
+        <div class="faq-a">与SVT成员的羁绊等级越高，在涉及该成员的剧情中会获得更多加成。最高为Lv.5灵魂之约。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">记忆碎片如何收集？</div>
+        <div class="faq-a">记忆碎片共39片，散落在各种剧情事件中。收集完整将解锁隐藏剧情。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">体力值有什么用？</div>
+        <div class="faq-a">大部分行动需要消耗体力。体力为0时无法进行高强度活动，可在休整区恢复。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">反派有哪些？</div>
+        <div class="faq-a">K、苹果、Shadow、林晚是你的主要竞争对手。在排位和赛事中会遇到他们。</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- API弹层 -->
+<div class="modal-overlay" id="apiModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('apiModal')">×</button>
+    <h2 class="modal-title">API 设置</h2>
+    <div class="modal-content">
+      <div class="api-section">
+        <label class="api-label">选择 API 服务</label>
+        <select class="api-select" id="apiProvider" onchange="updateApiKeyLabel()">
+          <option value="deepseek">DeepSeek</option>
+          <option value="groq">Groq</option>
+          <option value="gemini">Gemini</option>
+          <option value="siliconflow">硅基流动</option>
+          <option value="custom">自定义</option>
+          <option value="none">不使用API</option>
+        </select>
+      </div>
+      <div class="api-section">
+        <label class="api-label" id="apiKeyLabel">API Key</label>
+        <input type="password" class="api-input" id="apiKey" placeholder="输入 API Key">
+      </div>
+      <div class="api-section">
+        <label class="api-label">Base URL（可选）</label>
+        <input type="text" class="api-input" id="apiBaseUrl" placeholder="如需自定义endpoint">
+      </div>
+      <div class="api-section">
+        <label class="api-label">模型名称</label>
+        <input type="text" class="api-input" id="apiModel" placeholder="如: deepseek-chat">
+      </div>
+      <button class="send-btn" onclick="saveApiSettings()" style="width:100%; margin-top:4px;">保存设置</button>
+      <div style="margin-top:12px; font-size:0.75rem; color:var(--text-muted); text-align:center;">
+        💡 不填API也能游玩基础模式，连接API可解锁AI对话
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 羁绊详情弹层 -->
+<div class="modal-overlay" id="bondModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('bondModal')">×</button>
+    <div class="modal-content" id="bondModalContent"></div>
+  </div>
+</div>
+
+<!-- 属性详情弹层 -->
+<div class="modal-overlay" id="attrModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('attrModal')">×</button>
+    <div class="modal-content" id="attrModalContent"></div>
+  </div>
+</div>
+
+<!-- 更新日志弹层 -->
+<div class="modal-overlay" id="changelogModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('changelogModal')">×</button>
+    <h2 class="modal-title">更新日志</h2>
+    <div class="modal-content">
+      <div class="changelog">
+        <div class="log-item">
+          <div class="log-version">v2.0</div>
+          <div class="log-date">2026-06-14</div>
+          <div class="log-content">★ AI生成文本后自动滚动到新内容起始处（而非最底部），用户手动向上滑动时暂停自动跟随<br>★ 新增回顾节点点击跳转功能</div>
+        </div>
+        <div class="log-item">
+          <div class="log-version">v1.5</div>
+          <div class="log-date">2026-06-14</div>
+          <div class="log-content">★ 低饱和度配色与留白优化<br>★ 移除多余框线和表情<br>★ 增加逻辑自检<br>★ 统一字体层级<br>★ 移动端触摸优化</div>
+        </div>
+        <div class="log-item">
+          <div class="log-version">v1.1.0</div>
+          <div class="log-date">2026-06-14</div>
+          <div class="log-content">★ UI界面全新改版<br>★ 简约风格优化<br>★ 移动端体验升级<br>★ 记忆碎片数字展示<br>★ 羁绊系统精简</div>
+        </div>
+        <div class="log-item">
+          <div class="log-version">v1.0.0</div>
+          <div class="log-date">2026-06-01</div>
+          <div class="log-content">★ 首发版本上线<br>★ 完整游戏框架<br>★ SVT 13位成员羁绊系统<br>★ 39片记忆碎片收集</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 回顾节点弹层 -->
+<div class="modal-overlay" id="reviewModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('reviewModal')">×</button>
+    <h2 class="modal-title">剧情回顾</h2>
+    <div class="modal-content">
+      <div class="changelog" id="reviewList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- 逻辑自检弹层 -->
+<div class="modal-overlay" id="logicModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('logicModal')">×</button>
+    <h2 class="modal-title">🔧 逻辑自检</h2>
+    <div class="modal-content" id="logicContent"></div>
+    <div style="padding: 14px 0 4px; border-top: 1px solid var(--border); margin-top: 14px;">
+      <button class="send-btn" onclick="runLogicCheck()" style="width:100%;">重新检查</button>
+    </div>
+  </div>
+</div>
+
+<!-- 确认弹层 -->
+<div class="modal-overlay" id="confirmModal">
+  <div class="modal-box" style="max-width:320px;">
+    <div class="confirm-box">
+      <p class="confirm-msg" id="confirmMsg">确定要执行此操作吗？</p>
+      <div class="confirm-btns">
+        <button class="confirm-btn confirm-yes" onclick="confirmAction(true)">确定</button>
+        <button class="confirm-btn confirm-no" onclick="confirmAction(false)">取消</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 通知消息 -->
+<div class="notification" id="notification">
+  <div class="notif-title" id="notifTitle">提示</div>
+  <div class="notif-msg" id="notifMsg"></div>
+</div>
+
+<script>
+// ==================== 游戏数据 ====================
+const SVT_MEMBERS = [
+  { id: 1, name: 'S.COUPS', korean: '에스쿱스', eng: 'Choi Seungcheol', bio: 'SVT队长，强势领导者，在电竞世界依然是团队核心。' },
+  { id: 2, name: 'JEONGHAN', korean: '정한', eng: 'Yoon Jeonghan', bio: '天使脸庞却有着腹黑的一面，擅长心理战术。' },
+  { id: 3, name: 'JOSHUA', korean: '조슈아', eng: 'Hong Joshua', bio: '韩美混血，冷静理性，是队伍的数据分析师。' },
+  { id: 4, name: 'JUN', korean: '준', eng: 'Moon Junhui', bio: '中国成员，武术底子，操作型选手。' },
+  { id: 5, name: 'HOSHI', korean: '호시', eng: 'Kwon Soonyoung', bio: '舞台王者，反应速度一流，擅长即时策略。' },
+  { id: 6, name: 'WONWOO', korean: '원우', eng: 'Jeon Wonwoo', bio: '低调的实力派，阅读比赛能力极强。' },
+  { id: 7, name: 'WOOZI', korean: '우지', eng: 'Choi Boo-Shin', bio: '身材小巧却有着巨大的战术头脑。' },
+  { id: 8, name: 'DK', korean: '디케이', eng: 'Lee Seokmin', bio: '开朗笑容下的热血选手，爆发力惊人。' },
+  { id: 9, name: 'MINGYU', korean: '민규', eng: 'Kim Mingyu', bio: '模特身材，手速极快，外向型选手。' },
+  { id: 10, name: 'THE8', korean: '디에이트', eng: 'Xu Ming Hao', bio: '中国成员，稳定冷静，中单位置的不二人选。' },
+  { id: 11, name: 'SEUNGKWAN', korean: '승관', eng: 'Boo Seungkwan', bio: '高音王者，情绪感染力强，团队气氛担当。' },
+  { id: 12, name: 'VERNON', korean: '버논', eng: 'Chwe Hansol', bio: '韩美混血，艺术气质，创意型选手。' },
+  { id: 13, name: 'DINO', korean: '디노', eng: 'Lee Chan', bio: '忙内，成长型选手，潜力无限。' }
+];
+
+const TALENTS = [
+  '操作天才', '意识大师', '心态稳健', '指挥如神', '临场发挥', '训练狂魔',
+  '社交达人', '商业头脑', '直播明星', '数据专家', '心理战专家', '战术大师'
+];
+
+const RANKS = [
+  { name: '青铜Ⅰ', points: 0, next: 100 },
+  { name: '青铜Ⅱ', points: 100, next: 100 },
+  { name: '白银Ⅰ', points: 200, next: 150 },
+  { name: '白银Ⅱ', points: 350, next: 150 },
+  { name: '黄金Ⅰ', points: 500, next: 200 },
+  { name: '黄金Ⅱ', points: 700, next: 200 },
+  { name: '钻石Ⅰ', points: 900, next: 300 },
+  { name: '钻石Ⅱ', points: 1200, next: 300 },
+  { name: '宗师', points: 1500, next: 500 },
+  { name: '传奇Ⅰ', points: 2000, next: 500 },
+  { name: '传奇Ⅱ', points: 2500, next: 500 },
+  { name: '传奇Ⅲ', points: 3000, next: 500 },
+  { name: '传奇Ⅳ', points: 3500, next: 500 },
+  { name: '传奇Ⅴ', points: 4000, next: -1 }
+];
+
+const ANTAGONISTS = [
+  { name: 'K', desc: '神秘强者，传闻曾是职业选手' },
+  { name: '苹果', desc: '网红选手，流量变现高手' },
+  { name: 'Shadow', desc: '暗影刺客，行事低调' },
+  { name: '林晚', desc: '新晋黑马，背后势力不明' }
+];
+
+const SCENES = {
+  '训练基地': [
+    { title: '基础训练', text: '你来到训练基地，设施齐全。你决定进行基础训练提升实力...', tags: ['训练', '日常'] },
+    { title: '专项特训', text: '针对你的弱项，开始进行专项强化训练...', tags: ['训练', '成长'] },
+    { title: '偶遇', text: '训练基地里，你注意到几个陌生的身影。他们似乎在讨论着什么...', tags: ['训练', '邂逅'] }
+  ],
+  '天梯排位': [
+    { title: '排位赛', text: '你进入了天梯排位赛，等待匹配对手...', tags: ['竞技', '挑战'] },
+    { title: '激战', text: '对局进入白热化阶段，每一波团战都至关重要...', tags: ['竞技', '关键'] },
+    { title: '胜利', text: '优势逐渐倾向你们这边，继续保持！', tags: ['竞技', '优势'] }
+  ],
+  '线下赛馆': [
+    { title: '大赛将至', text: '线下赛馆灯火通明，观众席座无虚席...', tags: ['赛事', '盛况'] },
+    { title: '赛前', text: '在后台做着最后的准备，调整心态...', tags: ['赛事', '准备'] },
+    { title: '登场', text: '聚光灯下，你代表战队走上舞台...', tags: ['赛事', '荣耀'] }
+  ],
+  '网咖': [
+    { title: '偶遇', text: '网咖里人声鼎沸，你看到一个熟悉的身影...', tags: ['随机', '偶遇'] },
+    { title: '挑战', text: '有人向你发起了私下来一场的邀请...', tags: ['随机', '挑战'] },
+    { title: '八卦', text: '隔壁桌的闲聊中似乎有关于某位选手的传闻...', tags: ['随机', '情报'] }
+  ],
+  '直播区': [
+    { title: '开播', text: '你打开了直播间，熟悉的开播提示音响起...', tags: ['直播', '互动'] },
+    { title: '粉丝互动', text: '弹幕刷屏，粉丝们热情高涨...', tags: ['直播', '粉丝'] },
+    { title: '连麦', text: '有观众申请连麦，看起来是个有趣的人...', tags: ['直播', '连麦'] }
+  ],
+  '商业区': [
+    { title: '赞助洽谈', text: '商业区的写字楼里，有几家品牌在考虑赞助合作...', tags: ['商业', '合作'] },
+    { title: '代言机会', text: '一个知名品牌看中了你的影响力...', tags: ['商业', '机会'] },
+    { title: '谈判', text: '合同条款需要仔细审阅，每一个细节都很重要...', tags: ['商业', '谈判'] }
+  ],
+  '休整区': [
+    { title: '放松时光', text: '难得的休整日，你决定好好放松一下...', tags: ['休息', '日常'] },
+    { title: '陌生人', text: '在休整区的咖啡厅，你看到了几个陌生的身影，似乎是某支战队...', tags: ['休息', '邂逅'] },
+    { title: '深夜', text: '夜深了，你独自思考着接下来的路...', tags: ['休息', '独处'] }
+  ],
+  '神秘地点': [
+    { title: '？？？', text: '这里的气氛异常诡异，似乎有某种力量在注视着你...', tags: ['神秘', '未知'] },
+    { title: '8094', text: '一个戴着兜帽的身影出现，他转过头的瞬间，你看到了一个编号——8094...', tags: ['神秘', '关键'] },
+    { title: '记忆碎片', text: '某个画面闪过你的脑海，那是来自平行世界的记忆碎片...', tags: ['神秘', '碎片'] }
+  ]
+};
+
+const ACTIONS = [
+  { id: 'train', icon: '🏋️', name: '训练', cost: 20, desc: '提升随机属性' },
+  { id: 'battle', icon: '⚔️', name: '实战', cost: 30, desc: '天梯排位赛' },
+  { id: 'social', icon: '💬', name: '社交', cost: 15, desc: '与SVT成员互动' },
+  { id: 'career', icon: '📈', name: '事业', cost: 25, desc: '商业/直播活动' },
+  { id: 'rest', icon: '🛋️', name: '休整', cost: 0, desc: '恢复体力' },
+  { id: 'explore', icon: '🔍', name: '探索', cost: 20, desc: '随机事件' }
+];
+
+// ==================== 游戏状态 ====================
+let gameState = {
+  started: false,
+  romance: false,
+  game: '王者荣耀',
+  career: '竞技者',
+  difficulty: '标准',
+  character: { type: 'custom', id: null, name: '自定义选手' },
+  day: 1,
+  stamina: 100,
+  maxStamina: 100,
+  rank: 0,
+  rankPoints: 0,
+  attributes: { op: 10, cons: 10, mind: 10, lead: 10 },
+  bonds: {},
+  fragments: [],
+  buffs: [],
+  debuffs: [],
+  currentMap: '训练基地',
+  currentScene: null,
+  storyHistory: [],
+  apiProvider: 'none',
+  apiKey: '',
+  apiBaseUrl: '',
+  apiModel: ''
+};
+
+// ==================== 封面页功能 ====================
+let romanceOn = false;
+
+function toggleRomance() {
+  romanceOn = !romanceOn;
+  const sw = document.getElementById('romanceSwitch');
+  sw.classList.toggle('on', romanceOn);
+  document.getElementById('romanceOff').classList.toggle('active', !romanceOn);
+  document.getElementById('romanceOn').classList.toggle('active', romanceOn);
+}
+
+function openSettings() {
+  document.getElementById('settingsModal').classList.add('active');
+}
+
+function selectOption(gridId, btn) {
+  const grid = document.getElementById(gridId);
+  grid.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+
+function selectCustomChar() {
+  document.getElementById('customCharBtn').classList.add('selected');
+  document.getElementById('svtCharBtn').classList.remove('selected');
+  document.getElementById('customCharInput').style.display = 'block';
+  document.getElementById('svtCharGrid').style.display = 'none';
+  gameState.character.type = 'custom';
+}
+
+function selectSVTChar() {
+  document.getElementById('svtCharBtn').classList.add('selected');
+  document.getElementById('customCharBtn').classList.remove('selected');
+  document.getElementById('customCharInput').style.display = 'none';
+  document.getElementById('svtCharGrid').style.display = 'grid';
+  gameState.character.type = 'svt';
+}
+
+document.querySelectorAll('#gameSelect .option-btn').forEach(btn => {
+  btn.addEventListener('click', () => { selectOption('gameSelect', btn); gameState.game = btn.dataset.value; });
+});
+
+document.querySelectorAll('#careerSelect .option-btn').forEach(btn => {
+  btn.addEventListener('click', () => { selectOption('careerSelect', btn); gameState.career = btn.dataset.value; });
+});
+
+document.querySelectorAll('#difficultySelect .option-btn').forEach(btn => {
+  btn.addEventListener('click', () => { selectOption('difficultySelect', btn); gameState.difficulty = btn.dataset.value; });
+});
+
+document.querySelectorAll('#svtCharGrid .char-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#svtCharGrid .char-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    gameState.character.id = parseInt(btn.dataset.id);
+    gameState.character.name = btn.dataset.name;
+  });
+});
+
+function startGame() {
+  if (gameState.character.type === 'custom') {
+    const name = document.getElementById('customName').value.trim();
+    gameState.character.name = name || '自定义选手';
+  }
+
+  gameState.romance = romanceOn;
+  gameState.started = true;
+
+  // 初始化羁绊 - 全部为0（陌生人）
+  SVT_MEMBERS.forEach(m => {
+    gameState.bonds[m.id] = { level: 0, exp: 0 };
+  });
+
+  // 初始化天赋
+  gameState.talents = TALENTS.slice(0, 3).map((t, i) => ({ name: t, id: i }));
+
+  closeModal('settingsModal');
+  document.getElementById('cover-page').classList.add('hidden');
+  document.getElementById('game-container').classList.add('active');
+
+  initGameUI();
+  startNewDay();
+  showNotification('欢迎', `SVT电竞 - ${gameState.character.name}`);
+}
+
+// ==================== 游戏初始化 ====================
+function initGameUI() {
+  updateStaminaUI();
+  updateRankUI();
+  updateAttrUI();
+  updateBondMiniUI();
+  renderStory();
+}
+
+function startNewDay() {
+  document.getElementById('dayCounter').textContent = `第 ${gameState.day} 天`;
+
+  // 恢复体力
+  gameState.stamina = Math.min(gameState.maxStamina, gameState.stamina + 30);
+  updateStaminaUI();
+
+  // 每日事件
+  const maps = Object.keys(SCENES);
+  gameState.currentMap = maps[Math.floor(Math.random() * maps.length)];
+  showRandomScene();
+}
+
+// ==================== 智能滚动系统 ====================
+let isUserScrollingUp = false;
+
+function scrollStory(targetPosition) {
+  const storyPanel = document.getElementById('storyText');
+  const panelPos = storyPanel ? storyPanel.getBoundingClientRect().top + window.pageYOffset : 0;
+  requestAnimationFrame(() => {
+    if (typeof targetPosition === 'number' && targetPosition > 0) {
+      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+    } else {
+      if (!isUserScrollingUp) {
+        window.scrollTo({ top: panelPos, behavior: 'smooth' });
+      }
+    }
+  });
+}
+
+// ==================== 消息 ID 计数 ====================
+let messageIdCounter = 0;
+
+function showRandomScene() {
+  const scenes = SCENES[gameState.currentMap];
+  const scene = scenes[Math.floor(Math.random() * scenes.length)];
+  gameState.currentScene = scene;
+
+  document.getElementById('sceneTitle').textContent = gameState.currentMap;
+  const storyEl = document.getElementById('storyText');
+  const startPos = storyEl ? storyEl.getBoundingClientRect().top + window.pageYOffset : 0;
+
+  messageIdCounter++;
+  const msgId = 'msg-' + messageIdCounter;
+  const wrapper = document.createElement('div');
+  wrapper.id = msgId;
+  wrapper.className = 'story-message';
+  storyEl.appendChild(wrapper);
+  wrapper.appendChild(document.createElement('div')).textContent = scene.text;
+
+  recordReviewNode(msgId, wrapper);
+  renderStoryTags(scene.tags);
+  renderOptions();
+  scrollStory(Math.max(0, startPos - 30));
+}
+
+function typewriterEffect(text, callback) {
+  const storyEl = document.getElementById('storyText');
+  const target = document.createElement('div');
+  target.className = 'story-message';
+  messageIdCounter++;
+  target.id = 'msg-' + messageIdCounter;
+  storyEl.appendChild(target);
+
+  let i = 0;
+  const cursor = document.createElement('span');
+  cursor.className = 'typewriter-cursor';
+
+  function type() {
+    if (i < text.length) {
+      target.textContent = text.substring(0, i + 1);
+      target.appendChild(cursor);
+      i++;
+      setTimeout(type, 30);
+    } else {
+      cursor.remove();
+      recordReviewNode(target.id, target);
+      if (callback) callback();
+    }
+  }
+  type();
+}
+
+function renderStoryTags(tags) {
+  const container = document.getElementById('storyTags');
+  container.innerHTML = '';
+  tags.forEach(tag => {
+    const span = document.createElement('span');
+    span.className = 'tag';
+    span.textContent = tag;
+    container.appendChild(span);
+  });
+}
+
+function renderOptions() {
+  const optionsEl = document.getElementById('optionsPanel');
+  optionsEl.innerHTML = '';
+
+  const options = generateOptions();
+  options.forEach((opt, idx) => {
+    const div = document.createElement('div');
+    div.className = 'option-item';
+    div.textContent = opt.text;
+    div.onclick = () => selectOptionAction(opt);
+    optionsEl.appendChild(div);
+  });
+}
+
+function generateOptions() {
+  const map = gameState.currentMap;
+  let options = [
+    { text: '继续探索', action: 'explore' },
+    { text: '查看状态', action: 'status' }
+  ];
+
+  switch(map) {
+    case '训练基地':
+      options = [
+        { text: '进行操作训练', action: 'train_op', stat: 'op' },
+        { text: '进行意识训练', action: 'train_cons', stat: 'cons' },
+        { text: '进行心态训练', action: 'train_mind', stat: 'mind' },
+        { text: '进行指挥训练', action: 'train_lead', stat: 'lead' },
+        { text: '返回', action: 'back' }
+      ];
+      break;
+    case '天梯排位':
+      options = [
+        { text: '发起排位挑战', action: 'ranked' },
+        { text: '查看排名信息', action: 'ranking' },
+        { text: '返回', action: 'back' }
+      ];
+      break;
+    case '线下赛馆':
+      options = [
+        { text: '报名参赛', action: 'tournament' },
+        { text: '观摩比赛', action: 'observe' },
+        { text: '返回', action: 'back' }
+      ];
+      break;
+    case '网咖':
+      options = [
+        { text: '与随机对手对战', action: 'cafe_battle' },
+        { text: '打听消息', action: 'cafe_gossip' },
+        { text: '返回', action: 'back' }
+      ];
+      break;
+    case '直播区':
+      options = [
+        { text: '开启直播', action: 'stream' },
+        { text: '查看粉丝', action: 'fans' },
+        { text: '返回', action: 'back' }
+      ];
+      break;
+    case '商业区':
+      options = [
+        { text: '洽谈赞助', action: 'sponsor' },
+        { text: '查看合同', action: 'contract' },
+        { text: '返回', action: 'back' }
+      ];
+      break;
+    case '休整区':
+      options = [
+        { text: '充分休息', action: 'full_rest' },
+        { text: '四处看看', action: 'look_around' },
+        { text: '返回', action: 'back' }
+      ];
+      break;
+    case '神秘地点':
+      options = [
+        { text: '深入调查', action: 'investigate' },
+        { text: '与神秘人对峙', action: 'confront_8094' },
+        { text: '返回', action: 'back' }
+      ];
+      break;
+  }
+
+  return options;
+}
+
+function selectOptionAction(opt) {
+  switch(opt.action) {
+    case 'explore':
+      showRandomScene();
+      break;
+    case 'status':
+      showQuickInfo('status');
+      break;
+    case 'back':
+      selectMap('休整区');
+      break;
+    case 'train_op':
+    case 'train_cons':
+    case 'train_mind':
+    case 'train_lead':
+      doTraining(opt.stat);
+      break;
+    case 'ranked':
+      doRankedBattle();
+      break;
+    case 'tournament':
+      doTournament();
+      break;
+    case 'investigate':
+      doInvestigate();
+      break;
+    case 'confront_8094':
+      doConfront8094();
+      break;
+    default:
+      showNotification('提示', '该功能正在开发中');
+  }
+}
+
+function doTraining(stat) {
+  if (gameState.stamina < 20) {
+    showCheckResult(false, '体力不足！');
+    return;
+  }
+
+  gameState.stamina -= 20;
+  updateStaminaUI();
+
+  const attrValue = gameState.attributes[stat];
+  const difficultyMod = { '休闲': 0.7, '标准': 0.5, '硬核': 0.3, '地狱': 0.2 }[gameState.difficulty];
+  const threshold = Math.floor(attrValue * difficultyMod + 5);
+  const roll = Math.floor(Math.random() * 20) + 1;
+  const success = roll >= threshold;
+
+  const statNames = { op: '操作', cons: '意识', mind: '心态', lead: '指挥' };
+
+  if (success) {
+    const gain = Math.floor(Math.random() * 3) + 1;
+    gameState.attributes[stat] = Math.min(100, gameState.attributes[stat] + gain);
+    updateAttrUI();
+    showCheckResult(true, `训练成功！${statNames[stat]}+${gain}`);
+  } else {
+    showCheckResult(false, '训练效果不佳');
+  }
+
+  setTimeout(showRandomScene, 1500);
+}
+
+function doRankedBattle() {
+  if (gameState.stamina < 30) {
+    showCheckResult(false, '体力不足！');
+    return;
+  }
+
+  gameState.stamina -= 30;
+  updateStaminaUI();
+
+  const totalAttr = Object.values(gameState.attributes).reduce((a, b) => a + b, 0) / 4;
+  const difficultyMod = { '休闲': 0.4, '标准': 0.5, '硬核': 0.6, '地狱': 0.75 }[gameState.difficulty];
+  const threshold = Math.floor(totalAttr * difficultyMod);
+  const roll = Math.floor(Math.random() * 100) + 1;
+  const success = roll <= threshold;
+
+  const opponent = ANTAGONISTS[Math.floor(Math.random() * ANTAGONISTS.length)];
+
+  if (success) {
+    const basePoints = 20 + Math.floor(Math.random() * 15);
+    const bonusPoints = gameState.difficulty === '地狱' ? 25 : (gameState.difficulty === '硬核' ? 15 : 0);
+    gameState.rankPoints += basePoints + bonusPoints;
+    updateRankUI();
+    showCheckResult(true, `击败 ${opponent.name}！+${basePoints + bonusPoints} 胜点`);
+    collectFragment(1);
+  } else {
+    const loss = gameState.difficulty === '地狱' ? 30 : (gameState.difficulty === '硬核' ? 20 : 10);
+    gameState.rankPoints = Math.max(0, gameState.rankPoints - loss);
+    updateRankUI();
+    showCheckResult(false, `败于 ${opponent.name}... -${loss} 胜点`);
+  }
+
+  setTimeout(showRandomScene, 2000);
+}
+
+function doTournament() {
+  if (gameState.stamina < 40) {
+    showCheckResult(false, '体力不足！');
+    return;
+  }
+
+  gameState.stamina -= 40;
+  updateStaminaUI();
+
+  const totalAttr = Object.values(gameState.attributes).reduce((a, b) => a + b, 0) / 4;
+  const threshold = Math.floor(totalAttr * 0.6);
+  const roll = Math.floor(Math.random() * 100) + 1;
+  const success = roll <= threshold;
+
+  if (success) {
+    const points = 100 + Math.floor(Math.random() * 50);
+    gameState.rankPoints += points;
+    updateRankUI();
+    showCheckResult(true, `线下赛冠军！+${points} 胜点`);
+    collectFragment(3);
+  } else {
+    const loss = 30;
+    gameState.rankPoints = Math.max(0, gameState.rankPoints - loss);
+    updateRankUI();
+    showCheckResult(false, `止步八强... -${loss} 胜点`);
+  }
+
+  setTimeout(showRandomScene, 2000);
+}
+
+function doInvestigate() {
+  if (gameState.stamina < 20) {
+    showCheckResult(false, '体力不足！');
+    return;
+  }
+
+  gameState.stamina -= 20;
+  updateStaminaUI();
+
+  const success = Math.random() > 0.5;
+
+  if (success) {
+    collectFragment(1);
+    showCheckResult(true, '你发现了一块记忆碎片！');
+  } else {
+    showCheckResult(false, '什么都没发现...');
+  }
+
+  setTimeout(showRandomScene, 1500);
+}
+
+function doConfront8094() {
+  if (gameState.stamina < 30) {
+    showCheckResult(false, '体力不足！');
+    return;
+  }
+
+  gameState.stamina -= 30;
+  updateStaminaUI();
+
+  const totalAttr = Object.values(gameState.attributes).reduce((a, b) => a + b, 0) / 4;
+  const success = Math.random() > 0.3 && totalAttr > 40;
+
+  if (success) {
+    collectFragment(5);
+    showCheckResult(true, '8094向你透露了平行世界的秘密...');
+    showNotification('重大发现', '你获得了 5 块记忆碎片！');
+  } else {
+    showCheckResult(false, '8094消失在黑暗中...');
+  }
+
+  setTimeout(showRandomScene, 2000);
+}
+
+function showCheckResult(success, msg) {
+  const el = document.getElementById('checkResult');
+  el.style.display = 'inline-block';
+  el.className = `check-tag ${success ? 'success' : 'fail'}`;
+  el.textContent = success ? '✓ 成功' : '✗ 失败';
+
+  const storyText = document.getElementById('storyText');
+  const startPos = storyText ? storyText.getBoundingClientRect().top + window.pageYOffset : 0;
+
+  messageIdCounter++;
+  const msgId = 'msg-' + messageIdCounter;
+  const wrapper = document.createElement('div');
+  wrapper.id = msgId;
+  wrapper.className = 'story-message';
+  wrapper.appendChild(document.createElement('p')).textContent = msg;
+  wrapper.querySelector('p').style.color = success ? 'var(--success)' : 'var(--danger)';
+  wrapper.querySelector('p').style.marginBottom = '10px';
+  storyText.appendChild(wrapper);
+  recordReviewNode(msgId, wrapper);
+  scrollStory(Math.max(0, startPos - 30));
+}
+
+function collectFragment(count) {
+  for (let i = 0; i < count; i++) {
+    if (gameState.fragments.length < 39) {
+      let fragId;
+      do {
+        fragId = Math.floor(Math.random() * 39) + 1;
+      } while (gameState.fragments.includes(fragId));
+      gameState.fragments.push(fragId);
+    }
+  }
+  updateFragmentUI();
+}
+
+// ==================== UI更新 ====================
+function updateStaminaUI() {
+  const fill = document.getElementById('staminaFill');
+  const text = document.getElementById('staminaText');
+  const pct = (gameState.stamina / gameState.maxStamina) * 100;
+  fill.style.width = `${pct}%`;
+  text.textContent = `${gameState.stamina}/${gameState.maxStamina}`;
+
+  fill.classList.remove('low', 'med');
+  if (pct < 30) {
+    fill.classList.add('low');
+  } else if (pct < 60) {
+    fill.classList.add('med');
+  }
+}
+
+function updateRankUI() {
+  let currentRank = RANKS[0];
+  for (let i = RANKS.length - 1; i >= 0; i--) {
+    if (gameState.rankPoints >= RANKS[i].points) {
+      currentRank = RANKS[i];
+      break;
+    }
+  }
+
+  document.getElementById('rankDisplay').textContent = currentRank.name;
+  document.getElementById('sidebarRank').textContent = currentRank.name;
+  document.getElementById('rankPoints').textContent = gameState.rankPoints;
+}
+
+function updateAttrUI() {
+  const attrs = ['op', 'cons', 'mind', 'lead'];
+  attrs.forEach(a => {
+    const val = gameState.attributes[a];
+    document.getElementById('attr' + a.charAt(0).toUpperCase() + a.slice(1)).textContent = val;
+    document.getElementById('attr' + a.charAt(0).toUpperCase() + a.slice(1) + 'Bar').style.width = val + '%';
+  });
+}
+
+function updateBondMiniUI() {
+  const container = document.getElementById('bondMini');
+  container.innerHTML = '';
+
+  const levelNames = ['陌生', '相识', '好感', '信赖', '挚友', '灵魂'];
+
+  SVT_MEMBERS.forEach(m => {
+    if (gameState.character.type === 'svt' && m.id === gameState.character.id) return;
+
+    const bond = gameState.bonds[m.id];
+    const div = document.createElement('div');
+    div.className = `bond-tag lv${bond.level}`;
+    div.textContent = `${m.name} ${levelNames[bond.level]}`;
+    div.onclick = () => showBondDetail(m);
+    container.appendChild(div);
+  });
+}
+
+function updateFragmentUI() {
+  document.getElementById('fragCount').textContent = gameState.fragments.length;
+}
+
+function showBondDetail(member) {
+  const bond = gameState.bonds[member.id];
+  const levelNames = ['陌生人', '相识', '好感', '信赖', '挚友', '灵魂之约'];
+
+  const content = `
+    <div class="detail-header">
+      <div class="detail-avatar">${member.id}</div>
+      <div class="detail-name">${member.name}</div>
+      <div class="detail-id">${member.korean} · ${member.eng}</div>
+    </div>
+    <div class="detail-stats">
+      <div class="stat-card">
+        <div class="stat-label">羁绊等级</div>
+        <div class="stat-value">Lv.${bond.level}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">羁绊名</div>
+        <div class="stat-value" style="font-size:0.9rem">${levelNames[bond.level]}</div>
+      </div>
+    </div>
+    <div class="detail-bio">${member.bio}</div>
+  `;
+
+  document.getElementById('bondModalContent').innerHTML = content;
+  document.getElementById('bondModal').classList.add('active');
+}
+
+// ==================== 地图选择 ====================
+function selectMap(mapName) {
+  gameState.currentMap = mapName;
+  closeModal('mapModal');
+  showRandomScene();
+  showNotification('切换地图', `已进入 ${mapName}`);
+}
+
+// ==================== 回顾节点系统 ====================
+const reviewNodes = [];
+
+function recordReviewNode(msgId, wrapper) {
+  const preview = wrapper.textContent.replace(/\s+/g, ' ').trim().slice(0, 40);
+  reviewNodes.push({
+    id: msgId,
+    index: reviewNodes.length + 1,
+    preview: preview || '(暂无文本)'
+  });
+}
+
+function jumpToReview(index) {
+  const node = reviewNodes[index - 1];
+  if (!node) return;
+  const target = document.getElementById(node.id);
+  if (!target) return;
+  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const originalBg = target.style.background;
+  target.style.background = 'rgba(106, 156, 196, 0.2)';
+  setTimeout(() => {
+    target.style.background = originalBg || '';
+  }, 2000);
+}
+
+function showReviewModal() {
+  const modal = document.getElementById('reviewModal');
+  if (!modal) return;
+  const listEl = document.getElementById('reviewList');
+  if (listEl) {
+    if (reviewNodes.length === 0) {
+      listEl.innerHTML = '<div style="padding:20px; text-align:center; color:var(--muted);">暂无剧情节点</div>';
+    } else {
+      listEl.innerHTML = reviewNodes.map(node => `
+        <div class="review-item" data-index="${node.index}" onclick="jumpToReview(${node.index}); closeModal('reviewModal');">
+          <span class="review-index">#${String(node.index).padStart(3, '0')}</span>
+          <span class="review-preview">${node.preview}${node.preview.length >= 40 ? '...' : ''}</span>
+        </div>
+      `).join('');
+    }
+  }
+  modal.classList.add('active');
+}
+
+// ==================== 模态框 ====================
+function toggleMenu(modalId) {
+  const modal = document.getElementById(modalId);
+  modal.classList.toggle('active');
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.remove('active');
+}
+
+function toggleFaq(el) {
+  const item = el.parentElement;
+  item.classList.toggle('open');
+}
+
+// ==================== 主题切换 ====================
+function setTheme(theme) {
+  document.querySelectorAll('.theme-item').forEach(t => t.classList.remove('selected'));
+  event.currentTarget.classList.add('selected');
+
+  const themes = {
+    default: { accent: '#74b9ff', bg: '#f8f9fa', text: '#2c3e50' },
+    forest: { accent: '#00b894', bg: '#f0fff4', text: '#2d3436' },
+    sunset: { accent: '#fdcb6e', bg: '#fffcf0', text: '#2d3436' },
+    pink: { accent: '#fd79a8', bg: '#fff5f8', text: '#2d3436' },
+    mono: { accent: '#636e72', bg: '#f5f5f5', text: '#2d3436' },
+    dark: { accent: '#74b9ff', bg: '#2d3436', text: '#dfe6e9' }
+  };
+
+  const t = themes[theme];
+  document.documentElement.style.setProperty('--accent', t.accent);
+  document.documentElement.style.setProperty('--bg-primary', t.bg);
+  document.documentElement.style.setProperty('--text-primary', t.text);
+}
+
+// ==================== API设置 ====================
+function updateApiKeyLabel() {
+  const provider = document.getElementById('apiProvider').value;
+  const labels = {
+    deepseek: 'API Key (sk-...)',
+    groq: 'API Key',
+    gemini: 'API Key',
+    siliconflow: 'API Key',
+    custom: 'Custom Endpoint',
+    none: '不使用API'
+  };
+  document.getElementById('apiKeyLabel').textContent = labels[provider] || 'API Key';
+}
+
+function saveApiSettings() {
+  gameState.apiProvider = document.getElementById('apiProvider').value;
+  gameState.apiKey = document.getElementById('apiKey').value;
+  gameState.apiBaseUrl = document.getElementById('apiBaseUrl').value;
+  gameState.apiModel = document.getElementById('apiModel').value;
+
+  localStorage.setItem('svt_esports_api', JSON.stringify({
+    provider: gameState.apiProvider,
+    key: gameState.apiKey,
+    baseUrl: gameState.apiBaseUrl,
+    model: gameState.apiModel
+  }));
+
+  showNotification('设置保存', 'API设置已保存');
+  closeModal('apiModal');
+}
+
+function loadApiSettings() {
+  const saved = localStorage.getItem('svt_esports_api');
+  if (saved) {
+    const data = JSON.parse(saved);
+    gameState.apiProvider = data.provider || 'none';
+    gameState.apiKey = data.key || '';
+    gameState.apiBaseUrl = data.baseUrl || '';
+    gameState.apiModel = data.model || '';
+
+    document.getElementById('apiProvider').value = gameState.apiProvider;
+    document.getElementById('apiKey').value = gameState.apiKey;
+    document.getElementById('apiBaseUrl').value = gameState.apiBaseUrl;
+    document.getElementById('apiModel').value = gameState.apiModel;
+  }
+}
+
+// ==================== 快速信息 ====================
+function showQuickInfo(type) {
+  switch(type) {
+    case 'status': showStatusInfo(); break;
+    case 'bonds': showBondsInfo(); break;
+    case 'ranking': showRankingInfo(); break;
+    case 'fragments': showFragmentsInfo(); break;
+  }
+}
+
+function showStatusInfo() {
+  const attr = gameState.attributes;
+  const talentNames = gameState.talents ? gameState.talents.map(t => t.name).join('、') : '无';
+
+  const content = `
+    <div class="detail-header">
+      <div class="detail-avatar" style="font-size:1.5rem">🎮</div>
+      <div class="detail-name">${gameState.character.name}</div>
+      <div class="detail-id">${gameState.career} · ${gameState.game} · ${gameState.difficulty}</div>
+    </div>
+    <div class="detail-stats">
+      <div class="stat-card"><div class="stat-label">操作</div><div class="stat-value">${attr.op}</div></div>
+      <div class="stat-card"><div class="stat-label">意识</div><div class="stat-value">${attr.cons}</div></div>
+      <div class="stat-card"><div class="stat-label">心态</div><div class="stat-value">${attr.mind}</div></div>
+      <div class="stat-card"><div class="stat-label">指挥</div><div class="stat-value">${attr.lead}</div></div>
+    </div>
+    <div style="margin-top:12px;">
+      <div class="stat-label">天赋标签</div>
+      <div class="talent-tags">${gameState.talents ? gameState.talents.map(t => `<span class="talent-tag">${t.name}</span>`).join('') : '<span class="talent-tag">无</span>'}</div>
+    </div>
+    <div class="detail-bio">
+      💡 队内恋爱: ${gameState.romance ? '开启' : '关闭'}<br>
+      ⚡ 体力: ${gameState.stamina}/${gameState.maxStamina}<br>
+      🏆 当前地图: ${gameState.currentMap}
+    </div>
+  `;
+
+  document.getElementById('attrModalContent').innerHTML = content;
+  document.getElementById('attrModal').classList.add('active');
+}
+
+function showBondsInfo() {
+  const levelNames = ['陌生人', '相识', '好感', '信赖', '挚友', '灵魂之约'];
+  let html = '<div class="detail-header"><div class="detail-name">SVT 羁绊总览</div></div>';
+
+  SVT_MEMBERS.forEach(m => {
+    if (gameState.character.type === 'svt' && m.id === gameState.character.id) return;
+    const bond = gameState.bonds[m.id];
+    html += `
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
+        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg, var(--accent), #a29bfe);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.8rem;font-weight:bold;">${m.id}</div>
+        <div style="flex:1;">
+          <div style="font-size:0.85rem">${m.name}</div>
+          <div style="font-size:0.68rem;color:var(--text-muted)">${levelNames[bond.level]}</div>
+        </div>
+        <div style="font-size:0.8rem;color:var(--accent);font-weight:600;">Lv.${bond.level}</div>
+      </div>
+    `;
+  });
+
+  document.getElementById('bondModalContent').innerHTML = html;
+  document.getElementById('bondModal').classList.add('active');
+}
+
+function showRankingInfo() {
+  const currentRank = RANKS.find((r, i) => {
+    const next = RANKS[i + 1];
+    return !next || (gameState.rankPoints >= r.points && gameState.rankPoints < next.points);
+  }) || RANKS[RANKS.length - 1];
+
+  const content = `
+    <div class="detail-header">
+      <div class="detail-avatar" style="font-size:1.5rem">👑</div>
+      <div class="detail-name">${currentRank.name}</div>
+      <div class="detail-id">当前段位</div>
+    </div>
+    <div class="detail-stats">
+      <div class="stat-card"><div class="stat-label">总胜点</div><div class="stat-value">${gameState.rankPoints}</div></div>
+      <div class="stat-card"><div class="stat-label">游戏天数</div><div class="stat-value">${gameState.day}</div></div>
+    </div>
+    <div class="detail-bio">
+      ${currentRank.next === -1 ? '🎉 你已达到最高段位！' : `📈 距离 ${RANKS[RANKS.indexOf(currentRank) + 1]?.name || ''} 还需 ${currentRank.next - (gameState.rankPoints - currentRank.points)} 胜点`}
+    </div>
+  `;
+
+  document.getElementById('attrModalContent').innerHTML = content;
+  document.getElementById('attrModal').classList.add('active');
+}
+
+function showFragmentsInfo() {
+  const content = `
+    <div class="detail-header">
+      <div class="detail-avatar" style="font-size:1.5rem">💎</div>
+      <div class="detail-name">记忆碎片</div>
+      <div class="detail-id">${gameState.fragments.length} / 39</div>
+    </div>
+    <div class="detail-bio" style="text-align:center;">
+      ${gameState.fragments.length >= 39 ? '🎉 已收集全部碎片！' : `📦 还差 ${39 - gameState.fragments.length} 块碎片`}
+    </div>
+  `;
+
+  document.getElementById('attrModalContent').innerHTML = content;
+  document.getElementById('attrModal').classList.add('active');
+}
+
+// ==================== 行动菜单 ====================
+function showActionMenu() {
+  const grid = document.getElementById('actionGrid');
+  grid.innerHTML = '';
+
+  ACTIONS.forEach(action => {
+    const div = document.createElement('div');
+    div.className = 'action-item';
+    div.innerHTML = `
+      <div class="action-icon">${action.icon}</div>
+      <div class="action-name">${action.name}</div>
+      <div class="action-cost">⚡${action.cost}</div>
+      <div class="action-desc">${action.desc}</div>
+    `;
+    div.onclick = () => doAction(action);
+    grid.appendChild(div);
+  });
+
+  document.getElementById('actionModal').classList.add('active');
+}
+
+function doAction(action) {
+  if (gameState.stamina < action.cost) {
+    showNotification('体力不足', `需要 ${action.cost} 体力`);
+    return;
+  }
+
+  closeModal('actionModal');
+  gameState.stamina -= action.cost;
+  updateStaminaUI();
+
+  switch(action.id) {
+    case 'train':
+      const stats = ['op', 'cons', 'mind', 'lead'];
+      const stat = stats[Math.floor(Math.random() * stats.length)];
+      doTraining(stat);
+      break;
+    case 'battle':
+      doRankedBattle();
+      break;
+    case 'social':
+      const member = SVT_MEMBERS[Math.floor(Math.random() * SVT_MEMBERS.length)];
+      gameState.bonds[member.id].exp += Math.floor(Math.random() * 15) + 5;
+      if (gameState.bonds[member.id].exp >= 100 && gameState.bonds[member.id].level < 5) {
+        gameState.bonds[member.id].level++;
+        gameState.bonds[member.id].exp = 0;
+        showNotification('羁绊提升', `${member.name} 羁绊等级达到 Lv.${gameState.bonds[member.id].level}`);
+      }
+      updateBondMiniUI();
+      showCheckResult(true, `与 ${member.name} 愉快地交流了！`);
+      setTimeout(showRandomScene, 1500);
+      break;
+    case 'career':
+      const gain = Math.floor(Math.random() * 20) + 10;
+      gameState.rankPoints += gain;
+      updateRankUI();
+      showCheckResult(true, `事业发展顺利！+${gain} 胜点`);
+      setTimeout(showRandomScene, 1500);
+      break;
+    case 'rest':
+      gameState.stamina = gameState.maxStamina;
+      updateStaminaUI();
+      showCheckResult(true, '充分休息，体力已满！');
+      setTimeout(showRandomScene, 1500);
+      break;
+    case 'explore':
+      showRandomScene();
+      break;
+  }
+}
+
+// ==================== 输入处理 ====================
+function handleInput(e) {
+  if (e.key === 'Enter') sendInput();
+}
+
+function sendInput() {
+  const input = document.getElementById('playerInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+
+  if (text.startsWith('/')) {
+    handleCommand(text.substring(1));
+    return;
+  }
+
+  processPlayerAction(text);
+}
+
+function handleCommand(cmd) {
+  const parts = cmd.toLowerCase().split(' ');
+  switch(parts[0]) {
+    case 'help':
+      showNotification('命令帮助', '/status /bonds /rank /save /next');
+      break;
+    case 'status': showQuickInfo('status'); break;
+    case 'bonds': showBondsInfo(); break;
+    case 'rank': showRankingInfo(); break;
+    case 'save': saveGame(); break;
+    case 'next': nextDay(); break;
+    case 'map': toggleMenu('mapModal'); break;
+    default:
+      showNotification('未知命令', `/${parts[0]}`);
+  }
+}
+
+function processPlayerAction(text) {
+  const lowerText = text.toLowerCase();
+
+  if (lowerText.includes('训练') || lowerText.includes('练习')) {
+    doTraining('op');
+  } else if (lowerText.includes('排位') || lowerText.includes('比赛')) {
+    doRankedBattle();
+  } else if (lowerText.includes('休息') || lowerText.includes('睡觉')) {
+    gameState.stamina = gameState.maxStamina;
+    updateStaminaUI();
+    showCheckResult(true, '好好休息了一下！');
+    setTimeout(showRandomScene, 1500);
+  } else {
+    showCheckResult(Math.random() > 0.3, '收到你的想法...');
+    setTimeout(showRandomScene, 1500);
+  }
+}
+
+// ==================== 存档系统 ====================
+function saveGame() {
+  localStorage.setItem('svt_esports_save', JSON.stringify(gameState));
+  showNotification('存档成功', '游戏进度已保存');
+}
+
+function loadGame() {
+  const saved = localStorage.getItem('svt_esports_save');
+  if (saved) {
+    gameState = JSON.parse(saved);
+    document.getElementById('cover-page').classList.add('hidden');
+    document.getElementById('game-container').classList.add('active');
+    initGameUI();
+    showNotification('读档成功', `欢迎回来，${gameState.character.name}`);
+    return true;
+  }
+  return false;
+}
+
+function restartGame() {
+  if (confirm('确定要重新开始吗？当前进度将丢失。')) {
+    localStorage.removeItem('svt_esports_save');
+    location.reload();
+  }
+}
+
+// ==================== 通知系统 ====================
+function showNotification(title, msg) {
+  const notif = document.getElementById('notification');
+  document.getElementById('notifTitle').textContent = title;
+  document.getElementById('notifMsg').textContent = msg;
+  notif.classList.add('show');
+  setTimeout(() => notif.classList.remove('show'), 3000);
+}
+
+// ==================== 每日推进 ====================
+function nextDay() {
+  gameState.day++;
+  saveGame();
+  startNewDay();
+  showNotification('新的一天', `第 ${gameState.day} 天开始了`);
+}
+
+// ==================== 逻辑自检 ====================
+function openLogicModal() {
+  document.getElementById('logicModal').classList.add('active');
+  runLogicCheck();
+}
+
+function runLogicCheck() {
+  const content = document.getElementById('logicContent');
+  let html = '';
+
+  html += '<div class="logic-section">';
+  html += `<div class="logic-title">🎮 游戏状态</div>`;
+  html += `<div class="logic-row"><span class="logic-label">游戏类型</span><span class="logic-val">${gameState.game}</span></div>`;
+  html += `<div class="logic-row"><span class="logic-label">职业路线</span><span class="logic-val">${gameState.career}</span></div>`;
+  html += `<div class="logic-row"><span class="logic-label">难度</span><span class="logic-val">${gameState.difficulty}</span></div>`;
+  html += `<div class="logic-row"><span class="logic-label">角色</span><span class="logic-val">${gameState.character.name}</span></div>`;
+  html += `<div class="logic-row"><span class="logic-label">天数</span><span class="logic-val">第 ${gameState.day} 天</span></div>`;
+  html += `<div class="logic-row"><span class="logic-label">队内恋爱</span><span class="logic-val ${gameState.romance ? 'ok' : ''}">${gameState.romance ? '开启' : '关闭'}</span></div>`;
+  html += '</div>';
+
+  html += '<div class="logic-section">';
+  html += `<div class="logic-title">⚡ 四维属性</div>`;
+  const attrs = { op: '操作', cons: '意识', mind: '心态', lead: '指挥' };
+  Object.entries(gameState.attributes).forEach(([key, val]) => {
+    const isValid = val >= 0 && val <= 100;
+    html += `<div class="logic-row"><span class="logic-label">${attrs[key]}</span><span class="logic-val ${isValid ? 'ok' : 'err'}">${val} ${isValid ? '[正常]' : '[异常]'}</span></div>`;
+  });
+  html += '</div>';
+
+  html += '<div class="logic-section">';
+  html += `<div class="logic-title">💕 SVT羁绊</div>`;
+  if (Object.keys(gameState.bonds).length === 0) {
+    html += '<div class="logic-row"><span class="logic-label">状态</span><span class="logic-val warn">暂无羁绊</span></div>';
+  } else {
+    Object.entries(gameState.bonds).forEach(([memberId, bond]) => {
+      const member = SVT_MEMBERS.find(m => m.id === parseInt(memberId));
+      const levelNames = ['陌生', '相识', '好感', '信赖', '挚友', '灵魂'];
+      html += `<div class="logic-row"><span class="logic-label">${member?.name || memberId}</span><span class="logic-val">Lv.${bond.level} ${levelNames[bond.level]}</span></div>`;
+    });
+  }
+  html += '</div>';
+
+  html += '<div class="logic-section">';
+  html += `<div class="logic-title">💎 记忆碎片</div>`;
+  html += `<div class="logic-row"><span class="logic-label">收集进度</span><span class="logic-val">${gameState.fragments.length}/39</span></div>`;
+  html += '</div>';
+
+  html += '<div class="logic-section">';
+  html += `<div class="logic-title">💾 存档</div>`;
+  const saved = localStorage.getItem('svt_esports_save');
+  html += `<div class="logic-row"><span class="logic-label">本地存档</span><span class="logic-val ${saved ? 'ok' : 'warn'}">${saved ? '存在' : '不存在'}</span></div>`;
+  html += `<div class="logic-row"><span class="logic-label">体力</span><span class="logic-val">${gameState.stamina}/${gameState.maxStamina}</span></div>`;
+  html += '</div>';
+
+  content.innerHTML = html;
+}
+
+// ==================== 初始化 ====================
+document.addEventListener('DOMContentLoaded', () => {
+  loadApiSettings();
+
+  // 清空按钮点击事件
+  document.getElementById('clear-btn').addEventListener('click', () => {
+    const input = document.getElementById('playerInput');
+    input.value = '';
+    input.focus();
+    document.getElementById('clear-btn').style.display = 'none';
+  });
+
+  // 清空按钮显示控制
+  document.getElementById('playerInput').addEventListener('input', () => {
+    const hasText = document.getElementById('playerInput').value.trim().length > 0;
+    document.getElementById('clear-btn').style.display = hasText ? 'flex' : 'none';
+  });
+});
+
+document.querySelectorAll('.modal-overlay').forEach(modal => {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.remove('active');
+    }
+  });
+});
+</script>
+</body>
+</html>
