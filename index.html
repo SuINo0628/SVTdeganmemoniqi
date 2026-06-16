@@ -2,1193 +2,486 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>SVT电竞模拟</title>
-<link rel="stylesheet" href="//at.alicdn.com/t/font_中心平台.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>SVT 电竞 · 电竞荣光</title>
 <style>
 :root {
-  --bg-primary: #f8f9fa;
-  --bg-secondary: #ffffff;
-  --bg-card: #ffffff;
-  --text-primary: #2c3e50;
-  --text-secondary: #7f8c8d;
-  --text-muted: #aab2bd;
-  --accent: #74b9ff;
-  --accent-light: #dfe6ed;
-  --success: #55a77a;
-  --warning: #fdcb6e;
-  --danger: #e17055;
-  --border: #e8ecf1;
-  --shadow: 0 2px 12px rgba(0,0,0,0.06);
-  --shadow-hover: 0 4px 20px rgba(0,0,0,0.1);
-  --radius: 12px;
-  --radius-sm: 8px;
+  --bg: #1a1a1a;
+  --surface: rgba(34,34,34,0.85);
+  --surface-alt: rgba(40,40,40,0.7);
+  --text: #e0e0e0;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+  --accent: #4fc3f7;
+  --accent-dim: rgba(79,195,247,0.1);
+  --accent2: #ffd54f;
+  --border: #333333;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.4);
+  --radius: 4px;
+  --font: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  --font-mono: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+  --font-serif: 'Georgia', 'Noto Serif SC', serif;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --neon-glow: 0 0 8px rgba(79,195,247,0.3);
+  --log-train: #4fc3f7;
+  --log-match: #00e5ff;
+  --log-social: #ffd54f;
+  --log-villain: #ff5252;
+  --log-shadow: #888888;
+  --log-rest: #69f0ae;
+  --log-story: #c9a96e;
+  --btn-hover-bg: rgba(79,195,247,0.1);
+  --toast-bg: rgba(20,20,20,0.96);
+  --toast-text: rgba(255,255,255,0.88);
+  --btn-radius: 4px;
+  --btn-border: 1px solid var(--border);
+  --chat-bg: #1c1c1c;
+  --shadow-dot-color: #ff5252;
+  --stamina-high: #69f0ae;
+  --stamina-mid: #ffd54f;
+  --stamina-low: #ff5252;
+  --glass-bg: rgba(34,34,34,0.75);
+  --noise: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+}
+body.theme-b {
+  --bg: #0d0d1a;
+  --surface: rgba(18,18,42,0.85);
+  --surface-alt: rgba(24,24,53,0.7);
+  --text: #e8e8ff;
+  --text-secondary: #b0b0d0;
+  --text-muted: #6060a0;
+  --accent: #ff2d78;
+  --accent-dim: rgba(255,45,120,0.1);
+  --accent2: #00e5ff;
+  --border: #252550;
+  --neon-glow: 0 0 12px rgba(255,45,120,0.5);
+  --log-train: #ff2d78;
+  --log-match: #00e5ff;
+  --log-social: #ffd54f;
+  --log-villain: #ff5252;
+  --log-shadow: #6666aa;
+  --log-rest: #69f0ae;
+  --log-story: #c9a96e;
+  --btn-hover-bg: rgba(255,45,120,0.1);
+  --toast-bg: rgba(10,10,30,0.96);
+  --toast-text: #e8e8ff;
+  --glass-bg: rgba(18,18,42,0.75);
+  --btn-radius: 0px;
+  --btn-border: 1px solid var(--accent);
+  --chat-bg: #0d0d1a;
+  --shadow-dot-color: #ff2d78;
+}
+body.theme-c {
+  --bg: #000000;
+  --surface: rgba(15,15,15,0.9);
+  --surface-alt: rgba(20,20,20,0.75);
+  --text: #f0f0f0;
+  --text-secondary: #999999;
+  --text-muted: #555555;
+  --accent: #c9a96e;
+  --accent-dim: rgba(201,169,110,0.1);
+  --accent2: #d4af37;
+  --border: #1a1a1a;
+  --neon-glow: none;
+  --log-train: #c9a96e;
+  --log-match: #c9a96e;
+  --log-social: #c9a96e;
+  --log-villain: #ff5252;
+  --log-shadow: #666;
+  --log-rest: #c9a96e;
+  --log-story: #c9a96e;
+  --btn-hover-bg: rgba(201,169,110,0.1);
+  --toast-bg: rgba(0,0,0,0.96);
+  --toast-text: rgba(255,255,255,0.92);
+  --glass-bg: rgba(10,10,10,0.8);
+  --btn-radius: 0px;
+  --btn-border: none;
+  --chat-bg: #000;
+  --shadow-dot-color: #c9a96e;
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-overflow-scrolling: touch; }
-html, body { height: 100%; }
+html, body { height: 100%; background: var(--bg); }
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  min-height: 100vh;
-  overflow-x: hidden;
+  font-family: var(--font);
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+  background-image: var(--noise);
+  background-repeat: repeat;
 }
 
-/* 封面页 */
-#cover-page {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(180deg, #f8f9fa 0%, #e8ecf1 100%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  padding: 20px;
-  overflow-y: auto;
-}
+#theme-switcher { position: fixed; bottom: 60px; right: 8px; z-index: 600; display: flex; flex-direction: column; gap: 3px; opacity: 0.5; }
+#theme-switcher:hover { opacity: 1; }
+.theme-dot { width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--border); cursor: pointer; opacity: 0.5; transition: all 0.2s; }
+.theme-dot:hover { opacity: 1; transform: scale(1.2); }
+.theme-dot.active { border-color: var(--accent); opacity: 1; box-shadow: 0 0 6px var(--accent); }
+#dot-a { background: #1a1a1a; } #dot-b { background: #0d0d1a; } #dot-c { background: #000; }
+
+#cover-page { position: fixed; inset: 0; background: var(--bg); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; padding: 24px; overflow-y: auto; background-image: var(--noise); }
 #cover-page.hidden { display: none; }
+.cover-title { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 400; letter-spacing: 4px; color: var(--text); margin-bottom: 4px; }
+.cover-subtitle { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; }
+.step-indicator { display: flex; gap: 8px; margin-bottom: 20px; }
+.step-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); transition: all 0.3s; }
+.step-dot.active { background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+.cover-step { display: none; width: 100%; max-width: 360px; }
+.cover-step.active { display: block; }
+.cover-block { background: var(--surface); border: 1px solid var(--border); padding: 16px; margin: 8px 0; position: relative; }
+.cover-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); opacity: 0.5; }
+.cover-block.api-section { border-color: var(--accent); box-shadow: var(--neon-glow); }
+.block-label { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; text-align: center; }
+.api-input-row, .free-input-row { display: flex; gap: 6px; }
+.api-input, .free-input { flex: 1; padding: 10px 12px; border: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.78rem; background: var(--bg); color: var(--text); border-radius: var(--radius); transition: border-color 0.2s; }
+.api-input:focus, .free-input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 6px var(--accent-dim); }
+.api-save-btn { padding: 10px 16px; background: var(--accent); color: #000; border: none; font-size: 0.78rem; cursor: pointer; font-weight: 600; border-radius: var(--radius); transition: all 0.2s; }
+.api-save-btn:hover { filter: brightness(1.1); }
+.api-status { font-size: 0.65rem; color: var(--text-muted); margin-top: 6px; }
+.toggle-row { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.toggle-text { font-size: 0.8rem; color: var(--text-secondary); transition: color 0.2s; }
+.toggle-text.on { color: var(--accent); }
+.toggle-switch { width: 44px; height: 24px; background: var(--border); border-radius: 12px; cursor: pointer; position: relative; transition: background 0.3s; }
+.toggle-switch.on { background: var(--accent); }
+.toggle-switch::after { content: ''; position: absolute; width: 20px; height: 20px; background: #fff; border-radius: 50%; top: 2px; left: 2px; transition: left 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+.toggle-switch.on::after { left: 22px; }
+.chip-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.chip { padding: 8px 12px; background: var(--surface-alt); border: 1px solid var(--border); font-size: 0.72rem; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; border-radius: var(--radius); }
+.chip:hover { border-color: var(--accent); color: var(--text); background: var(--btn-hover-bg); }
+.chip.selected { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 600; box-shadow: var(--neon-glow); }
+.chip.free { border-style: dashed; color: var(--text-muted); }
+.char-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 4px; margin-top: 8px; }
+.char-btn { background: var(--surface-alt); border: 1px solid var(--border); color: var(--text-secondary); padding: 6px 2px; border-radius: var(--radius); cursor: pointer; font-size: 0.6rem; text-align: center; transition: all 0.2s; }
+.char-btn:hover { border-color: var(--accent); color: var(--text); }
+.char-btn.selected { background: var(--accent); color: #000; border-color: var(--accent); }
+#customCharInput { margin-top: 8px; }
+.step-btns { display: flex; gap: 10px; margin-top: 20px; }
+.step-btn { flex: 1; padding: 12px; border-radius: var(--radius); cursor: pointer; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; text-align: center; }
+.step-btn.prev { background: var(--surface-alt); border: 1px solid var(--border); color: var(--text-secondary); }
+.step-btn.next { background: var(--accent); color: #000; border: none; }
+.step-btn.next:hover { filter: brightness(1.1); box-shadow: var(--neon-glow); }
+.step-btn:disabled { opacity: 0.3; pointer-events: none; }
 
-.cover-header {
-  text-align: center;
-  margin-bottom: 32px;
+#game-container { display: none; flex-direction: column; height: 100vh; height: 100dvh; max-width: 100%; margin: 0 auto; position: relative; overflow: hidden; background: var(--bg); background-image: var(--noise); }
+#game-container.active { display: flex; }
+@media (min-width: 768px) {
+  #game-container { max-width: 960px; flex-direction: row; }
+  .main-column { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .side-column { width: 240px; border-left: 1px solid var(--border); background: var(--surface); display: flex; flex-direction: column; }
 }
-.game-title {
-  font-size: clamp(1.8rem, 5vw, 2.5rem);
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: 2px;
-  margin-bottom: 6px;
-}
-.game-subtitle {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  letter-spacing: 1px;
-}
+.top-bar { display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 10; flex-shrink: 0; position: relative; }
+.top-bar::after { content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 1px; background: var(--accent); opacity: 0.3; filter: blur(2px); }
+.top-left { display: flex; align-items: center; gap: 8px; }
+.top-logo { font-family: var(--font-serif); font-size: 0.9rem; letter-spacing: 2px; color: var(--accent); }
+.top-day { font-size: 0.65rem; color: var(--text-secondary); font-family: var(--font-mono); }
+.top-rank { font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono); }
+.top-center { display: flex; align-items: center; gap: 6px; }
+.stamina-wrap { display: flex; align-items: center; gap: 4px; }
+.stamina-icon { font-size: 0.8rem; }
+.stamina-bar { width: 50px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.stamina-fill { height: 100%; background: var(--stamina-high); transition: width 0.4s ease; border-radius: 2px; box-shadow: 0 0 4px var(--stamina-high); }
+.stamina-fill.low { background: var(--stamina-low); box-shadow: 0 0 4px var(--stamina-low); }
+.stamina-fill.mid { background: var(--stamina-mid); box-shadow: 0 0 4px var(--stamina-mid); }
+.stamina-text { font-size: 0.6rem; color: var(--text-muted); min-width: 40px; }
+.top-right { display: flex; gap: 4px; }
+.icon-btn { background: var(--surface-alt); border: 1px solid var(--border); color: var(--text-secondary); width: 26px; height: 26px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; transition: all 0.2s; }
+.icon-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--btn-hover-bg); }
 
-.cover-section {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  margin: 10px 0;
-  width: 100%;
-  max-width: 360px;
-  box-shadow: var(--shadow);
-}
+#stat-panel { max-height: 0; overflow: hidden; transition: max-height 0.3s; background: var(--surface-alt); border-bottom: 1px solid var(--border); flex-shrink: 0; backdrop-filter: blur(8px); }
+#stat-panel.open { max-height: 160px; }
+.stat-inner { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 12px; }
+.stat-item { font-size: 0.65rem; color: var(--text-secondary); font-family: var(--font-mono); padding: 4px 10px; background: var(--surface); border: 1px solid var(--border); white-space: nowrap; border-radius: var(--radius); transition: background 0.3s; position: relative; overflow: hidden; }
+.stat-item::after { content: ''; position: absolute; bottom: 0; left: 0; height: 2px; background: var(--accent); opacity: 0.3; transition: width 0.4s; }
+.stat-item.flash { background: var(--accent-dim); color: var(--text); }
+.stat-item.stamina-low { color: var(--stamina-low); border-color: var(--stamina-low); }
+#bond-summary-btn { margin: 4px 12px 8px; padding: 5px 10px; background: var(--surface-alt); border: 1px solid var(--border); color: var(--text-secondary); font-size: 0.6rem; letter-spacing: 1px; cursor: pointer; border-radius: var(--radius); display: none; transition: all 0.2s; }
+#bond-summary-btn:hover { border-color: var(--accent); color: var(--accent); }
+#bond-summary-btn.show { display: inline-block; }
 
-.section-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 14px;
-  text-align: center;
-}
+#guide-bar { padding: 6px 12px; background: var(--accent-dim); font-size: 0.65rem; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; border-bottom: 1px solid var(--border); }
+#guide-bar.hidden { display: none; }
+.guide-close { background: none; border: none; color: var(--text-muted); font-size: 0.9rem; cursor: pointer; }
 
-.toggle-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-}
-.toggle-label {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-.toggle-label.active { color: var(--accent); font-weight: 500; }
+#log-area { flex: 1; overflow-y: auto; padding: 16px; -webkit-overflow-scrolling: touch; overscroll-behavior: contain; }
+.log-entry { padding: 14px 0; border-bottom: 1px solid var(--border); font-size: 0.8rem; line-height: 1.8; color: var(--text); animation: logIn 0.3s ease; padding-left: 12px; margin-bottom: 2px; border-left: 3px solid var(--log-train); transition: background 0.2s; word-break: break-word; }
+.log-entry:hover { background: var(--btn-hover-bg); }
+.log-entry.train { border-left-color: var(--log-train); }
+.log-entry.match { border-left-color: var(--log-match); }
+.log-entry.social { border-left-color: var(--log-social); }
+.log-entry.villain { border-left-color: var(--log-villain); }
+.log-entry.shadow { border-left-color: var(--log-shadow); }
+.log-entry.rest { border-left-color: var(--log-rest); }
+.log-entry.story { border-left-color: var(--log-story); }
+.log-day-sep { text-align: center; font-size: 0.6rem; color: var(--text-muted); padding: 10px 0; letter-spacing: 1px; border-bottom: 1px dashed var(--border); }
+@keyframes logIn { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: translateX(0); } }
 
-.switch {
-  position: relative;
-  width: 48px;
-  height: 26px;
-  background: var(--border);
-  border-radius: 13px;
-  cursor: pointer;
-  transition: all 0.3s;
-  border: none;
-}
-.switch.on { background: var(--accent); }
-.switch::after {
-  content: '';
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  background: #fff;
-  border-radius: 50%;
-  top: 2px;
-  left: 2px;
-  transition: all 0.3s;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-}
-.switch.on::after { left: 24px; }
+#back-to-bottom { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background: var(--surface); border: 1px solid var(--accent); color: var(--text); padding: 4px 12px; font-size: 0.65rem; cursor: pointer; z-index: 150; border-radius: var(--radius); display: none; box-shadow: var(--neon-glow); }
+#back-to-bottom.show { display: block; }
 
-.option-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+#mobile-nav { display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--border); z-index: 100; padding-bottom: var(--safe-bottom); }
+#mobile-nav .nav-row { display: flex; }
+.nav-tab { flex: 1; text-align: center; padding: 10px 4px; font-size: 0.65rem; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; border: none; background: none; position: relative; }
+.nav-tab.active { color: var(--accent); }
+.nav-tab.active::after { content: ''; position: absolute; top: 0; left: 25%; right: 25%; height: 2px; background: var(--accent); border-radius: 0 0 2px 2px; box-shadow: 0 0 6px var(--accent); }
+.nav-panel { display: none; padding: 12px; background: var(--surface); border-top: 1px solid var(--border); max-height: 45vh; overflow-y: auto; }
+.nav-panel.open { display: block; }
+@media (max-width: 767px) {
+  #mobile-nav { display: block; }
+  .side-column { display: none; }
+  #input-panel { display: none; }
+  #input-panel.mobile-show { display: block; position: fixed; bottom: 0; left: 0; right: 0; z-index: 200; background: var(--surface); border-top: 1px solid var(--accent); padding: 10px 12px; padding-bottom: calc(12px + var(--safe-bottom)); }
 }
-.option-btn {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  padding: 12px 8px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all 0.25s;
-  font-size: 0.85rem;
-  text-align: center;
-}
-.option-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.option-btn.selected {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-  font-weight: 500;
-}
+#action-fab { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); padding: 12px 40px; background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #000; border: none; font-size: 0.85rem; letter-spacing: 3px; cursor: pointer; z-index: 100; font-weight: 600; border-radius: var(--radius); box-shadow: var(--neon-glow); transition: all 0.2s; }
+#action-fab:hover { filter: brightness(1.15); transform: translateX(-50%) scale(1.03); }
+@media (min-width: 768px) { #action-fab { display: none; } .side-actions { display: block !important; } }
 
-.char-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
-  gap: 6px;
-}
-.char-btn {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  padding: 10px 4px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  transition: all 0.25s;
-  font-size: 0.65rem;
-  text-align: center;
-}
-.char-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.char-btn.selected {
-  background: var(--accent);
-  border-color: var(--accent);
-  color: #fff;
-}
+.side-actions { display: none; padding: 12px; overflow-y: auto; }
+.side-section { margin-bottom: 10px; }
+.side-section-title { font-size: 0.55rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; font-family: var(--font-mono); }
+.side-action { display: flex; justify-content: space-between; align-items: center; width: 100%; text-align: left; padding: 8px 10px; background: var(--surface-alt); border: var(--btn-border); font-size: 0.72rem; color: var(--text); cursor: pointer; margin-bottom: 3px; transition: all 0.2s; border-radius: var(--btn-radius); position: relative; overflow: hidden; }
+.side-action::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); opacity: 0; transition: opacity 0.2s; }
+.side-action:hover { border-color: var(--accent); background: var(--btn-hover-bg); padding-left: 14px; }
+.side-action:hover::before { opacity: 0.6; }
+.side-action:disabled { color: var(--text-muted); opacity: 0.4; }
+.side-action .cost { font-size: 0.6rem; color: var(--text-muted); font-family: var(--font-mono); }
+.action-hint { font-size: 0.55rem; color: var(--text-muted); margin-top: 2px; margin-bottom: 4px; font-style: italic; }
 
-.start-btn {
-  background: var(--accent);
-  border: none;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 14px 50px;
-  border-radius: var(--radius);
-  cursor: pointer;
-  margin-top: 24px;
-  letter-spacing: 2px;
-  transition: all 0.3s;
-  box-shadow: 0 4px 16px rgba(116, 185, 255, 0.35);
-}
-.start-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(116, 185, 255, 0.45);
-}
+.side-action.loading, .drawer-action.loading { color: var(--text-muted); pointer-events: none; position: relative; }
+.side-action.loading::after, .drawer-action.loading::after { content: '...'; animation: loadingDots 1.5s infinite; }
+@keyframes loadingDots { 0%,20%{ content: '.'; } 40%{ content: '..'; } 60%,100%{ content: '...'; } }
 
-/* 主游戏界面 */
-#game-container {
-  display: none;
-  min-height: 100vh;
-  background: var(--bg-primary);
-}
-#game-container.active { display: flex; flex-direction: column; }
+#shadow-toast { position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%) translateY(10px); max-width: 500px; width: 88%; padding: 14px 18px; background: var(--toast-bg); color: var(--toast-text); font-family: var(--font-serif); font-style: italic; font-size: 0.78rem; line-height: 1.6; text-align: center; z-index: 300; pointer-events: none; opacity: 0; transition: opacity 0.6s, transform 0.6s; border: 1px solid var(--accent); border-radius: var(--radius); border-left: 3px solid var(--accent); animation: shadowPulse 2s infinite; }
+#shadow-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+@keyframes shadowPulse { 0%,100%{ border-left-color: var(--accent); } 50%{ border-left-color: transparent; } }
+#shadow-dot { position: fixed; top: 10px; right: 10px; width: 8px; height: 8px; background: var(--shadow-dot-color); border-radius: 50%; z-index: 400; cursor: pointer; display: none; box-shadow: 0 0 10px var(--shadow-dot-color); }
+#shadow-dot.show { display: block; }
+#shadow-dot.blink { animation: blink 1s infinite; }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+#shadow-chat { position: fixed; top: 0; right: -100%; width: 100%; max-width: 380px; height: 100dvh; background: var(--chat-bg); color: #d0d0d0; z-index: 500; transition: right 0.3s; display: flex; flex-direction: column; border-left: 1px solid var(--accent); }
+#shadow-chat.open { right: 0; }
+.chat-header { padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center; }
+.chat-header span { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 1px; }
+.chat-close { background: none; border: none; color: rgba(255,255,255,0.2); font-size: 1.1rem; cursor: pointer; }
+.chat-msgs { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 8px; }
+.chat-msg { max-width: 80%; padding: 8px 12px; font-size: 0.72rem; line-height: 1.5; animation: msgIn 0.25s; }
+.chat-msg.them { background: rgba(255,255,255,0.04); align-self: flex-start; font-style: italic; }
+.chat-msg.me { background: rgba(255,255,255,0.1); align-self: flex-end; }
+.chat-actions { padding: 10px 14px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; flex-direction: column; gap: 4px; }
+.chat-act { flex: 1; padding: 8px 4px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); color: #999; font-size: 0.65rem; cursor: pointer; text-align: center; }
+.chat-free-input { width: 100%; padding: 6px 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #ccc; font-size: 0.65rem; font-family: var(--font); margin-top: 4px; }
+.chat-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 450; display: none; }
+.chat-backdrop.show { display: block; }
 
-/* 顶部栏 */
-.top-bar {
-  position: sticky;
-  top: 0;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  padding: 10px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  z-index: 100;
-}
-.top-left { display: flex; align-items: center; gap: 12px; }
-.game-logo {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-.day-badge {
-  background: var(--bg-primary);
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  border: 1px solid var(--border);
-}
-.rank-badge {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  background: linear-gradient(135deg, #74b9ff22, #a29bfe22);
-  border: 1px solid var(--accent);
-  color: var(--accent);
-}
-.rank-icon { font-size: 0.9rem; }
-
-.top-center { display: flex; align-items: center; gap: 14px; }
-
-.stamina-wrap {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.stamina-icon { font-size: 1rem; color: var(--success); }
-.stamina-bar {
-  width: 70px;
-  height: 6px;
-  background: var(--border);
-  border-radius: 3px;
-  overflow: hidden;
-}
-.stamina-fill {
-  height: 100%;
-  background: linear-gradient(90deg, var(--success), #81ecec);
-  transition: width 0.4s ease;
-  border-radius: 3px;
-}
-.stamina-fill.low { background: linear-gradient(90deg, var(--danger), #fd79a8); }
-.stamina-fill.med { background: linear-gradient(90deg, var(--warning), #fdcb6e); }
-.stamina-text { font-size: 0.7rem; color: var(--text-muted); min-width: 42px; }
-
-.top-right { display: flex; align-items: center; gap: 8px; }
-.icon-btn {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  transition: all 0.25s;
-}
-.icon-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-light);
-}
-
-/* 主舞台 */
-.main-stage {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-  padding-bottom: calc(16px + env(safe-area-inset-bottom));
-  max-width: 100%;
-  margin: 0 auto;
-  width: 100%;
-}
-
-/* 状态面板 - 在输入区上方 */
-.status-panel {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow);
-}
-.status-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 16px;
-}
-.status-section {
-  flex: 1;
-}
-.section-title {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.section-title::before {
-  content: '';
-  width: 3px;
-  height: 10px;
-  background: var(--accent);
-  border-radius: 2px;
-}
-
-/* 四维属性 */
-.attr-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-}
-.attr-item {
-  text-align: center;
-  padding: 8px 4px;
-  background: var(--bg-primary);
-  border-radius: var(--radius-sm);
-}
-.attr-name {
-  font-size: 0.6rem;
-  color: var(--text-muted);
-  margin-bottom: 4px;
-}
-.attr-val {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--accent);
-}
-.attr-bar {
-  height: 3px;
-  background: var(--border);
-  border-radius: 2px;
-  margin-top: 6px;
-  overflow: hidden;
-}
-.attr-fill {
-  height: 100%;
-  background: var(--accent);
-  border-radius: 2px;
-  transition: width 0.4s ease;
-}
-
-/* 羁绊列表 */
-.bond-mini {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.bond-tag {
-  font-size: 0.7rem;
-  padding: 4px 10px;
-  background: var(--bg-primary);
-  border-radius: 20px;
-  color: var(--text-secondary);
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.bond-tag:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.bond-tag.lv0 { opacity: 0.5; }
-.bond-tag.lv1 { background: #74b9ff15; border-color: #74b9ff50; color: #0984e3; }
-.bond-tag.lv2 { background: #55efc415; border-color: #55efc450; color: #00b894; }
-.bond-tag.lv3 { background: #fdcb6e15; border-color: #fdcb6e50; color: #e17055; }
-.bond-tag.lv4 { background: #a29bfe15; border-color: #a29bfe50; color: #6c5ce7; }
-.bond-tag.lv5 { background: #fd79a815; border-color: #fd79a850; color: #e84393; }
-
-/* 记忆碎片 - 数字展示 */
-.fragment-num {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--accent);
-}
-.fragment-num span { color: var(--text-muted); font-weight: 400; }
-
-/* 排名小面板 */
-.rank-mini {
-  text-align: center;
-}
-.rank-name {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--accent);
-}
-.rank-pts {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-
-/* 剧情面板 */
-.story-panel {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow);
-}
-.story-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
-}
-.scene-title {
-  font-size: 0.8rem;
-  color: var(--accent);
-  font-weight: 500;
-  letter-spacing: 0.5px;
-}
-.check-tag {
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 0.7rem;
-  font-weight: 600;
-  animation: popIn 0.4s ease;
-}
-@keyframes popIn {
-  0% { transform: scale(0); opacity: 0; }
-  70% { transform: scale(1.1); }
-  100% { transform: scale(1); opacity: 1; }
-}
-.check-tag.success { background: #55efc415; color: var(--success); }
-.check-tag.fail { background: #fab1a015; color: var(--danger); }
-
-.story-text {
-  font-size: 0.92rem;
-  line-height: 1.75;
-  color: var(--text-primary);
-  min-height: 60px;
-}
-.story-message {
-  margin-bottom: 18px;
-  padding: 4px 0;
-  border-radius: 4px;
-  transition: background 0.3s ease;
-}
-.review-item {
-  display: flex;
-  gap: 12px;
-  padding: 12px 14px;
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  margin-bottom: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  align-items: center;
-  min-height: 48px;
-}
-.review-item:hover {
-  border-color: var(--accent);
-  background: var(--bg-secondary);
-  transform: translateX(4px);
-}
-.review-index {
-  color: var(--accent);
-  font-weight: 600;
-  font-family: 'Courier New', monospace;
-  min-width: 60px;
-  flex-shrink: 0;
-}
-.review-preview {
-  color: var(--text-primary);
-  font-size: 0.88rem;
-  line-height: 1.6;
-  flex: 1;
-  word-break: break-word;
-}
-.typewriter-cursor {
-  display: inline-block;
-  width: 2px;
-  height: 1em;
-  background: var(--accent);
-  animation: blink 0.8s infinite;
-  vertical-align: middle;
-  margin-left: 2px;
-}
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
-
-.story-footer {
-  margin-top: 14px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.char-tag {
-  font-size: 0.75rem;
-  color: var(--accent);
-}
-.story-tags { display: flex; gap: 5px; flex-wrap: wrap; }
-.tag {
-  background: var(--bg-primary);
-  padding: 2px 8px;
-  border-radius: 10px;
-  font-size: 0.6rem;
-  color: var(--text-muted);
-}
-
-/* 选项面板 */
-.options-panel {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 12px;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow);
-}
-.option-item {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  color: var(--text-primary);
-  padding: 14px 16px;
-  min-height: 52px;
-  border-radius: var(--radius-sm);
-  margin: 6px 0;
-  cursor: pointer;
-  transition: all 0.25s;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.9rem;
-}
-.option-item:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateX(4px);
-}
-.option-item::before {
-  content: '◇';
-  color: var(--accent);
-  transition: all 0.25s;
-  font-size: 0.8rem;
-}
-.option-item:hover::before { content: '◆'; }
-
-/* 输入面板 - 最底部 */
-.input-panel {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 14px;
-  box-shadow: var(--shadow);
-  margin-top: auto;
-}
-.input-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
-}
-.game-input {
-  flex: 1;
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 0 14px;
-  height: 48px;
-  color: var(--text-primary);
-  font-size: 0.92rem;
-  outline: none;
-  transition: all 0.25s;
-  display: flex;
-  align-items: center;
-}
-.game-input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(116, 185, 255, 0.15);
-}
-.game-input::placeholder { color: var(--text-muted); }
-
-.send-btn {
-  background: var(--accent);
-  border: none;
-  color: #fff;
-  padding: 0 20px;
-  height: 48px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.25s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.send-btn:hover {
-  background: #5fa8f5;
-  transform: translateY(-1px);
-}
-.clear-btn { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: transparent; border: 1px solid var(--border); color: var(--text-muted); cursor: pointer; transition: all 0.2s ease; border-radius: 6px; flex-shrink: 0; font-size: 14px; }
-.clear-btn:hover { border-color: var(--accent); color: var(--accent); }
-.quick-btns {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.quick-btn {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  padding: 6px 12px;
-  border-radius: 16px;
-  cursor: pointer;
-  font-size: 0.75rem;
-  transition: all 0.25s;
-}
-.quick-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-.input-hint {
-  text-align: center;
-  color: var(--text-muted);
-  font-size: 0.72rem;
-  margin-top: 10px;
-  letter-spacing: 0.3px;
-}
-
-/* 模态框 */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.4);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 200;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  padding: 20px;
-}
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; z-index: 2000; }
 .modal-overlay.active { display: flex; }
-
-.modal-box {
-  background: var(--bg-card);
-  border-radius: var(--radius);
-  padding: 24px;
-  max-width: 480px;
-  width: 100%;
-  max-height: 85vh;
-  overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.15);
-  position: relative;
-}
-.modal-close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 1rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.25s;
-}
-.modal-close:hover {
-  background: var(--danger);
-  border-color: var(--danger);
-  color: #fff;
-}
-.modal-title {
-  font-size: 1.1rem;
-  color: var(--text-primary);
-  margin-bottom: 18px;
-  text-align: center;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-.modal-content { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
-
-/* 地图网格 */
-.map-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-  gap: 10px;
-}
-.map-item {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 10px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.map-item:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
-}
-.map-icon { font-size: 1.8rem; margin-bottom: 8px; }
-.map-name { font-size: 0.8rem; color: var(--text-primary); margin-bottom: 3px; }
-.map-desc { font-size: 0.65rem; color: var(--text-muted); }
-
-/* 行动网格 */
-.action-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 10px;
-}
-.action-item {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 16px 12px;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.25s;
-}
-.action-item:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-hover);
-}
-.action-icon { font-size: 1.8rem; margin-bottom: 8px; }
-.action-name { font-size: 0.85rem; color: var(--text-primary); margin-bottom: 4px; }
-.action-cost { font-size: 0.7rem; color: var(--danger); }
-.action-desc { font-size: 0.65rem; color: var(--text-muted); margin-top: 3px; }
-
-/* 详情弹层 */
-.detail-header { text-align: center; margin-bottom: 18px; }
-.detail-avatar {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), #a29bfe);
-  margin: 0 auto 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8rem;
-  color: #fff;
-  box-shadow: 0 4px 16px rgba(116, 185, 255, 0.35);
-}
-.detail-name { font-size: 1.2rem; color: var(--text-primary); margin-bottom: 4px; font-weight: 600; }
-.detail-id { font-size: 0.75rem; color: var(--text-muted); }
-.detail-stats {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  margin: 16px 0;
-}
-.stat-card {
-  background: var(--bg-primary);
-  border-radius: var(--radius-sm);
-  padding: 12px;
-  text-align: center;
-}
-.stat-label { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
-.stat-value { font-size: 1.1rem; color: var(--accent); font-weight: 700; }
-.detail-bio {
-  background: var(--bg-primary);
-  border-radius: var(--radius-sm);
-  padding: 14px;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  margin-top: 12px;
-}
-
-/* FAQ */
-.faq-item {
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  margin-bottom: 8px;
-  overflow: hidden;
-}
-.faq-q {
-  padding: 12px 14px;
-  color: var(--text-primary);
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.88rem;
-}
-.faq-a {
-  padding: 0 14px 12px;
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  line-height: 1.6;
-  display: none;
-}
+.modal-box { background: var(--surface); border: 1px solid var(--border); padding: 16px; width: 90%; max-width: 400px; max-height: 80vh; overflow-y: auto; border-radius: var(--radius); position: relative; backdrop-filter: blur(16px); line-height: 1.6; }
+.modal-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--accent); }
+.modal-box::after { content: ''; position: absolute; top: 0; left: 0; width: 8px; height: 8px; border-left: 1px solid var(--accent); border-top: 1px solid var(--accent); opacity: 0.4; }
+.modal-box h3 { font-size: 0.75rem; margin-bottom: 10px; letter-spacing: 1px; padding-top: 4px; }
+.modal-close-btn { margin-top: 10px; padding: 6px 14px; background: var(--accent); color: #000; border: none; cursor: pointer; font-weight: 600; border-radius: var(--radius); transition: filter 0.2s; }
+.modal-close-btn:hover { filter: brightness(1.1); }
+.member-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.member-chip { padding: 6px 10px; background: var(--surface-alt); border: 1px solid var(--border); font-size: 0.68rem; cursor: pointer; color: var(--text-secondary); border-radius: var(--radius); transition: all 0.2s; min-width: 60px; text-align: center; }
+.member-chip:hover { border-color: var(--accent); background: var(--btn-hover-bg); }
+.review-item { display: flex; gap: 10px; padding: 10px 12px; background: var(--surface-alt); border: 1px solid var(--border); border-radius: 6px; margin-bottom: 6px; cursor: pointer; font-size: 0.78rem; transition: all 0.2s; }
+.review-item:hover { border-color: var(--accent); background: var(--btn-hover-bg); }
+.faq-item { background: var(--surface-alt); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 6px; overflow: hidden; }
+.faq-q { padding: 10px 12px; font-size: 0.8rem; cursor: pointer; }
+.faq-a { padding: 0 12px 10px; font-size: 0.75rem; color: var(--text-secondary); display: none; }
 .faq-item.open .faq-a { display: block; }
-.faq-item.open .faq-q::after { content: '▲'; font-size: 0.6rem; color: var(--accent); }
-.faq-q::after { content: '▼'; font-size: 0.6rem; color: var(--text-muted); }
-
-/* API设置 */
-.api-section { margin-bottom: 14px; }
-.api-label { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 6px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
-.api-select, .api-input {
-  width: 100%;
-  background: var(--bg-primary);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 10px 12px;
-  color: var(--text-primary);
-  font-size: 0.88rem;
-  margin-bottom: 8px;
-}
-.api-select:focus, .api-input:focus { border-color: var(--accent); outline: none; }
-
-/* 确认弹层 */
-.confirm-box { text-align: center; padding: 10px; }
-.confirm-msg { font-size: 0.95rem; margin-bottom: 20px; line-height: 1.5; }
-.confirm-btns { display: flex; gap: 12px; justify-content: center; }
-.confirm-btn {
-  padding: 10px 28px;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.88rem;
-  transition: all 0.25s;
-  border: none;
-}
-.confirm-yes { background: var(--accent); color: #fff; }
-.confirm-yes:hover { background: #5fa8f5; }
-.confirm-no { background: var(--bg-primary); border: 1px solid var(--border); color: var(--text-secondary); }
-.confirm-no:hover { border-color: var(--danger); color: var(--danger); }
-
-/* 主题选择 */
-.theme-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-.theme-item {
-  padding: 12px 8px;
-  border-radius: var(--radius-sm);
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.25s;
-  border: 2px solid transparent;
-}
-.theme-item:hover { transform: scale(1.03); }
-.theme-item.selected { border-color: var(--accent); }
-.theme-preview { width: 100%; height: 36px; border-radius: 6px; margin-bottom: 6px; }
-.theme-name { font-size: 0.72rem; color: var(--text-secondary); }
-
-/* 天赋标签 */
-.talent-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
-.talent-tag {
-  background: var(--bg-primary);
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 0.65rem;
-  color: var(--text-secondary);
-  border: 1px solid var(--border);
-}
-
-/* 逻辑自检 */
-.logic-section {
-  margin-bottom: 16px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--border);
-}
-.logic-section:last-child { border-bottom: none; }
-.logic-title { font-size: 0.75rem; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-.logic-row { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.82rem; }
-.logic-label { color: var(--text-secondary); }
-.logic-val { color: var(--text-primary); font-weight: 500; }
-.logic-val.ok { color: var(--success); }
-.logic-val.warn { color: var(--warning); }
-.logic-val.err { color: var(--danger); }
-
-/* 通知 */
-.notification {
-  position: fixed;
-  top: 70px;
-  right: 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 12px 16px;
-  z-index: 300;
-  transform: translateX(120%);
-  transition: transform 0.3s ease;
-  max-width: 280px;
-  box-shadow: var(--shadow-hover);
-}
+.notification { position: fixed; top: 60px; right: 12px; background: var(--surface); border: 1px solid var(--accent); border-radius: var(--radius); padding: 10px 14px; z-index: 5000; transform: translateX(120%); transition: transform 0.3s; max-width: 260px; box-shadow: var(--neon-glow); }
 .notification.show { transform: translateX(0); }
-.notif-title { font-size: 0.8rem; color: var(--accent); margin-bottom: 3px; font-weight: 600; }
-.notif-msg { font-size: 0.78rem; color: var(--text-secondary); }
+.notif-title { font-size: 0.7rem; color: var(--accent); font-weight: 600; }
+.notif-msg { font-size: 0.7rem; color: var(--text-secondary); }
 
-/* 更新日志 */
-.changelog { max-height: 280px; overflow-y: auto; }
-.log-item {
-  border-left: 2px solid var(--accent);
-  padding-left: 14px;
-  margin-bottom: 14px;
-  position: relative;
-}
-.log-item::before {
-  content: '';
-  position: absolute;
-  left: -5px;
-  top: 0;
-  width: 8px;
-  height: 8px;
-  background: var(--accent);
-  border-radius: 50%;
-}
-.log-version { font-size: 0.88rem; color: var(--accent); font-weight: 600; margin-bottom: 3px; }
-.log-date { font-size: 0.68rem; color: var(--text-muted); margin-bottom: 5px; }
-.log-content { font-size: 0.8rem; line-height: 1.6; }
+#input-panel { padding: 8px 12px; background: var(--glass-bg); backdrop-filter: blur(12px); border-top: 1px solid var(--border); }
+.input-row { display: flex; gap: 6px; margin-bottom: 6px; }
+.game-input { flex: 1; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 10px; color: var(--text); font-size: 0.8rem; outline: none; transition: border-color 0.2s; }
+.game-input:focus { border-color: var(--accent); box-shadow: 0 0 6px var(--accent-dim); }
+.clear-btn { background: transparent; border: 1px solid var(--border); color: var(--text-muted); cursor: pointer; padding: 0 10px; border-radius: var(--radius); display: none; }
+.send-btn { background: var(--accent); color: #000; border: none; padding: 0 16px; border-radius: var(--radius); cursor: pointer; font-weight: 600; font-size: 0.8rem; transition: filter 0.2s; }
+.send-btn:hover { filter: brightness(1.1); }
+.quick-btns { display: flex; flex-wrap: wrap; gap: 4px; }
+.quick-btn { background: var(--surface-alt); border: 1px solid var(--border); color: var(--text-secondary); padding: 4px 10px; border-radius: 12px; cursor: pointer; font-size: 0.65rem; transition: all 0.2s; }
+.quick-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-/* 滚动条 */
-::-webkit-scrollbar { width: 5px; height: 5px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+.bond-tag { font-size: 0.6rem; padding: 2px 6px; border-radius: 8px; font-weight: 500; }
+.bond-lv0 { background: #333; color: #777; }
+.bond-lv1 { background: rgba(79,195,247,0.15); color: #4fc3f7; }
+.bond-lv2 { background: rgba(0,229,255,0.15); color: #00e5ff; }
+.bond-lv3 { background: rgba(255,213,79,0.15); color: #ffd54f; }
+.bond-lv4 { background: rgba(105,240,174,0.15); color: #69f0ae; }
+.bond-lv5 { background: rgba(255,82,82,0.15); color: #ff5252; }
 
-/* 加载动画 */
-.loading {
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  border: 2px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+.strategy-opt { padding: 10px 14px; background: var(--surface-alt); border: 1px solid var(--border); cursor: pointer; color: var(--text); font-size: 0.78rem; margin-bottom: 6px; border-radius: var(--radius); transition: all 0.2s; }
+.strategy-opt:hover { border-color: var(--accent); background: var(--btn-hover-bg); }
+.strategy-opt small { color: var(--text-muted); display: block; margin-top: 2px; }
 
-/* 移动端适配 */
-@media (max-width: 768px) {
-  .top-bar { padding: 8px 12px; }
-  .game-logo { font-size: 0.85rem; }
-  .day-badge, .rank-badge { font-size: 0.7rem; padding: 3px 8px; }
-  .stamina-bar { width: 55px; }
-  .main-stage { padding: 12px; padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
-  .story-panel, .options-panel, .input-panel, .status-panel { padding: 14px; }
-  .option-item { padding: 15px 14px; min-height: 52px; font-size: 0.88rem; }
-  .game-input { height: 48px; font-size: 16px; }
-  .send-btn { height: 48px; padding: 0 16px; }
-  .icon-btn { width: 34px; height: 34px; font-size: 0.9rem; }
-  .modal-box { padding: 18px; margin: 10px; }
-  .action-grid { grid-template-columns: repeat(2, 1fr); }
-  .attr-grid { grid-template-columns: repeat(2, 1fr); }
-  .map-grid { grid-template-columns: repeat(2, 1fr); }
-}
+.logic-section { margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
+.logic-section:last-child { border-bottom: none; }
+.logic-title { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 6px; }
+.logic-row { display: flex; justify-content: space-between; padding: 3px 0; font-size: 0.75rem; }
+.logic-row span:first-child { color: var(--text-secondary); }
+.logic-row span:last-child { color: var(--text); }
+.logic-row span.ok { color: var(--log-rest); }
+.logic-row span.warn { color: var(--stamina-mid); }
+.logic-row span.err { color: var(--stamina-low); }
 
-/* PC端侧栏 */
-@media (min-width: 1024px) {
-  .main-stage {
-    max-width: 600px;
-    margin: 0 auto;
-    padding-top: 20px;
-  }
+@media (max-width: 480px) {
+  .modal-box { padding: 14px; width: 95%; }
+  .member-chip { min-width: 50px; font-size: 0.65rem; }
+  .quick-btns { gap: 3px; }
+  .quick-btn { padding: 3px 8px; font-size: 0.6rem; }
 }
 </style>
 </head>
 <body>
 
-<!-- 封面页 -->
+<div id="theme-switcher">
+  <div class="theme-dot active" id="dot-a" onclick="setTheme('a')"></div>
+  <div class="theme-dot" id="dot-b" onclick="setTheme('b')"></div>
+  <div class="theme-dot" id="dot-c" onclick="setTheme('c')"></div>
+</div>
+
 <div id="cover-page">
-  <div class="cover-header">
-    <h1 class="game-title">SVT电竞</h1>
-    <p class="game-subtitle">平行世界记忆</p>
+  <div class="cover-title">SVT 电竞</div>
+  <div class="cover-subtitle">电 竞 荣 光</div>
+  <div class="step-indicator">
+    <div class="step-dot active" id="stepDot1"></div>
+    <div class="step-dot" id="stepDot2"></div>
+    <div class="step-dot" id="stepDot3"></div>
   </div>
-
-  <div class="cover-section">
-    <div class="section-label">队内恋爱</div>
-    <div class="toggle-row">
-      <span class="toggle-label" id="romanceOff">关闭</span>
-      <div class="switch" id="romanceSwitch" onclick="toggleRomance()"></div>
-      <span class="toggle-label" id="romanceOn">开启</span>
+  <div class="cover-step active" id="coverStep1">
+    <div class="cover-block api-section">
+      <div class="block-label">DeepSeek API Key</div>
+      <div class="api-input-row">
+        <input type="password" class="api-input" id="apiKeyInput" placeholder="输入 API Key">
+        <button class="api-save-btn" onclick="saveApiKey()">保存</button>
+      </div>
+      <div class="api-status" id="apiStatus"></div>
+    </div>
+    <div class="cover-block">
+      <div class="block-label">队内恋爱</div>
+      <div class="toggle-row">
+        <span class="toggle-text on" id="romOff">关闭</span>
+        <div class="toggle-switch" id="romSwitch" onclick="toggleRomance()"></div>
+        <span class="toggle-text" id="romOn">开启</span>
+      </div>
+    </div>
+    <div class="step-btns">
+      <button class="step-btn next" onclick="nextStep(2)">下一步</button>
     </div>
   </div>
-
-  <button class="start-btn" onclick="openSettings()">开始游戏</button>
-</div>
-
-<!-- 设置弹层 -->
-<div class="modal-overlay" id="settingsModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('settingsModal')">×</button>
-    <h2 class="modal-title">游戏设置</h2>
-    <div class="modal-content">
-      <div class="cover-section" style="box-shadow: none; border: none; padding: 0; margin: 0 0 14px 0;">
-        <div class="section-label">主攻游戏</div>
-        <div class="option-grid" id="gameSelect">
-          <div class="option-btn" data-value="王者荣耀">王者荣耀</div>
-          <div class="option-btn" data-value="英雄联盟">英雄联盟</div>
-          <div class="option-btn" data-value="CS2">CS2</div>
-          <div class="option-btn" data-value="瓦罗兰">瓦罗兰</div>
-        </div>
+  <div class="cover-step" id="coverStep2">
+    <div class="cover-block">
+      <div class="block-label">主攻游戏</div>
+      <div class="chip-row" id="gameChips">
+        <div class="chip selected" data-val="王者荣耀">王者荣耀</div>
+        <div class="chip" data-val="英雄联盟">英雄联盟</div>
+        <div class="chip" data-val="CS2">CS2</div>
+        <div class="chip" data-val="瓦罗兰特">瓦罗兰特</div>
+        <div class="chip" data-val="永劫无间">永劫无间</div>
+        <div class="chip" data-val="PUBG">PUBG</div>
+        <div class="chip free" onclick="freeInputGame()">+ 其他</div>
       </div>
-
-      <div class="cover-section" style="box-shadow: none; border: none; padding: 0; margin: 0 0 14px 0;">
-        <div class="section-label">职业路线</div>
-        <div class="option-grid" id="careerSelect">
-          <div class="option-btn" data-value="竞技者">竞技者</div>
-          <div class="option-btn" data-value="幕后智者">幕后智者</div>
-          <div class="option-btn" data-value="内容王者">内容王者</div>
-          <div class="option-btn" data-value="建设者">建设者</div>
-        </div>
+      <div class="free-input-row" id="gameFreeRow" style="display:none;">
+        <input type="text" class="free-input" id="gameFreeInput" placeholder="输入游戏名称" oninput="onGameFreeInput()">
       </div>
-
-      <div class="cover-section" style="box-shadow: none; border: none; padding: 0; margin: 0 0 14px 0;">
-        <div class="section-label">难度</div>
-        <div class="option-grid" id="difficultySelect">
-          <div class="option-btn" data-value="休闲">休闲</div>
-          <div class="option-btn" data-value="标准">标准</div>
-          <div class="option-btn" data-value="硬核">硬核</div>
-          <div class="option-btn" data-value="地狱">地狱</div>
-        </div>
+    </div>
+    <div class="cover-block">
+      <div class="block-label">职业路线</div>
+      <div class="chip-row" id="careerChips">
+        <div class="chip selected" data-val="竞技者">竞技者</div>
+        <div class="chip" data-val="幕后智者">幕后智者</div>
+        <div class="chip" data-val="内容王者">内容王者</div>
+        <div class="chip" data-val="建设者">建设者</div>
+        <div class="chip free" onclick="freeInputCareer()">+ 自定</div>
       </div>
-
-      <div class="cover-section" style="box-shadow: none; border: none; padding: 0; margin: 0 0 14px 0;">
-        <div class="section-label">选择角色</div>
-        <div class="option-grid" style="margin-bottom: 10px;">
-          <div class="option-btn" id="customCharBtn" onclick="selectCustomChar()">自定义</div>
-          <div class="option-btn" id="svtCharBtn" onclick="selectSVTChar()">SVT成员</div>
-        </div>
-        <div id="customCharInput" style="display:none;">
-          <input type="text" class="game-input" id="customName" placeholder="输入角色名" style="width:100%;margin-bottom:8px;height:42px;">
-        </div>
-        <div id="svtCharGrid" class="char-grid" style="display:none;">
-          <div class="char-btn" data-id="1" data-name="S.COUPS">SC</div>
-          <div class="char-btn" data-id="2" data-name="JEONGHAN">JH</div>
-          <div class="char-btn" data-id="3" data-name="JOSHUA">JS</div>
-          <div class="char-btn" data-id="4" data-name="JUN">JUN</div>
-          <div class="char-btn" data-id="5" data-name="HOSHI">HSH</div>
-          <div class="char-btn" data-id="6" data-name="WONWOO">WW</div>
-          <div class="char-btn" data-id="7" data-name="WOOZI">WZ</div>
-          <div class="char-btn" data-id="8" data-name="DK">DK</div>
-          <div class="char-btn" data-id="9" data-name="MINGYU">MG</div>
-          <div class="char-btn" data-id="10" data-name="THE8">T8</div>
-          <div class="char-btn" data-id="11" data-name="SEUNGKWAN">SK</div>
-          <div class="char-btn" data-id="12" data-name="VERNON">VRN</div>
-          <div class="char-btn" data-id="13" data-name="DINO">DN</div>
-        </div>
+      <div class="free-input-row" id="careerFreeRow" style="display:none;">
+        <input type="text" class="free-input" id="careerFreeInput" placeholder="输入职业路线" oninput="onCareerFreeInput()">
       </div>
-
-      <button class="start-btn" onclick="startGame()" style="width:100%; margin-top:10px;">确认开始</button>
+    </div>
+    <div class="step-btns">
+      <button class="step-btn prev" onclick="prevStep(1)">上一步</button>
+      <button class="step-btn next" onclick="nextStep(3)">下一步</button>
+    </div>
+  </div>
+  <div class="cover-step" id="coverStep3">
+    <div class="cover-block">
+      <div class="block-label">选择角色</div>
+      <div class="chip-row" style="margin-bottom:4px;">
+        <div class="chip selected" id="customCharChip" data-val="custom" onclick="selectCharType('custom')">自定义</div>
+        <div class="chip" id="svtCharChip" data-val="svt" onclick="selectCharType('svt')">SVT成员</div>
+      </div>
+      <div id="customCharInput">
+        <input type="text" class="free-input" id="customName" placeholder="输入角色名" style="width:100%;">
+      </div>
+      <div id="svtCharGrid" class="char-grid" style="display:none;">
+        <div class="char-btn" data-id="1" data-name="S.COUPS">SC</div>
+        <div class="char-btn" data-id="2" data-name="JEONGHAN">JH</div>
+        <div class="char-btn" data-id="3" data-name="JOSHUA">JS</div>
+        <div class="char-btn" data-id="4" data-name="JUN">JUN</div>
+        <div class="char-btn" data-id="5" data-name="HOSHI">HSH</div>
+        <div class="char-btn" data-id="6" data-name="WONWOO">WW</div>
+        <div class="char-btn" data-id="7" data-name="WOOZI">WZ</div>
+        <div class="char-btn" data-id="8" data-name="DK">DK</div>
+        <div class="char-btn" data-id="9" data-name="MINGYU">MG</div>
+        <div class="char-btn" data-id="10" data-name="THE8">T8</div>
+        <div class="char-btn" data-id="11" data-name="SEUNGKWAN">SK</div>
+        <div class="char-btn" data-id="12" data-name="VERNON">VRN</div>
+        <div class="char-btn" data-id="13" data-name="DINO">DN</div>
+      </div>
+    </div>
+    <div class="cover-block">
+      <div class="block-label">难度</div>
+      <div class="chip-row" id="diffChips">
+        <div class="chip" data-val="休闲">休闲</div>
+        <div class="chip selected" data-val="标准">标准</div>
+        <div class="chip" data-val="硬核">硬核</div>
+        <div class="chip" data-val="地狱">地狱</div>
+      </div>
+    </div>
+    <div class="step-btns">
+      <button class="step-btn prev" onclick="prevStep(2)">上一步</button>
+      <button class="step-btn next" onclick="startGame()">开 始 游 戏</button>
     </div>
   </div>
 </div>
 
-<!-- 主游戏界面 -->
 <div id="game-container">
-  <!-- 顶部栏 -->
-  <div class="top-bar">
-    <div class="top-left">
-      <span class="game-logo">SVT电竞</span>
-      <span class="day-badge" id="dayCounter">第 1 天</span>
-      <div class="rank-badge">
-        <span class="rank-icon">👑</span>
-        <span id="rankDisplay">青铜Ⅰ</span>
+  <div class="main-column">
+    <div class="top-bar" onclick="toggleStatPanel()">
+      <div class="top-left">
+        <span class="top-logo">SVT</span>
+        <span class="top-day" id="dayDisplay">第 1 天</span>
+        <span class="top-rank" id="rankDisplay">未定级</span>
       </div>
-    </div>
-    <div class="top-center">
-      <div class="stamina-wrap">
-        <span class="stamina-icon">⚡</span>
-        <div class="stamina-bar">
-          <div class="stamina-fill" id="staminaFill" style="width: 100%;"></div>
-        </div>
-        <span class="stamina-text" id="staminaText">100/100</span>
-      </div>
-    </div>
-    <div class="top-right">
-      <button class="icon-btn" onclick="toggleMenu('mapModal')" title="地图">🗺️</button>
-      <button class="icon-btn" onclick="toggleMenu('actionModal')" title="行动">⚡</button>
-      <button class="icon-btn" onclick="toggleMenu('themeModal')" title="主题">🎨</button>
-      <button class="icon-btn" onclick="openLogicModal()" title="自检">🔧</button>
-      <button class="icon-btn" onclick="toggleMenu('apiModal')" title="API">⚙️</button>
-    </div>
-  </div>
-
-  <!-- 主舞台 -->
-  <div class="main-stage">
-    <!-- 状态面板 -->
-    <div class="status-panel">
-      <div class="status-row">
-        <div class="status-section" style="flex:2;">
-          <div class="section-title">四维属性</div>
-          <div class="attr-grid">
-            <div class="attr-item">
-              <div class="attr-name">操作</div>
-              <div class="attr-val" id="attrOp">10</div>
-              <div class="attr-bar"><div class="attr-fill" id="attrOpBar" style="width:10%"></div></div>
-            </div>
-            <div class="attr-item">
-              <div class="attr-name">意识</div>
-              <div class="attr-val" id="attrCons">10</div>
-              <div class="attr-bar"><div class="attr-fill" id="attrConsBar" style="width:10%"></div></div>
-            </div>
-            <div class="attr-item">
-              <div class="attr-name">心态</div>
-              <div class="attr-val" id="attrMind">10</div>
-              <div class="attr-bar"><div class="attr-fill" id="attrMindBar" style="width:10%"></div></div>
-            </div>
-            <div class="attr-item">
-              <div class="attr-name">指挥</div>
-              <div class="attr-val" id="attrLead">10</div>
-              <div class="attr-bar"><div class="attr-fill" id="attrLeadBar" style="width:10%"></div></div>
-            </div>
-          </div>
-        </div>
-        <div class="status-section" style="flex:1.5;">
-          <div class="section-title">SVT羁绊</div>
-          <div class="bond-mini" id="bondMini"></div>
+      <div class="top-center">
+        <div class="stamina-wrap">
+          <span class="stamina-icon">⚡</span>
+          <div class="stamina-bar"><div class="stamina-fill" id="staminaFill" style="width:100%;"></div></div>
+          <span class="stamina-text" id="staminaText">100/100</span>
         </div>
       </div>
-      <div class="status-row" style="margin-top:14px; padding-top:12px; border-top:1px solid var(--border);">
-        <div class="status-section">
-          <div class="section-title">记忆碎片</div>
-          <div class="fragment-num"><span id="fragCount">0</span> <span>/ 39</span></div>
-        </div>
-        <div class="status-section">
-          <div class="section-title">当前段位</div>
-          <div class="rank-mini">
-            <div class="rank-name" id="sidebarRank">青铜Ⅰ</div>
-            <div class="rank-pts"><span id="rankPoints">0</span> 胜点</div>
-          </div>
-        </div>
+      <div class="top-right">
+        <button class="icon-btn" onclick="toggleMenu('faqModal')">?</button>
+        <button class="icon-btn" onclick="toggleMenu('apiModal')">⚙</button>
+        <button class="icon-btn" onclick="openLogicModal()">🔧</button>
       </div>
     </div>
-
-    <!-- 剧情面板 -->
-    <div class="story-panel">
-      <div class="story-header">
-        <span class="scene-title" id="sceneTitle">训练基地</span>
-        <span class="check-tag" id="checkResult" style="display:none;"></span>
-      </div>
-      <div class="story-text" id="storyText"></div>
-      <div class="story-footer">
-        <span class="char-tag" id="charIndicator"></span>
-        <div class="story-tags" id="storyTags"></div>
-      </div>
+    <div id="stat-panel">
+      <div class="stat-inner" id="statInner"></div>
+      <button id="bond-summary-btn" onclick="showBondSummary()">羁 绊 总 览</button>
     </div>
-
-    <!-- 选项面板 -->
-    <div class="options-panel" id="optionsPanel"></div>
-
-    <!-- 输入面板 - 最底部 -->
-    <div class="input-panel">
+    <div id="guide-bar">
+      <span id="guideText">选择行动，开始你的电竞生涯。</span>
+      <button class="guide-close" onclick="dismissGuide()">&times;</button>
+    </div>
+    <div id="log-area"></div>
+    <div id="input-panel">
       <div class="input-row">
-        <input type="text" class="game-input" id="playerInput" placeholder="输入指令或对话..." onkeypress="handleInput(event)">
-        <button class="clear-btn" id="clear-btn" title="清空" style="display:none;">✕</button>
+        <input type="text" class="game-input" id="playerInput" placeholder="输入指令或自由行动..." onkeypress="if(event.key==='Enter')sendInput()">
+        <button class="clear-btn" id="clearBtn" onclick="clearInput()">✕</button>
         <button class="send-btn" onclick="sendInput()">发送</button>
       </div>
       <div class="quick-btns">
@@ -1196,1459 +489,1021 @@ body {
         <button class="quick-btn" onclick="showQuickInfo('bonds')">羁绊</button>
         <button class="quick-btn" onclick="showQuickInfo('ranking')">排名</button>
         <button class="quick-btn" onclick="showQuickInfo('fragments')">碎片</button>
-        <button class="quick-btn" onclick="toggleMenu('mapModal')">地图</button>
-        <button class="quick-btn" onclick="toggleMenu('actionModal')">行动</button>
         <button class="quick-btn" onclick="showReviewModal()">回顾</button>
-        <button class="quick-btn" onclick="saveGame()">存档</button>
-      </div>
-      <div class="input-hint">◆ 自由输入你的行动或对话</div>
-    </div>
-  </div>
-</div>
-
-<!-- 地图弹层 -->
-<div class="modal-overlay" id="mapModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('mapModal')">×</button>
-    <h2 class="modal-title">地图选择</h2>
-    <div class="modal-content">
-      <div class="map-grid">
-        <div class="map-item" onclick="selectMap('训练基地')">
-          <div class="map-icon">🏋️</div>
-          <div class="map-name">训练基地</div>
-          <div class="map-desc">提升属性</div>
-        </div>
-        <div class="map-item" onclick="selectMap('天梯排位')">
-          <div class="map-icon">🏆</div>
-          <div class="map-name">天梯排位</div>
-          <div class="map-desc">获取胜点</div>
-        </div>
-        <div class="map-item" onclick="selectMap('线下赛馆')">
-          <div class="map-icon">🎪</div>
-          <div class="map-name">线下赛馆</div>
-          <div class="map-desc">大型赛事</div>
-        </div>
-        <div class="map-item" onclick="selectMap('网咖')">
-          <div class="map-icon">💻</div>
-          <div class="map-name">网咖</div>
-          <div class="map-desc">随机事件</div>
-        </div>
-        <div class="map-item" onclick="selectMap('直播区')">
-          <div class="map-icon">📺</div>
-          <div class="map-name">直播区</div>
-          <div class="map-desc">提升人气</div>
-        </div>
-        <div class="map-item" onclick="selectMap('商业区')">
-          <div class="map-icon">🏢</div>
-          <div class="map-name">商业区</div>
-          <div class="map-desc">商务合作</div>
-        </div>
-        <div class="map-item" onclick="selectMap('休整区')">
-          <div class="map-icon">🛋️</div>
-          <div class="map-name">休整区</div>
-          <div class="map-desc">恢复体力</div>
-        </div>
-        <div class="map-item" onclick="selectMap('神秘地点')">
-          <div class="map-icon">❓</div>
-          <div class="map-name">神秘地点</div>
-          <div class="map-desc">8094?</div>
-        </div>
+        <button class="quick-btn" onclick="exportSave()">存档</button>
       </div>
     </div>
   </div>
-</div>
-
-<!-- 行动菜单弹层 -->
-<div class="modal-overlay" id="actionModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('actionModal')">×</button>
-    <h2 class="modal-title">每日行动</h2>
-    <div class="modal-content">
-      <div class="action-grid" id="actionGrid"></div>
+  <div class="side-column side-actions" id="sideActions"></div>
+  <div id="mobile-nav">
+    <div class="nav-row">
+      <button class="nav-tab active" onclick="switchMobileTab('train')">训练</button>
+      <button class="nav-tab" onclick="switchMobileTab('match')">实战</button>
+      <button class="nav-tab" onclick="switchMobileTab('social')">社交</button>
+      <button class="nav-tab" onclick="switchMobileTab('rest')">休整</button>
+      <button class="nav-tab" onclick="switchMobileTab('input')">输入</button>
     </div>
+    <div class="nav-panel open" id="mobileTrain"></div>
+    <div class="nav-panel" id="mobileMatch"></div>
+    <div class="nav-panel" id="mobileSocial"></div>
+    <div class="nav-panel" id="mobileRest"></div>
+    <div class="nav-panel" id="mobileInputPanel"></div>
   </div>
 </div>
 
-<!-- 主题弹层 -->
-<div class="modal-overlay" id="themeModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('themeModal')">×</button>
-    <h2 class="modal-title">主题切换</h2>
-    <div class="modal-content">
-      <div class="theme-grid">
-        <div class="theme-item selected" onclick="setTheme('default')">
-          <div class="theme-preview" style="background: linear-gradient(135deg, #74b9ff, #a29bfe);"></div>
-          <div class="theme-name">晴空蓝紫</div>
-        </div>
-        <div class="theme-item" onclick="setTheme('forest')">
-          <div class="theme-preview" style="background: linear-gradient(135deg, #55efc4, #00b894);"></div>
-          <div class="theme-name">翠竹青绿</div>
-        </div>
-        <div class="theme-item" onclick="setTheme('sunset')">
-          <div class="theme-preview" style="background: linear-gradient(135deg, #ffeaa7, #fdcb6e);"></div>
-          <div class="theme-name">暖阳金橙</div>
-        </div>
-        <div class="theme-item" onclick="setTheme('pink')">
-          <div class="theme-preview" style="background: linear-gradient(135deg, #fd79a8, #e84393);"></div>
-          <div class="theme-name">樱粉玫瑰</div>
-        </div>
-        <div class="theme-item" onclick="setTheme('mono')">
-          <div class="theme-preview" style="background: linear-gradient(135deg, #636e72, #b2bec3);"></div>
-          <div class="theme-name">静谧灰调</div>
-        </div>
-        <div class="theme-item" onclick="setTheme('dark')">
-          <div class="theme-preview" style="background: linear-gradient(135deg, #2d3436, #636e72);"></div>
-          <div class="theme-name">深夜炭灰</div>
-        </div>
-      </div>
-    </div>
+<div id="shadow-toast"><span id="toastText"></span></div>
+<div id="shadow-dot" onclick="openShadowChat()"></div>
+<div class="chat-backdrop" id="chatBackdrop" onclick="closeShadowChat()"></div>
+<div id="shadow-chat">
+  <div class="chat-header"><span>未 知 发 件 人</span><button class="chat-close" onclick="closeShadowChat()">&times;</button></div>
+  <div class="chat-msgs" id="chatMsgs"></div>
+  <div class="chat-actions" id="chatActs"></div>
+</div>
+<div id="shadow-guide-modal" style="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:3000;display:none;align-items:center;justify-content:center;">
+  <div style="background:var(--surface);border:1px solid var(--accent);padding:24px;max-width:340px;text-align:center;border-radius:var(--radius);">
+    <p style="font-family:var(--font-serif);font-style:italic;color:var(--text);margin-bottom:16px;">你感觉到有什么在看着你。<br>点击右上角的红点。</p>
+    <button style="padding:8px 24px;background:var(--accent);color:#000;border:none;cursor:pointer;font-weight:600;" onclick="document.getElementById('shadow-guide-modal').style.display='none';openShadowChat();">知道了</button>
   </div>
 </div>
 
-<!-- FAQ弹层 -->
-<div class="modal-overlay" id="faqModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('faqModal')">×</button>
-    <h2 class="modal-title">FAQ 帮助</h2>
-    <div class="modal-content">
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">如何开始游戏？</div>
-        <div class="faq-a">在封面页点击"开始游戏"，在弹出的设置中选择游戏类型、职业路线、难度和角色后确认即可进入。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">四维属性是什么？</div>
-        <div class="faq-a">操作、意识、心态、指挥四项属性影响你在各类行动中的成功率。通过训练和实战可以提升。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">SVT羁绊有什么用？</div>
-        <div class="faq-a">与SVT成员的羁绊等级越高，在涉及该成员的剧情中会获得更多加成。最高为Lv.5灵魂之约。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">记忆碎片如何收集？</div>
-        <div class="faq-a">记忆碎片共39片，散落在各种剧情事件中。收集完整将解锁隐藏剧情。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">体力值有什么用？</div>
-        <div class="faq-a">大部分行动需要消耗体力。体力为0时无法进行高强度活动，可在休整区恢复。</div>
-      </div>
-      <div class="faq-item">
-        <div class="faq-q" onclick="toggleFaq(this)">反派有哪些？</div>
-        <div class="faq-a">K、苹果、Shadow、林晚是你的主要竞争对手。在排位和赛事中会遇到他们。</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- API弹层 -->
-<div class="modal-overlay" id="apiModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('apiModal')">×</button>
-    <h2 class="modal-title">API 设置</h2>
-    <div class="modal-content">
-      <div class="api-section">
-        <label class="api-label">选择 API 服务</label>
-        <select class="api-select" id="apiProvider" onchange="updateApiKeyLabel()">
-          <option value="deepseek">DeepSeek</option>
-          <option value="groq">Groq</option>
-          <option value="gemini">Gemini</option>
-          <option value="siliconflow">硅基流动</option>
-          <option value="custom">自定义</option>
-          <option value="none">不使用API</option>
-        </select>
-      </div>
-      <div class="api-section">
-        <label class="api-label" id="apiKeyLabel">API Key</label>
-        <input type="password" class="api-input" id="apiKey" placeholder="输入 API Key">
-      </div>
-      <div class="api-section">
-        <label class="api-label">Base URL（可选）</label>
-        <input type="text" class="api-input" id="apiBaseUrl" placeholder="如需自定义endpoint">
-      </div>
-      <div class="api-section">
-        <label class="api-label">模型名称</label>
-        <input type="text" class="api-input" id="apiModel" placeholder="如: deepseek-chat">
-      </div>
-      <button class="send-btn" onclick="saveApiSettings()" style="width:100%; margin-top:4px;">保存设置</button>
-      <div style="margin-top:12px; font-size:0.75rem; color:var(--text-muted); text-align:center;">
-        💡 不填API也能游玩基础模式，连接API可解锁AI对话
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 羁绊详情弹层 -->
-<div class="modal-overlay" id="bondModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('bondModal')">×</button>
-    <div class="modal-content" id="bondModalContent"></div>
-  </div>
-</div>
-
-<!-- 属性详情弹层 -->
-<div class="modal-overlay" id="attrModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('attrModal')">×</button>
-    <div class="modal-content" id="attrModalContent"></div>
-  </div>
-</div>
-
-<!-- 更新日志弹层 -->
-<div class="modal-overlay" id="changelogModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('changelogModal')">×</button>
-    <h2 class="modal-title">更新日志</h2>
-    <div class="modal-content">
-      <div class="changelog">
-        <div class="log-item">
-          <div class="log-version">v2.0</div>
-          <div class="log-date">2026-06-14</div>
-          <div class="log-content">★ AI生成文本后自动滚动到新内容起始处（而非最底部），用户手动向上滑动时暂停自动跟随<br>★ 新增回顾节点点击跳转功能</div>
-        </div>
-        <div class="log-item">
-          <div class="log-version">v1.5</div>
-          <div class="log-date">2026-06-14</div>
-          <div class="log-content">★ 低饱和度配色与留白优化<br>★ 移除多余框线和表情<br>★ 增加逻辑自检<br>★ 统一字体层级<br>★ 移动端触摸优化</div>
-        </div>
-        <div class="log-item">
-          <div class="log-version">v1.1.0</div>
-          <div class="log-date">2026-06-14</div>
-          <div class="log-content">★ UI界面全新改版<br>★ 简约风格优化<br>★ 移动端体验升级<br>★ 记忆碎片数字展示<br>★ 羁绊系统精简</div>
-        </div>
-        <div class="log-item">
-          <div class="log-version">v1.0.0</div>
-          <div class="log-date">2026-06-01</div>
-          <div class="log-content">★ 首发版本上线<br>★ 完整游戏框架<br>★ SVT 13位成员羁绊系统<br>★ 39片记忆碎片收集</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 回顾节点弹层 -->
-<div class="modal-overlay" id="reviewModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('reviewModal')">×</button>
-    <h2 class="modal-title">剧情回顾</h2>
-    <div class="modal-content">
-      <div class="changelog" id="reviewList"></div>
-    </div>
-  </div>
-</div>
-
-<!-- 逻辑自检弹层 -->
-<div class="modal-overlay" id="logicModal">
-  <div class="modal-box">
-    <button class="modal-close" onclick="closeModal('logicModal')">×</button>
-    <h2 class="modal-title">🔧 逻辑自检</h2>
-    <div class="modal-content" id="logicContent"></div>
-    <div style="padding: 14px 0 4px; border-top: 1px solid var(--border); margin-top: 14px;">
-      <button class="send-btn" onclick="runLogicCheck()" style="width:100%;">重新检查</button>
-    </div>
-  </div>
-</div>
-
-<!-- 确认弹层 -->
-<div class="modal-overlay" id="confirmModal">
-  <div class="modal-box" style="max-width:320px;">
-    <div class="confirm-box">
-      <p class="confirm-msg" id="confirmMsg">确定要执行此操作吗？</p>
-      <div class="confirm-btns">
-        <button class="confirm-btn confirm-yes" onclick="confirmAction(true)">确定</button>
-        <button class="confirm-btn confirm-no" onclick="confirmAction(false)">取消</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- 通知消息 -->
-<div class="notification" id="notification">
-  <div class="notif-title" id="notifTitle">提示</div>
-  <div class="notif-msg" id="notifMsg"></div>
-</div>
+<div class="modal-overlay" id="member-modal"><div class="modal-box"><h3>选择联系的成员</h3><div class="member-list" id="memberList"></div><button class="modal-close-btn" onclick="closeModal('member-modal')">取消</button></div></div>
+<div class="modal-overlay" id="bond-modal"><div class="modal-box"><h3>羁绊总览</h3><div id="bondSummaryContent"></div><button class="modal-close-btn" onclick="closeModal('bond-modal')">关闭</button></div></div>
+<div class="modal-overlay" id="strategy-modal"><div class="modal-box"><h3 id="strategyTitle">赛前战术会议</h3><div class="strategy-options" id="strategyOptions"></div><div class="free-input-row" style="margin-top:8px;"><input type="text" class="free-input" id="strategyFreeInput" placeholder="或输入自己的战术思路"><button class="api-save-btn" onclick="submitStrategyFree()">执行</button></div><button class="modal-close-btn" onclick="closeModal('strategy-modal')" style="margin-top:8px;">取消</button></div></div>
+<div class="modal-overlay" id="ending-modal"><div class="modal-box" id="endingContent" style="max-width:500px;font-family:var(--font-serif);line-height:1.8;"></div></div>
+<div class="modal-overlay" id="faqModal"><div class="modal-box"><h3>FAQ 帮助</h3><div id="faqContent"></div><button class="modal-close-btn" onclick="closeModal('faqModal')">关闭</button></div></div>
+<div class="modal-overlay" id="apiModal"><div class="modal-box"><h3>API 设置</h3><div class="api-section"><label class="api-label">选择 API 服务</label><select class="api-input" id="apiProvider" onchange="updateApiKeyLabel()"><option value="deepseek">DeepSeek</option><option value="groq">Groq</option><option value="gemini">Gemini</option><option value="siliconflow">硅基流动</option><option value="custom">自定义</option><option value="none">不使用API</option></select></div><div class="api-section"><label class="api-label" id="apiKeyLabel">API Key</label><input type="password" class="api-input" id="apiKeyModal" placeholder="输入 API Key"></div><div class="api-section"><label class="api-label">Base URL（可选）</label><input type="text" class="api-input" id="apiBaseUrl" placeholder="如需自定义endpoint"></div><div class="api-section"><label class="api-label">模型名称</label><input type="text" class="api-input" id="apiModel" placeholder="如: deepseek-chat"></div><button class="send-btn" onclick="saveApiSettings()" style="width:100%;">保存设置</button></div></div>
+<div class="modal-overlay" id="confirmModal"><div class="modal-box" style="max-width:320px;"><div class="confirm-box"><p class="confirm-msg" id="confirmMsg">确定吗？</p><div class="confirm-btns"><button class="confirm-btn confirm-yes" onclick="resolveConfirm(true)">确定</button><button class="confirm-btn confirm-no" onclick="resolveConfirm(false)">取消</button></div></div></div></div>
+<div class="modal-overlay" id="changelogModal"><div class="modal-box"><h3>更新日志</h3><div class="changelog" id="changelogContent"></div><button class="modal-close-btn" onclick="closeModal('changelogModal')">关闭</button></div></div>
+<div class="modal-overlay" id="logicModal"><div class="modal-box"><h3>逻辑自检</h3><div id="logicContent"></div><button class="modal-close-btn" onclick="closeModal('logicModal')" style="margin-top:8px;">关闭</button></div></div>
+<div class="modal-overlay" id="reviewModal"><div class="modal-box"><h3>剧情回顾</h3><div id="reviewList"></div><button class="modal-close-btn" onclick="closeModal('reviewModal')">关闭</button></div></div>
+<div class="modal-overlay" id="attrModal"><div class="modal-box"><h3 id="attrModalTitle">详情</h3><div id="attrModalContent"></div><button class="modal-close-btn" onclick="closeModal('attrModal')">关闭</button></div></div>
+<div class="notification" id="notification"><div class="notif-title" id="notifTitle"></div><div class="notif-msg" id="notifMsg"></div></div>
 
 <script>
-// ==================== 游戏数据 ====================
-const SVT_MEMBERS = [
-  { id: 1, name: 'S.COUPS', korean: '에스쿱스', eng: 'Choi Seungcheol', bio: 'SVT队长，强势领导者，在电竞世界依然是团队核心。' },
-  { id: 2, name: 'JEONGHAN', korean: '정한', eng: 'Yoon Jeonghan', bio: '天使脸庞却有着腹黑的一面，擅长心理战术。' },
-  { id: 3, name: 'JOSHUA', korean: '조슈아', eng: 'Hong Joshua', bio: '韩美混血，冷静理性，是队伍的数据分析师。' },
-  { id: 4, name: 'JUN', korean: '준', eng: 'Moon Junhui', bio: '中国成员，武术底子，操作型选手。' },
-  { id: 5, name: 'HOSHI', korean: '호시', eng: 'Kwon Soonyoung', bio: '舞台王者，反应速度一流，擅长即时策略。' },
-  { id: 6, name: 'WONWOO', korean: '원우', eng: 'Jeon Wonwoo', bio: '低调的实力派，阅读比赛能力极强。' },
-  { id: 7, name: 'WOOZI', korean: '우지', eng: 'Choi Boo-Shin', bio: '身材小巧却有着巨大的战术头脑。' },
-  { id: 8, name: 'DK', korean: '디케이', eng: 'Lee Seokmin', bio: '开朗笑容下的热血选手，爆发力惊人。' },
-  { id: 9, name: 'MINGYU', korean: '민규', eng: 'Kim Mingyu', bio: '模特身材，手速极快，外向型选手。' },
-  { id: 10, name: 'THE8', korean: '디에이트', eng: 'Xu Ming Hao', bio: '中国成员，稳定冷静，中单位置的不二人选。' },
-  { id: 11, name: 'SEUNGKWAN', korean: '승관', eng: 'Boo Seungkwan', bio: '高音王者，情绪感染力强，团队气氛担当。' },
-  { id: 12, name: 'VERNON', korean: '버논', eng: 'Chwe Hansol', bio: '韩美混血，艺术气质，创意型选手。' },
-  { id: 13, name: 'DINO', korean: '디노', eng: 'Lee Chan', bio: '忙内，成长型选手，潜力无限。' }
-];
+/**
+ * SVT 电竞 · 电竞荣光 - 完整游戏逻辑
+ * @module SVTEsports
+ */
 
-const TALENTS = [
-  '操作天才', '意识大师', '心态稳健', '指挥如神', '临场发挥', '训练狂魔',
-  '社交达人', '商业头脑', '直播明星', '数据专家', '心理战专家', '战术大师'
-];
+// ==================== 主题管理 ====================
+const THEME_KEY = 'svt_theme';
+function setTheme(t) {
+  document.body.classList.remove('theme-a','theme-b','theme-c');
+  if (t !== 'a') document.body.classList.add('theme-'+t);
+  document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
+  document.getElementById('dot-'+t).classList.add('active');
+  localStorage.setItem(THEME_KEY, t);
+}
+(function(){ const saved = localStorage.getItem(THEME_KEY) || 'a'; setTheme(saved); })();
 
-const RANKS = [
-  { name: '青铜Ⅰ', points: 0, next: 100 },
-  { name: '青铜Ⅱ', points: 100, next: 100 },
-  { name: '白银Ⅰ', points: 200, next: 150 },
-  { name: '白银Ⅱ', points: 350, next: 150 },
-  { name: '黄金Ⅰ', points: 500, next: 200 },
-  { name: '黄金Ⅱ', points: 700, next: 200 },
-  { name: '钻石Ⅰ', points: 900, next: 300 },
-  { name: '钻石Ⅱ', points: 1200, next: 300 },
-  { name: '宗师', points: 1500, next: 500 },
-  { name: '传奇Ⅰ', points: 2000, next: 500 },
-  { name: '传奇Ⅱ', points: 2500, next: 500 },
-  { name: '传奇Ⅲ', points: 3000, next: 500 },
-  { name: '传奇Ⅳ', points: 3500, next: 500 },
-  { name: '传奇Ⅴ', points: 4000, next: -1 }
-];
-
-const ANTAGONISTS = [
-  { name: 'K', desc: '神秘强者，传闻曾是职业选手' },
-  { name: '苹果', desc: '网红选手，流量变现高手' },
-  { name: 'Shadow', desc: '暗影刺客，行事低调' },
-  { name: '林晚', desc: '新晋黑马，背后势力不明' }
-];
-
-const SCENES = {
-  '训练基地': [
-    { title: '基础训练', text: '你来到训练基地，设施齐全。你决定进行基础训练提升实力...', tags: ['训练', '日常'] },
-    { title: '专项特训', text: '针对你的弱项，开始进行专项强化训练...', tags: ['训练', '成长'] },
-    { title: '偶遇', text: '训练基地里，你注意到几个陌生的身影。他们似乎在讨论着什么...', tags: ['训练', '邂逅'] }
-  ],
-  '天梯排位': [
-    { title: '排位赛', text: '你进入了天梯排位赛，等待匹配对手...', tags: ['竞技', '挑战'] },
-    { title: '激战', text: '对局进入白热化阶段，每一波团战都至关重要...', tags: ['竞技', '关键'] },
-    { title: '胜利', text: '优势逐渐倾向你们这边，继续保持！', tags: ['竞技', '优势'] }
-  ],
-  '线下赛馆': [
-    { title: '大赛将至', text: '线下赛馆灯火通明，观众席座无虚席...', tags: ['赛事', '盛况'] },
-    { title: '赛前', text: '在后台做着最后的准备，调整心态...', tags: ['赛事', '准备'] },
-    { title: '登场', text: '聚光灯下，你代表战队走上舞台...', tags: ['赛事', '荣耀'] }
-  ],
-  '网咖': [
-    { title: '偶遇', text: '网咖里人声鼎沸，你看到一个熟悉的身影...', tags: ['随机', '偶遇'] },
-    { title: '挑战', text: '有人向你发起了私下来一场的邀请...', tags: ['随机', '挑战'] },
-    { title: '八卦', text: '隔壁桌的闲聊中似乎有关于某位选手的传闻...', tags: ['随机', '情报'] }
-  ],
-  '直播区': [
-    { title: '开播', text: '你打开了直播间，熟悉的开播提示音响起...', tags: ['直播', '互动'] },
-    { title: '粉丝互动', text: '弹幕刷屏，粉丝们热情高涨...', tags: ['直播', '粉丝'] },
-    { title: '连麦', text: '有观众申请连麦，看起来是个有趣的人...', tags: ['直播', '连麦'] }
-  ],
-  '商业区': [
-    { title: '赞助洽谈', text: '商业区的写字楼里，有几家品牌在考虑赞助合作...', tags: ['商业', '合作'] },
-    { title: '代言机会', text: '一个知名品牌看中了你的影响力...', tags: ['商业', '机会'] },
-    { title: '谈判', text: '合同条款需要仔细审阅，每一个细节都很重要...', tags: ['商业', '谈判'] }
-  ],
-  '休整区': [
-    { title: '放松时光', text: '难得的休整日，你决定好好放松一下...', tags: ['休息', '日常'] },
-    { title: '陌生人', text: '在休整区的咖啡厅，你看到了几个陌生的身影，似乎是某支战队...', tags: ['休息', '邂逅'] },
-    { title: '深夜', text: '夜深了，你独自思考着接下来的路...', tags: ['休息', '独处'] }
-  ],
-  '神秘地点': [
-    { title: '？？？', text: '这里的气氛异常诡异，似乎有某种力量在注视着你...', tags: ['神秘', '未知'] },
-    { title: '8094', text: '一个戴着兜帽的身影出现，他转过头的瞬间，你看到了一个编号——8094...', tags: ['神秘', '关键'] },
-    { title: '记忆碎片', text: '某个画面闪过你的脑海，那是来自平行世界的记忆碎片...', tags: ['神秘', '碎片'] }
-  ]
+// ==================== API 多服务支持 ====================
+const API_PROVIDERS = {
+  deepseek: {
+    url: 'https://api.deepseek.com/chat/completions',
+    header: (key) => ({ 'Authorization': 'Bearer ' + key }),
+    body: (model, messages, maxTokens, temp) => ({ model: model || 'deepseek-chat', messages, max_tokens: maxTokens, temperature: temp })
+  },
+  groq: {
+    url: 'https://api.groq.com/openai/v1/chat/completions',
+    header: (key) => ({ 'Authorization': 'Bearer ' + key }),
+    body: (model, messages, maxTokens, temp) => ({ model: model || 'llama-3.1-70b-versatile', messages, max_tokens: maxTokens, temperature: temp })
+  },
+  gemini: {
+    url: (key) => `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,
+    header: () => ({ 'Content-Type': 'application/json' }),
+    body: (model, messages, maxTokens, temp) => {
+      const prompt = messages.map(m => (m.role === 'system' ? 'System: ' : 'User: ') + m.content).join('\n');
+      return { contents: [{ parts: [{ text: prompt }] }], generationConfig: { maxOutputTokens: maxTokens, temperature: temp } };
+    }
+  },
+  siliconflow: {
+    url: 'https://api.siliconflow.cn/v1/chat/completions',
+    header: (key) => ({ 'Authorization': 'Bearer ' + key }),
+    body: (model, messages, maxTokens, temp) => ({ model: model || 'deepseek-ai/DeepSeek-V3', messages, max_tokens: maxTokens, temperature: temp })
+  },
+  custom: {
+    url: null,
+    header: (key) => ({ 'Authorization': 'Bearer ' + key }),
+    body: (model, messages, maxTokens, temp) => ({ model: model || 'deepseek-chat', messages, max_tokens: maxTokens, temperature: temp })
+  }
 };
 
-const ACTIONS = [
-  { id: 'train', icon: '🏋️', name: '训练', cost: 20, desc: '提升随机属性' },
-  { id: 'battle', icon: '⚔️', name: '实战', cost: 30, desc: '天梯排位赛' },
-  { id: 'social', icon: '💬', name: '社交', cost: 15, desc: '与SVT成员互动' },
-  { id: 'career', icon: '📈', name: '事业', cost: 25, desc: '商业/直播活动' },
-  { id: 'rest', icon: '🛋️', name: '休整', cost: 0, desc: '恢复体力' },
-  { id: 'explore', icon: '🔍', name: '探索', cost: 20, desc: '随机事件' }
+function getApiKey() { return gs.apiKey || localStorage.getItem('ds_api_key') || ''; }
+
+/**
+ * 统一API调用，支持超时、重试、fallback
+ * @param {Array} messages - 消息数组
+ * @param {number} maxTokens - 最大token数
+ * @param {number} temp - 温度
+ * @param {number} retries - 重试次数
+ * @returns {Promise<Object>} API响应
+ */
+async function callDS(messages, maxTokens = 150, temp = 0.9, retries = 2) {
+  const provider = gs.apiProvider || 'deepseek';
+  const key = getApiKey();
+  const baseUrl = gs.apiBaseUrl || '';
+  const modelName = gs.apiModel || '';
+
+  if (!key && provider !== 'none') {
+    showNotification('API 错误', '请先在设置中配置 API Key');
+    throw new Error('API Key 未设置');
+  }
+  if (provider === 'none') {
+    return { choices: [{ message: { content: getFallbackText(messages) } }] };
+  }
+
+  const cfg = API_PROVIDERS[provider] || API_PROVIDERS.deepseek;
+  const url = provider === 'custom' ? (baseUrl || cfg.url) : (typeof cfg.url === 'function' ? cfg.url(key) : cfg.url);
+  const body = cfg.body(modelName, messages, maxTokens, temp);
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const resp = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', ...cfg.header(key) },
+        body: JSON.stringify(body),
+        signal: controller.signal
+      });
+      clearTimeout(timeout);
+      if (!resp.ok) {
+        const errText = await resp.text();
+        if (attempt < retries) { await new Promise(r => setTimeout(r, 1000 * (attempt + 1))); continue; }
+        showNotification('API 错误', `请求失败(${resp.status})，已使用备用文本`);
+        return { choices: [{ message: { content: getFallbackText(messages) } }] };
+      }
+      const data = await resp.json();
+      if (provider === 'gemini') {
+        const text = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        return { choices: [{ message: { content: text } }] };
+      }
+      return data;
+    } catch (e) {
+      clearTimeout(timeout);
+      if (e.name === 'AbortError') {
+        showNotification('API 超时', '请求超过15秒，已使用备用文本');
+        return { choices: [{ message: { content: getFallbackText(messages) } }] };
+      }
+      if (attempt < retries) { await new Promise(r => setTimeout(r, 1000 * (attempt + 1))); continue; }
+      showNotification('网络错误', '无法连接API，已使用备用文本');
+      return { choices: [{ message: { content: getFallbackText(messages) } }] };
+    }
+  }
+}
+
+/** 生成fallback文本 */
+function getFallbackText(messages) {
+  const userMsg = messages.find(m => m.role === 'user')?.content || '';
+  if (userMsg.includes('触发')) return '我在看。';
+  if (userMsg.includes('说话')) return '"今天训练怎么样？"';
+  if (userMsg.includes('列出')) return '星辰战队 | 激进 | 上游\n暗影公会 | 保守 | 中游';
+  return '继续前行。';
+}
+
+// ==================== 数据 ====================
+const SVT = [
+  { id:1, name:'S.COUPS', role:'可靠的队长', style:'沉稳有担当，偶尔露出疲惫', topics:'战术、团队、压力', quirk:'深夜独自看回放', bondPath:'并肩的战友/灵魂的依靠' },
+  { id:2, name:'JEONGHAN', role:'温柔的战略家', style:'温和洞察力强，偶尔腹黑', topics:'心理、战术、哲学', quirk:'在角落观察每个人', bondPath:'知心挚友/不可替代的人' },
+  { id:3, name:'JOSHUA', role:'优雅的绅士', style:'温柔有礼，偶尔开玩笑', topics:'音乐、生活、回忆', quirk:'弹吉他时手指记忆比脑子快', bondPath:'心灵支柱/命中注定的相遇' },
+  { id:4, name:'JUN', role:'神秘的美学追求者', style:'沉默观察敏锐，偶尔说大实话', topics:'艺术、梦想、孤独', quirk:'画训练室窗外同一棵树', bondPath:'灵魂共鸣者/星光的另一端' },
+  { id:5, name:'HOSHI', role:'热情的能量体', style:'充满活力，独处时安静', topics:'热情、比赛、舞蹈', quirk:'紧张时打拍子', bondPath:'永远的搭档/心跳的节拍' },
+  { id:6, name:'WONWOO', role:'沉静的思考者', style:'话少精准，偶尔冷幽默', topics:'书、战术深度、沉默', quirk:'背包里永远有书', bondPath:'无言的默契/书页间的相遇' },
+  { id:7, name:'WOOZI', role:'音乐与天才', style:'专注忘我，嘴硬心软', topics:'音乐、创作、完美主义', quirk:'用键盘敲节奏', bondPath:'旋律中的共鸣/两个人的宇宙' },
+  { id:8, name:'DK', role:'阳光的治愈者', style:'开朗爱笑，受伤时自己扛', topics:'快乐、治愈、隐藏的伤', quirk:'笑完立刻沉默的瞬间', bondPath:'快乐的源泉/温暖的归宿' },
+  { id:9, name:'MINGYU', role:'全能的多面手', style:'什么都能做，偶尔焦虑', topics:'全能、焦虑、日常', quirk:'同时做三件事', bondPath:'可靠的港湾/朝夕的陪伴' },
+  { id:10, name:'THE 8', role:'自由的舞者', style:'自由随性，偶尔深刻', topics:'自由、舞蹈、选择', quirk:'走路时突然转圈', bondPath:'自由的同行者/舞步的交叠' },
+  { id:11, name:'SEUNGKWAN', role:'综艺感与真诚', style:'幽默活跃，敏感细腻', topics:'综艺、真诚、敏感', quirk:'笑声从楼道尽头传来', bondPath:'欢笑制造机/心底的柔软' },
+  { id:12, name:'VERNON', role:'四次元的艺术家', style:'脑回路独特，价值观坚定', topics:'音乐、异想天开、真实', quirk:'突然说一句没人懂的话', bondPath:'同一频道的人/异世界的唯一' },
+  { id:13, name:'DINO', role:'努力的成长者', style:'认真努力，对自己太严', topics:'成长、努力、自我怀疑', quirk:'笔记本上写满反省', bondPath:'共同成长的伙伴/未来的约定' }
 ];
+
+function getRankTier(ladder) {
+  if (ladder <= 200) return '传奇';
+  if (ladder <= 1000) return '宗师';
+  if (ladder <= 5000) return '大师';
+  if (ladder <= 20000) return '白金';
+  return '黄金';
+}
 
 // ==================== 游戏状态 ====================
-let gameState = {
-  started: false,
-  romance: false,
-  game: '王者荣耀',
-  career: '竞技者',
-  difficulty: '标准',
-  character: { type: 'custom', id: null, name: '自定义选手' },
-  day: 1,
-  stamina: 100,
-  maxStamina: 100,
-  rank: 0,
-  rankPoints: 0,
-  attributes: { op: 10, cons: 10, mind: 10, lead: 10 },
-  bonds: {},
-  fragments: [],
-  buffs: [],
-  debuffs: [],
-  currentMap: '训练基地',
-  currentScene: null,
-  storyHistory: [],
-  apiProvider: 'none',
-  apiKey: '',
-  apiBaseUrl: '',
-  apiModel: ''
+/**
+ * @namespace gs
+ * @property {number} stamina - 体力
+ * @property {object} stats - {mech, awareness, mental, leadership}
+ * @property {object} villains - 反派状态
+ * @property {number} shadowIgnore - 暗线忽略计数
+ * @property {string} apiProvider - API服务商
+ */
+let gs = {
+  started: false, romance: false, game: '王者荣耀', career: '竞技者',
+  difficulty: '标准', day: 1, season: '春', seasonDay: 1,
+  stamina: 100, maxStamina: 100,
+  stats: { mech:5, awareness:5, mental:5, leadership:5 }, tag: null, tagEffect: '',
+  age: 20, ageEffect: '', secondIdentity: '', initialAcquaintance: null,
+  character: { type:'custom', id:null, name:'自定义选手' },
+  rank: { ladder:99999, popularity:99999, team:99999 },
+  svtBonds: {}, memberLastInteraction: {},
+  fragments: [], villains: {
+    K: { seen:false, defeated:false, converted:false, stage:0 },
+    apple: { seen:false, defeated:false, stage:0 },
+    shadow: { seen:false, defeated:false, converted:false, stage:0 },
+    linwan: { seen:false, defeated:false, converted:false, stage:0 }
+  }, n8094: 0, n8094used: 0, n8094history: [],
+  shadowLastDay:0, shadowCooldown:0, shadowPending:null,
+  shadowHistory:[], shadowStyle:'neutral', shadowIgnore:0, shadowGuideShown:false,
+  consecutiveSame:0, lastTrainType:null, consecutiveDrop:0,
+  lastMap:null, consecutiveMap:0, consecutiveSuccess:0, consecutiveFail:0,
+  achievements: [], memories: [], endingsTriggered: [],
+  staminaPenaltyDays: 0, staminaPenaltyActive: false,
+  gameOrgs: [], coreEncounters: {},
+  strategyUsed: false,
+  lockedMemberId: null,
+  apiProvider: 'deepseek', apiKey: '', apiBaseUrl: '', apiModel: ''
 };
+let romOn = false;
+let confirmCallback = null;
+const reviewNodes = [];
+let isUserScrollingUp = false;
 
-// ==================== 封面页功能 ====================
-let romanceOn = false;
+/** 获取可用成员（排除主角） */
+function getAvailableMembers() {
+  if (gs.character.type === 'svt' && gs.lockedMemberId) return SVT.filter(m => m.id !== gs.lockedMemberId);
+  return SVT;
+}
 
+// ==================== 封面逻辑 ====================
+let gameFreeMode = false, careerFreeMode = false;
+function freeInputGame() {
+  document.getElementById('gameFreeRow').style.display = 'flex';
+  document.getElementById('gameFreeInput').focus();
+  document.querySelectorAll('#gameChips .chip:not(.free)').forEach(c => c.classList.remove('selected'));
+  gameFreeMode = true;
+}
+function onGameFreeInput() {
+  gameFreeMode = !!document.getElementById('gameFreeInput').value.trim();
+  if (gameFreeMode) document.querySelectorAll('#gameChips .chip:not(.free)').forEach(c => c.classList.remove('selected'));
+}
+document.getElementById('gameChips').addEventListener('click', e => {
+  if (e.target.classList.contains('chip') && !e.target.classList.contains('free')) {
+    document.querySelectorAll('#gameChips .chip:not(.free)').forEach(c => c.classList.remove('selected'));
+    e.target.classList.add('selected');
+    document.getElementById('gameFreeRow').style.display = 'none';
+    document.getElementById('gameFreeInput').value = '';
+    gameFreeMode = false;
+  }
+});
+function freeInputCareer() {
+  document.getElementById('careerFreeRow').style.display = 'flex';
+  document.getElementById('careerFreeInput').focus();
+  document.querySelectorAll('#careerChips .chip:not(.free)').forEach(c => c.classList.remove('selected'));
+  careerFreeMode = true;
+}
+function onCareerFreeInput() {
+  careerFreeMode = !!document.getElementById('careerFreeInput').value.trim();
+  if (careerFreeMode) document.querySelectorAll('#careerChips .chip:not(.free)').forEach(c => c.classList.remove('selected'));
+}
+document.getElementById('careerChips').addEventListener('click', e => {
+  if (e.target.classList.contains('chip') && !e.target.classList.contains('free')) {
+    document.querySelectorAll('#careerChips .chip:not(.free)').forEach(c => c.classList.remove('selected'));
+    e.target.classList.add('selected');
+    document.getElementById('careerFreeRow').style.display = 'none';
+    document.getElementById('careerFreeInput').value = '';
+    careerFreeMode = false;
+  }
+});
+document.getElementById('diffChips').addEventListener('click', e => {
+  if (e.target.classList.contains('chip')) {
+    document.querySelectorAll('#diffChips .chip').forEach(c => c.classList.remove('selected'));
+    e.target.classList.add('selected');
+  }
+});
 function toggleRomance() {
-  romanceOn = !romanceOn;
-  const sw = document.getElementById('romanceSwitch');
-  sw.classList.toggle('on', romanceOn);
-  document.getElementById('romanceOff').classList.toggle('active', !romanceOn);
-  document.getElementById('romanceOn').classList.toggle('active', romanceOn);
+  romOn = !romOn;
+  document.getElementById('romSwitch').classList.toggle('on', romOn);
+  document.getElementById('romOff').classList.toggle('on', !romOn);
+  document.getElementById('romOn').classList.toggle('on', romOn);
 }
-
-function openSettings() {
-  document.getElementById('settingsModal').classList.add('active');
+function selectCharType(type) {
+  document.getElementById('customCharChip').classList.toggle('selected', type==='custom');
+  document.getElementById('svtCharChip').classList.toggle('selected', type==='svt');
+  document.getElementById('customCharInput').style.display = type==='custom' ? 'block' : 'none';
+  document.getElementById('svtCharGrid').style.display = type==='svt' ? 'grid' : 'none';
+  gs.character.type = type;
 }
-
-function selectOption(gridId, btn) {
-  const grid = document.getElementById(gridId);
-  grid.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-  btn.classList.add('selected');
-}
-
-function selectCustomChar() {
-  document.getElementById('customCharBtn').classList.add('selected');
-  document.getElementById('svtCharBtn').classList.remove('selected');
-  document.getElementById('customCharInput').style.display = 'block';
-  document.getElementById('svtCharGrid').style.display = 'none';
-  gameState.character.type = 'custom';
-}
-
-function selectSVTChar() {
-  document.getElementById('svtCharBtn').classList.add('selected');
-  document.getElementById('customCharBtn').classList.remove('selected');
-  document.getElementById('customCharInput').style.display = 'none';
-  document.getElementById('svtCharGrid').style.display = 'grid';
-  gameState.character.type = 'svt';
-}
-
-document.querySelectorAll('#gameSelect .option-btn').forEach(btn => {
-  btn.addEventListener('click', () => { selectOption('gameSelect', btn); gameState.game = btn.dataset.value; });
-});
-
-document.querySelectorAll('#careerSelect .option-btn').forEach(btn => {
-  btn.addEventListener('click', () => { selectOption('careerSelect', btn); gameState.career = btn.dataset.value; });
-});
-
-document.querySelectorAll('#difficultySelect .option-btn').forEach(btn => {
-  btn.addEventListener('click', () => { selectOption('difficultySelect', btn); gameState.difficulty = btn.dataset.value; });
-});
-
 document.querySelectorAll('#svtCharGrid .char-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('#svtCharGrid .char-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');
-    gameState.character.id = parseInt(btn.dataset.id);
-    gameState.character.name = btn.dataset.name;
+    gs.character.id = parseInt(btn.dataset.id);
+    gs.character.name = btn.dataset.name;
+    gs.lockedMemberId = parseInt(btn.dataset.id);
   });
 });
 
+// ==================== 开局 ====================
 function startGame() {
-  if (gameState.character.type === 'custom') {
-    const name = document.getElementById('customName').value.trim();
-    gameState.character.name = name || '自定义选手';
-  }
+  if (!getApiKey()) { alert('请先输入 DeepSeek API Key'); return; }
+  gs.romance = romOn;
+  gs.game = gameFreeMode ? document.getElementById('gameFreeInput').value.trim() : (document.querySelector('#gameChips .chip.selected:not(.free)')?.dataset.val || '王者荣耀');
+  gs.career = careerFreeMode ? document.getElementById('careerFreeInput').value.trim() : (document.querySelector('#careerChips .chip.selected:not(.free)')?.dataset.val || '竞技者');
+  gs.difficulty = document.querySelector('#diffChips .chip.selected')?.dataset.val || '标准';
+  if (gs.character.type === 'custom') { gs.character.name = document.getElementById('customName').value.trim() || '自定义选手'; gs.lockedMemberId = null; }
+  else { if (!gs.character.id) { alert('请选择一个SVT成员'); return; } gs.lockedMemberId = gs.character.id; }
+  if (!gs.game) { alert('请选择或输入主攻游戏'); return; }
+  if (!gs.career) { alert('请选择或输入职业路线'); return; }
+  gs.started = true;
 
-  gameState.romance = romanceOn;
-  gameState.started = true;
+  const b = {'休闲':3,'标准':2,'硬核':1,'地狱':1}[gs.difficulty]||2;
+  gs.stats.mech = 5 + Math.floor(Math.random()*b)+1;
+  gs.stats.awareness = 5 + Math.floor(Math.random()*b)+1;
+  gs.stats.mental = 5 + Math.floor(Math.random()*b)+1;
+  gs.stats.leadership = 5 + Math.floor(Math.random()*b)+1;
+  const s=gs.stats, arr=[s.mech,s.awareness,s.mental,s.leadership];
+  const max=Math.max(...arr), min=Math.min(...arr);
+  if (arr.every(v=>v<=6)) { gs.tag='平平淡淡才是真'; gs.tagEffect='永远稳定'; }
+  else if (s.mech===max&&s.mental<=4) { gs.tag='神经刀'; gs.tagEffect='优势+20%，劣势-20%'; }
+  else if (s.mech>=8&&s.mental<=3) { gs.tag='玻璃大炮'; gs.tagEffect='优势+25%，逆风-15%'; }
+  else if (s.mental<=3) { gs.tag='大赛软脚虾'; gs.tagEffect='关键局-10%，可突破'; }
+  else if (s.mental>=8&&arr.some(v=>v<=3)) { gs.tag='绝境战神'; gs.tagEffect='绝境全属性+20%'; }
+  else if (s.mech===max&&arr.filter(v=>v===max).length===1) { gs.tag='天才操作怪'; gs.tagEffect='1v1成功率+15%'; }
+  else if (s.awareness===max&&arr.filter(v=>v===max).length===1) { gs.tag='上帝视角'; gs.tagEffect='埋伏规避率+20%'; }
+  else if (s.mental===max&&arr.filter(v=>v===max).length===1) { gs.tag='大心脏先生'; gs.tagEffect='关键局失误率-25%'; }
+  else if (s.leadership===max&&arr.filter(v=>v===max).length===1) { gs.tag='泉水指挥官'; gs.tagEffect='队友响应+10%'; }
+  else if (arr.filter(v=>v===max).length===2) { gs.tag='全能战士'; gs.tagEffect='双Buff减半'; }
+  else if (arr.every(v=>v>=5&&v<=7)) { gs.tag='水桶型选手'; gs.tagEffect='稳定无修正'; }
+  else { gs.tag='偏科战神'; gs.tagEffect='特化+25%，短板Debuff翻倍'; }
 
-  // 初始化羁绊 - 全部为0（陌生人）
-  SVT_MEMBERS.forEach(m => {
-    gameState.bonds[m.id] = { level: 0, exp: 0 };
-  });
+  gs.age = 16 + Math.floor(Math.random()*15);
+  if (gs.age <= 17) gs.ageEffect = '操作上限+1，心态上限-1';
+  else if (gs.age <= 22) gs.ageEffect = '无修正';
+  else if (gs.age <= 27) gs.ageEffect = '心态上限+1，操作上限-1';
+  else gs.ageEffect = '操作上限-2，指挥/意识上限+1';
 
-  // 初始化天赋
-  gameState.talents = TALENTS.slice(0, 3).map((t, i) => ({ name: t, id: i }));
+  const identities = ['天梯路人王','青训新星','高校冠军','网吧赛黑马'];
+  gs.secondIdentity = identities[Math.floor(Math.random()*identities.length)];
+  const avail = getAvailableMembers();
+  gs.initialAcquaintance = avail[Math.floor(Math.random()*avail.length)];
+  gs.svtBonds[gs.initialAcquaintance.id] = 1;
+  gs.memberLastInteraction[gs.initialAcquaintance.id] = 1;
 
-  closeModal('settingsModal');
   document.getElementById('cover-page').classList.add('hidden');
   document.getElementById('game-container').classList.add('active');
-
-  initGameUI();
-  startNewDay();
-  showNotification('欢迎', `SVT电竞 - ${gameState.character.name}`);
+  updateUI(); switchMobileTab('train');
+  initFAQ(); initChangelog();
+  log('========== 开局档案 ==========', 'story');
+  log(`主攻：${gs.game} | 路线：${gs.career} | 难度：${gs.difficulty}`, 'story');
+  log(`年龄：${gs.age}岁 — ${gs.ageEffect}`, 'story');
+  log(`属性：操作${s.mech} | 意识${s.awareness} | 心态${s.mental} | 指挥${s.leadership}`, 'train');
+  log(`标签：${gs.tag} — ${gs.tagEffect}`, 'story');
+  log(`第二身份：${gs.secondIdentity}`, 'story');
+  log(`初始相识：${gs.initialAcquaintance.name} — Lv.1 初识`, 'social');
+  log('================================', 'story');
+  gs.shadowCooldown=1;
+  generateGameOrgs();
 }
 
-// ==================== 游戏初始化 ====================
-function initGameUI() {
+async function generateGameOrgs() {
+  if (gs.gameOrgs.length > 0) return;
+  try {
+    const data = await callDS([{role:'system',content:`列出5个在《${gs.game}》职业联赛中可能存在的战队或公会名称及风格。格式：名称 | 风格 | 排名区间`}], 200, 0.7);
+    const text = data.choices[0].message.content.trim();
+    gs.gameOrgs = text.split('\n').filter(l => l.includes('|')).map(l => { const p=l.split('|'); return { name:p[0]?.trim(), style:p[1]?.trim(), rank:p[2]?.trim() }; });
+  } catch(e) { gs.gameOrgs = [{ name:'星辰战队', style:'激进', rank:'上游' },{ name:'暗影公会', style:'保守', rank:'中游' }]; }
+}
+
+// ==================== UI 更新 ====================
+function updateUI() {
+  document.getElementById('dayDisplay').textContent = `第 ${gs.day} 天`;
+  const tier = getRankTier(gs.rank.ladder);
+  document.getElementById('rankDisplay').textContent = gs.rank.ladder < 99999 ? `#${gs.rank.ladder} ${tier}` : '未定级';
   updateStaminaUI();
-  updateRankUI();
-  updateAttrUI();
-  updateBondMiniUI();
-  renderStory();
+  const inner = document.getElementById('statInner');
+  inner.innerHTML = `
+    <div class="stat-item ${gs.stamina<=30?'stamina-low':''}" id="stat-stamina">体力 ${gs.stamina}/${gs.maxStamina}</div>
+    <div class="stat-item" id="stat-mech">操作 ${gs.stats.mech}</div>
+    <div class="stat-item" id="stat-awareness">意识 ${gs.stats.awareness}</div>
+    <div class="stat-item" id="stat-mental">心态 ${gs.stats.mental}</div>
+    <div class="stat-item" id="stat-leadership">指挥 ${gs.stats.leadership}</div>
+    <div class="stat-item">${gs.tag}</div>
+  `;
+  if (Object.keys(gs.svtBonds).length > 0) document.getElementById('bond-summary-btn').classList.add('show');
+  renderActions();
 }
-
-function startNewDay() {
-  document.getElementById('dayCounter').textContent = `第 ${gameState.day} 天`;
-
-  // 恢复体力
-  gameState.stamina = Math.min(gameState.maxStamina, gameState.stamina + 30);
-  updateStaminaUI();
-
-  // 每日事件
-  const maps = Object.keys(SCENES);
-  gameState.currentMap = maps[Math.floor(Math.random() * maps.length)];
-  showRandomScene();
-}
-
-// ==================== 智能滚动系统 ====================
-let isUserScrollingUp = false;
-
-function scrollStory(targetPosition) {
-  const storyPanel = document.getElementById('storyText');
-  const panelPos = storyPanel ? storyPanel.getBoundingClientRect().top + window.pageYOffset : 0;
-  requestAnimationFrame(() => {
-    if (typeof targetPosition === 'number' && targetPosition > 0) {
-      window.scrollTo({ top: targetPosition, behavior: 'smooth' });
-    } else {
-      if (!isUserScrollingUp) {
-        window.scrollTo({ top: panelPos, behavior: 'smooth' });
-      }
-    }
-  });
-}
-
-// ==================== 消息 ID 计数 ====================
-let messageIdCounter = 0;
-
-function showRandomScene() {
-  const scenes = SCENES[gameState.currentMap];
-  const scene = scenes[Math.floor(Math.random() * scenes.length)];
-  gameState.currentScene = scene;
-
-  document.getElementById('sceneTitle').textContent = gameState.currentMap;
-  const storyEl = document.getElementById('storyText');
-  const startPos = storyEl ? storyEl.getBoundingClientRect().top + window.pageYOffset : 0;
-
-  messageIdCounter++;
-  const msgId = 'msg-' + messageIdCounter;
-  const wrapper = document.createElement('div');
-  wrapper.id = msgId;
-  wrapper.className = 'story-message';
-  storyEl.appendChild(wrapper);
-  wrapper.appendChild(document.createElement('div')).textContent = scene.text;
-
-  recordReviewNode(msgId, wrapper);
-  renderStoryTags(scene.tags);
-  renderOptions();
-  scrollStory(Math.max(0, startPos - 30));
-}
-
-function typewriterEffect(text, callback) {
-  const storyEl = document.getElementById('storyText');
-  const target = document.createElement('div');
-  target.className = 'story-message';
-  messageIdCounter++;
-  target.id = 'msg-' + messageIdCounter;
-  storyEl.appendChild(target);
-
-  let i = 0;
-  const cursor = document.createElement('span');
-  cursor.className = 'typewriter-cursor';
-
-  function type() {
-    if (i < text.length) {
-      target.textContent = text.substring(0, i + 1);
-      target.appendChild(cursor);
-      i++;
-      setTimeout(type, 30);
-    } else {
-      cursor.remove();
-      recordReviewNode(target.id, target);
-      if (callback) callback();
-    }
-  }
-  type();
-}
-
-function renderStoryTags(tags) {
-  const container = document.getElementById('storyTags');
-  container.innerHTML = '';
-  tags.forEach(tag => {
-    const span = document.createElement('span');
-    span.className = 'tag';
-    span.textContent = tag;
-    container.appendChild(span);
-  });
-}
-
-function renderOptions() {
-  const optionsEl = document.getElementById('optionsPanel');
-  optionsEl.innerHTML = '';
-
-  const options = generateOptions();
-  options.forEach((opt, idx) => {
-    const div = document.createElement('div');
-    div.className = 'option-item';
-    div.textContent = opt.text;
-    div.onclick = () => selectOptionAction(opt);
-    optionsEl.appendChild(div);
-  });
-}
-
-function generateOptions() {
-  const map = gameState.currentMap;
-  let options = [
-    { text: '继续探索', action: 'explore' },
-    { text: '查看状态', action: 'status' }
-  ];
-
-  switch(map) {
-    case '训练基地':
-      options = [
-        { text: '进行操作训练', action: 'train_op', stat: 'op' },
-        { text: '进行意识训练', action: 'train_cons', stat: 'cons' },
-        { text: '进行心态训练', action: 'train_mind', stat: 'mind' },
-        { text: '进行指挥训练', action: 'train_lead', stat: 'lead' },
-        { text: '返回', action: 'back' }
-      ];
-      break;
-    case '天梯排位':
-      options = [
-        { text: '发起排位挑战', action: 'ranked' },
-        { text: '查看排名信息', action: 'ranking' },
-        { text: '返回', action: 'back' }
-      ];
-      break;
-    case '线下赛馆':
-      options = [
-        { text: '报名参赛', action: 'tournament' },
-        { text: '观摩比赛', action: 'observe' },
-        { text: '返回', action: 'back' }
-      ];
-      break;
-    case '网咖':
-      options = [
-        { text: '与随机对手对战', action: 'cafe_battle' },
-        { text: '打听消息', action: 'cafe_gossip' },
-        { text: '返回', action: 'back' }
-      ];
-      break;
-    case '直播区':
-      options = [
-        { text: '开启直播', action: 'stream' },
-        { text: '查看粉丝', action: 'fans' },
-        { text: '返回', action: 'back' }
-      ];
-      break;
-    case '商业区':
-      options = [
-        { text: '洽谈赞助', action: 'sponsor' },
-        { text: '查看合同', action: 'contract' },
-        { text: '返回', action: 'back' }
-      ];
-      break;
-    case '休整区':
-      options = [
-        { text: '充分休息', action: 'full_rest' },
-        { text: '四处看看', action: 'look_around' },
-        { text: '返回', action: 'back' }
-      ];
-      break;
-    case '神秘地点':
-      options = [
-        { text: '深入调查', action: 'investigate' },
-        { text: '与神秘人对峙', action: 'confront_8094' },
-        { text: '返回', action: 'back' }
-      ];
-      break;
-  }
-
-  return options;
-}
-
-function selectOptionAction(opt) {
-  switch(opt.action) {
-    case 'explore':
-      showRandomScene();
-      break;
-    case 'status':
-      showQuickInfo('status');
-      break;
-    case 'back':
-      selectMap('休整区');
-      break;
-    case 'train_op':
-    case 'train_cons':
-    case 'train_mind':
-    case 'train_lead':
-      doTraining(opt.stat);
-      break;
-    case 'ranked':
-      doRankedBattle();
-      break;
-    case 'tournament':
-      doTournament();
-      break;
-    case 'investigate':
-      doInvestigate();
-      break;
-    case 'confront_8094':
-      doConfront8094();
-      break;
-    default:
-      showNotification('提示', '该功能正在开发中');
-  }
-}
-
-function doTraining(stat) {
-  if (gameState.stamina < 20) {
-    showCheckResult(false, '体力不足！');
-    return;
-  }
-
-  gameState.stamina -= 20;
-  updateStaminaUI();
-
-  const attrValue = gameState.attributes[stat];
-  const difficultyMod = { '休闲': 0.7, '标准': 0.5, '硬核': 0.3, '地狱': 0.2 }[gameState.difficulty];
-  const threshold = Math.floor(attrValue * difficultyMod + 5);
-  const roll = Math.floor(Math.random() * 20) + 1;
-  const success = roll >= threshold;
-
-  const statNames = { op: '操作', cons: '意识', mind: '心态', lead: '指挥' };
-
-  if (success) {
-    const gain = Math.floor(Math.random() * 3) + 1;
-    gameState.attributes[stat] = Math.min(100, gameState.attributes[stat] + gain);
-    updateAttrUI();
-    showCheckResult(true, `训练成功！${statNames[stat]}+${gain}`);
-  } else {
-    showCheckResult(false, '训练效果不佳');
-  }
-
-  setTimeout(showRandomScene, 1500);
-}
-
-function doRankedBattle() {
-  if (gameState.stamina < 30) {
-    showCheckResult(false, '体力不足！');
-    return;
-  }
-
-  gameState.stamina -= 30;
-  updateStaminaUI();
-
-  const totalAttr = Object.values(gameState.attributes).reduce((a, b) => a + b, 0) / 4;
-  const difficultyMod = { '休闲': 0.4, '标准': 0.5, '硬核': 0.6, '地狱': 0.75 }[gameState.difficulty];
-  const threshold = Math.floor(totalAttr * difficultyMod);
-  const roll = Math.floor(Math.random() * 100) + 1;
-  const success = roll <= threshold;
-
-  const opponent = ANTAGONISTS[Math.floor(Math.random() * ANTAGONISTS.length)];
-
-  if (success) {
-    const basePoints = 20 + Math.floor(Math.random() * 15);
-    const bonusPoints = gameState.difficulty === '地狱' ? 25 : (gameState.difficulty === '硬核' ? 15 : 0);
-    gameState.rankPoints += basePoints + bonusPoints;
-    updateRankUI();
-    showCheckResult(true, `击败 ${opponent.name}！+${basePoints + bonusPoints} 胜点`);
-    collectFragment(1);
-  } else {
-    const loss = gameState.difficulty === '地狱' ? 30 : (gameState.difficulty === '硬核' ? 20 : 10);
-    gameState.rankPoints = Math.max(0, gameState.rankPoints - loss);
-    updateRankUI();
-    showCheckResult(false, `败于 ${opponent.name}... -${loss} 胜点`);
-  }
-
-  setTimeout(showRandomScene, 2000);
-}
-
-function doTournament() {
-  if (gameState.stamina < 40) {
-    showCheckResult(false, '体力不足！');
-    return;
-  }
-
-  gameState.stamina -= 40;
-  updateStaminaUI();
-
-  const totalAttr = Object.values(gameState.attributes).reduce((a, b) => a + b, 0) / 4;
-  const threshold = Math.floor(totalAttr * 0.6);
-  const roll = Math.floor(Math.random() * 100) + 1;
-  const success = roll <= threshold;
-
-  if (success) {
-    const points = 100 + Math.floor(Math.random() * 50);
-    gameState.rankPoints += points;
-    updateRankUI();
-    showCheckResult(true, `线下赛冠军！+${points} 胜点`);
-    collectFragment(3);
-  } else {
-    const loss = 30;
-    gameState.rankPoints = Math.max(0, gameState.rankPoints - loss);
-    updateRankUI();
-    showCheckResult(false, `止步八强... -${loss} 胜点`);
-  }
-
-  setTimeout(showRandomScene, 2000);
-}
-
-function doInvestigate() {
-  if (gameState.stamina < 20) {
-    showCheckResult(false, '体力不足！');
-    return;
-  }
-
-  gameState.stamina -= 20;
-  updateStaminaUI();
-
-  const success = Math.random() > 0.5;
-
-  if (success) {
-    collectFragment(1);
-    showCheckResult(true, '你发现了一块记忆碎片！');
-  } else {
-    showCheckResult(false, '什么都没发现...');
-  }
-
-  setTimeout(showRandomScene, 1500);
-}
-
-function doConfront8094() {
-  if (gameState.stamina < 30) {
-    showCheckResult(false, '体力不足！');
-    return;
-  }
-
-  gameState.stamina -= 30;
-  updateStaminaUI();
-
-  const totalAttr = Object.values(gameState.attributes).reduce((a, b) => a + b, 0) / 4;
-  const success = Math.random() > 0.3 && totalAttr > 40;
-
-  if (success) {
-    collectFragment(5);
-    showCheckResult(true, '8094向你透露了平行世界的秘密...');
-    showNotification('重大发现', '你获得了 5 块记忆碎片！');
-  } else {
-    showCheckResult(false, '8094消失在黑暗中...');
-  }
-
-  setTimeout(showRandomScene, 2000);
-}
-
-function showCheckResult(success, msg) {
-  const el = document.getElementById('checkResult');
-  el.style.display = 'inline-block';
-  el.className = `check-tag ${success ? 'success' : 'fail'}`;
-  el.textContent = success ? '✓ 成功' : '✗ 失败';
-
-  const storyText = document.getElementById('storyText');
-  const startPos = storyText ? storyText.getBoundingClientRect().top + window.pageYOffset : 0;
-
-  messageIdCounter++;
-  const msgId = 'msg-' + messageIdCounter;
-  const wrapper = document.createElement('div');
-  wrapper.id = msgId;
-  wrapper.className = 'story-message';
-  wrapper.appendChild(document.createElement('p')).textContent = msg;
-  wrapper.querySelector('p').style.color = success ? 'var(--success)' : 'var(--danger)';
-  wrapper.querySelector('p').style.marginBottom = '10px';
-  storyText.appendChild(wrapper);
-  recordReviewNode(msgId, wrapper);
-  scrollStory(Math.max(0, startPos - 30));
-}
-
-function collectFragment(count) {
-  for (let i = 0; i < count; i++) {
-    if (gameState.fragments.length < 39) {
-      let fragId;
-      do {
-        fragId = Math.floor(Math.random() * 39) + 1;
-      } while (gameState.fragments.includes(fragId));
-      gameState.fragments.push(fragId);
-    }
-  }
-  updateFragmentUI();
-}
-
-// ==================== UI更新 ====================
 function updateStaminaUI() {
+  const pct = (gs.stamina / gs.maxStamina) * 100;
   const fill = document.getElementById('staminaFill');
   const text = document.getElementById('staminaText');
-  const pct = (gameState.stamina / gameState.maxStamina) * 100;
-  fill.style.width = `${pct}%`;
-  text.textContent = `${gameState.stamina}/${gameState.maxStamina}`;
+  fill.style.width = pct + '%';
+  text.textContent = `${gs.stamina}/${gs.maxStamina}`;
+  fill.classList.remove('low','mid');
+  if (pct < 30) fill.classList.add('low');
+  else if (pct < 60) fill.classList.add('mid');
+}
 
-  fill.classList.remove('low', 'med');
-  if (pct < 30) {
-    fill.classList.add('low');
-  } else if (pct < 60) {
-    fill.classList.add('med');
+/** 添加日志条目，自动记录回顾节点 */
+function log(text, type='train') {
+  const area = document.getElementById('log-area');
+  const div = document.createElement('div');
+  div.className = `log-entry ${type}`;
+  div.textContent = text;
+  const id = 'log-' + Date.now() + '-' + Math.random().toString(36).substr(2,5);
+  div.id = id;
+  area.appendChild(div);
+  reviewNodes.push({ id, preview: text.substring(0, 40) });
+  scrollToBottom();
+}
+function logDaySep() {
+  const area = document.getElementById('log-area');
+  const sep = document.createElement('div');
+  sep.className = 'log-day-sep';
+  sep.textContent = `— 第 ${gs.day} 天结束 | 体力 ${gs.stamina} | 排名 #${gs.rank.ladder} —`;
+  const id = 'log-' + Date.now() + '-' + Math.random().toString(36).substr(2,5);
+  sep.id = id;
+  area.appendChild(sep);
+  reviewNodes.push({ id, preview: `第 ${gs.day} 天结束` });
+  scrollToBottom();
+}
+function scrollToBottom() {
+  if (isUserScrollingUp) return;
+  const area = document.getElementById('log-area');
+  requestAnimationFrame(() => { area.scrollTop = area.scrollHeight; });
+}
+document.getElementById('log-area').addEventListener('scroll', function() {
+  const atBottom = this.scrollHeight - this.scrollTop - this.clientHeight < 40;
+  isUserScrollingUp = !atBottom;
+  document.getElementById('back-to-bottom').classList.toggle('show', isUserScrollingUp);
+});
+
+function flashStat(id) { const el = document.getElementById(id); if (el) { el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 500); } }
+/** 修改属性，带边界保护 */
+function applyStatChange(stat, delta) {
+  if (gs.stats[stat] !== undefined) {
+    const old = gs.stats[stat];
+    gs.stats[stat] = Math.max(1, Math.min(10, old + delta));
+    if (gs.stats[stat] !== old) flashStat('stat-'+stat);
   }
 }
-
-function updateRankUI() {
-  let currentRank = RANKS[0];
-  for (let i = RANKS.length - 1; i >= 0; i--) {
-    if (gameState.rankPoints >= RANKS[i].points) {
-      currentRank = RANKS[i];
-      break;
-    }
-  }
-
-  document.getElementById('rankDisplay').textContent = currentRank.name;
-  document.getElementById('sidebarRank').textContent = currentRank.name;
-  document.getElementById('rankPoints').textContent = gameState.rankPoints;
+function addBond(memberId, amount = 1) {
+  const current = gs.svtBonds[memberId] || 0;
+  gs.svtBonds[memberId] = Math.min(5, current + amount);
 }
-
-function updateAttrUI() {
-  const attrs = ['op', 'cons', 'mind', 'lead'];
-  attrs.forEach(a => {
-    const val = gameState.attributes[a];
-    document.getElementById('attr' + a.charAt(0).toUpperCase() + a.slice(1)).textContent = val;
-    document.getElementById('attr' + a.charAt(0).toUpperCase() + a.slice(1) + 'Bar').style.width = val + '%';
-  });
-}
-
-function updateBondMiniUI() {
-  const container = document.getElementById('bondMini');
-  container.innerHTML = '';
-
-  const levelNames = ['陌生', '相识', '好感', '信赖', '挚友', '灵魂'];
-
-  SVT_MEMBERS.forEach(m => {
-    if (gameState.character.type === 'svt' && m.id === gameState.character.id) return;
-
-    const bond = gameState.bonds[m.id];
-    const div = document.createElement('div');
-    div.className = `bond-tag lv${bond.level}`;
-    div.textContent = `${m.name} ${levelNames[bond.level]}`;
-    div.onclick = () => showBondDetail(m);
-    container.appendChild(div);
-  });
-}
-
-function updateFragmentUI() {
-  document.getElementById('fragCount').textContent = gameState.fragments.length;
-}
-
-function showBondDetail(member) {
-  const bond = gameState.bonds[member.id];
-  const levelNames = ['陌生人', '相识', '好感', '信赖', '挚友', '灵魂之约'];
-
-  const content = `
-    <div class="detail-header">
-      <div class="detail-avatar">${member.id}</div>
-      <div class="detail-name">${member.name}</div>
-      <div class="detail-id">${member.korean} · ${member.eng}</div>
-    </div>
-    <div class="detail-stats">
-      <div class="stat-card">
-        <div class="stat-label">羁绊等级</div>
-        <div class="stat-value">Lv.${bond.level}</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">羁绊名</div>
-        <div class="stat-value" style="font-size:0.9rem">${levelNames[bond.level]}</div>
-      </div>
-    </div>
-    <div class="detail-bio">${member.bio}</div>
-  `;
-
-  document.getElementById('bondModalContent').innerHTML = content;
-  document.getElementById('bondModal').classList.add('active');
-}
-
-// ==================== 地图选择 ====================
-function selectMap(mapName) {
-  gameState.currentMap = mapName;
-  closeModal('mapModal');
-  showRandomScene();
-  showNotification('切换地图', `已进入 ${mapName}`);
-}
-
-// ==================== 回顾节点系统 ====================
-const reviewNodes = [];
-
-function recordReviewNode(msgId, wrapper) {
-  const preview = wrapper.textContent.replace(/\s+/g, ' ').trim().slice(0, 40);
-  reviewNodes.push({
-    id: msgId,
-    index: reviewNodes.length + 1,
-    preview: preview || '(暂无文本)'
-  });
-}
-
-function jumpToReview(index) {
-  const node = reviewNodes[index - 1];
-  if (!node) return;
-  const target = document.getElementById(node.id);
-  if (!target) return;
-  target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  const originalBg = target.style.background;
-  target.style.background = 'rgba(106, 156, 196, 0.2)';
-  setTimeout(() => {
-    target.style.background = originalBg || '';
-  }, 2000);
-}
-
-function showReviewModal() {
-  const modal = document.getElementById('reviewModal');
-  if (!modal) return;
-  const listEl = document.getElementById('reviewList');
-  if (listEl) {
-    if (reviewNodes.length === 0) {
-      listEl.innerHTML = '<div style="padding:20px; text-align:center; color:var(--muted);">暂无剧情节点</div>';
-    } else {
-      listEl.innerHTML = reviewNodes.map(node => `
-        <div class="review-item" data-index="${node.index}" onclick="jumpToReview(${node.index}); closeModal('reviewModal');">
-          <span class="review-index">#${String(node.index).padStart(3, '0')}</span>
-          <span class="review-preview">${node.preview}${node.preview.length >= 40 ? '...' : ''}</span>
-        </div>
-      `).join('');
-    }
-  }
-  modal.classList.add('active');
-}
-
-// ==================== 模态框 ====================
-function toggleMenu(modalId) {
-  const modal = document.getElementById(modalId);
-  modal.classList.toggle('active');
-}
-
-function closeModal(modalId) {
-  document.getElementById(modalId).classList.remove('active');
-}
-
-function toggleFaq(el) {
-  const item = el.parentElement;
-  item.classList.toggle('open');
-}
-
-// ==================== 主题切换 ====================
-function setTheme(theme) {
-  document.querySelectorAll('.theme-item').forEach(t => t.classList.remove('selected'));
-  event.currentTarget.classList.add('selected');
-
-  const themes = {
-    default: { accent: '#74b9ff', bg: '#f8f9fa', text: '#2c3e50' },
-    forest: { accent: '#00b894', bg: '#f0fff4', text: '#2d3436' },
-    sunset: { accent: '#fdcb6e', bg: '#fffcf0', text: '#2d3436' },
-    pink: { accent: '#fd79a8', bg: '#fff5f8', text: '#2d3436' },
-    mono: { accent: '#636e72', bg: '#f5f5f5', text: '#2d3436' },
-    dark: { accent: '#74b9ff', bg: '#2d3436', text: '#dfe6e9' }
-  };
-
-  const t = themes[theme];
-  document.documentElement.style.setProperty('--accent', t.accent);
-  document.documentElement.style.setProperty('--bg-primary', t.bg);
-  document.documentElement.style.setProperty('--text-primary', t.text);
-}
-
-// ==================== API设置 ====================
-function updateApiKeyLabel() {
-  const provider = document.getElementById('apiProvider').value;
-  const labels = {
-    deepseek: 'API Key (sk-...)',
-    groq: 'API Key',
-    gemini: 'API Key',
-    siliconflow: 'API Key',
-    custom: 'Custom Endpoint',
-    none: '不使用API'
-  };
-  document.getElementById('apiKeyLabel').textContent = labels[provider] || 'API Key';
-}
-
-function saveApiSettings() {
-  gameState.apiProvider = document.getElementById('apiProvider').value;
-  gameState.apiKey = document.getElementById('apiKey').value;
-  gameState.apiBaseUrl = document.getElementById('apiBaseUrl').value;
-  gameState.apiModel = document.getElementById('apiModel').value;
-
-  localStorage.setItem('svt_esports_api', JSON.stringify({
-    provider: gameState.apiProvider,
-    key: gameState.apiKey,
-    baseUrl: gameState.apiBaseUrl,
-    model: gameState.apiModel
-  }));
-
-  showNotification('设置保存', 'API设置已保存');
-  closeModal('apiModal');
-}
-
-function loadApiSettings() {
-  const saved = localStorage.getItem('svt_esports_api');
-  if (saved) {
-    const data = JSON.parse(saved);
-    gameState.apiProvider = data.provider || 'none';
-    gameState.apiKey = data.key || '';
-    gameState.apiBaseUrl = data.baseUrl || '';
-    gameState.apiModel = data.model || '';
-
-    document.getElementById('apiProvider').value = gameState.apiProvider;
-    document.getElementById('apiKey').value = gameState.apiKey;
-    document.getElementById('apiBaseUrl').value = gameState.apiBaseUrl;
-    document.getElementById('apiModel').value = gameState.apiModel;
-  }
-}
-
-// ==================== 快速信息 ====================
-function showQuickInfo(type) {
-  switch(type) {
-    case 'status': showStatusInfo(); break;
-    case 'bonds': showBondsInfo(); break;
-    case 'ranking': showRankingInfo(); break;
-    case 'fragments': showFragmentsInfo(); break;
-  }
-}
-
-function showStatusInfo() {
-  const attr = gameState.attributes;
-  const talentNames = gameState.talents ? gameState.talents.map(t => t.name).join('、') : '无';
-
-  const content = `
-    <div class="detail-header">
-      <div class="detail-avatar" style="font-size:1.5rem">🎮</div>
-      <div class="detail-name">${gameState.character.name}</div>
-      <div class="detail-id">${gameState.career} · ${gameState.game} · ${gameState.difficulty}</div>
-    </div>
-    <div class="detail-stats">
-      <div class="stat-card"><div class="stat-label">操作</div><div class="stat-value">${attr.op}</div></div>
-      <div class="stat-card"><div class="stat-label">意识</div><div class="stat-value">${attr.cons}</div></div>
-      <div class="stat-card"><div class="stat-label">心态</div><div class="stat-value">${attr.mind}</div></div>
-      <div class="stat-card"><div class="stat-label">指挥</div><div class="stat-value">${attr.lead}</div></div>
-    </div>
-    <div style="margin-top:12px;">
-      <div class="stat-label">天赋标签</div>
-      <div class="talent-tags">${gameState.talents ? gameState.talents.map(t => `<span class="talent-tag">${t.name}</span>`).join('') : '<span class="talent-tag">无</span>'}</div>
-    </div>
-    <div class="detail-bio">
-      💡 队内恋爱: ${gameState.romance ? '开启' : '关闭'}<br>
-      ⚡ 体力: ${gameState.stamina}/${gameState.maxStamina}<br>
-      🏆 当前地图: ${gameState.currentMap}
-    </div>
-  `;
-
-  document.getElementById('attrModalContent').innerHTML = content;
-  document.getElementById('attrModal').classList.add('active');
-}
-
-function showBondsInfo() {
-  const levelNames = ['陌生人', '相识', '好感', '信赖', '挚友', '灵魂之约'];
-  let html = '<div class="detail-header"><div class="detail-name">SVT 羁绊总览</div></div>';
-
-  SVT_MEMBERS.forEach(m => {
-    if (gameState.character.type === 'svt' && m.id === gameState.character.id) return;
-    const bond = gameState.bonds[m.id];
-    html += `
-      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
-        <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg, var(--accent), #a29bfe);display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.8rem;font-weight:bold;">${m.id}</div>
-        <div style="flex:1;">
-          <div style="font-size:0.85rem">${m.name}</div>
-          <div style="font-size:0.68rem;color:var(--text-muted)">${levelNames[bond.level]}</div>
-        </div>
-        <div style="font-size:0.8rem;color:var(--accent);font-weight:600;">Lv.${bond.level}</div>
-      </div>
-    `;
-  });
-
-  document.getElementById('bondModalContent').innerHTML = html;
-  document.getElementById('bondModal').classList.add('active');
-}
-
-function showRankingInfo() {
-  const currentRank = RANKS.find((r, i) => {
-    const next = RANKS[i + 1];
-    return !next || (gameState.rankPoints >= r.points && gameState.rankPoints < next.points);
-  }) || RANKS[RANKS.length - 1];
-
-  const content = `
-    <div class="detail-header">
-      <div class="detail-avatar" style="font-size:1.5rem">👑</div>
-      <div class="detail-name">${currentRank.name}</div>
-      <div class="detail-id">当前段位</div>
-    </div>
-    <div class="detail-stats">
-      <div class="stat-card"><div class="stat-label">总胜点</div><div class="stat-value">${gameState.rankPoints}</div></div>
-      <div class="stat-card"><div class="stat-label">游戏天数</div><div class="stat-value">${gameState.day}</div></div>
-    </div>
-    <div class="detail-bio">
-      ${currentRank.next === -1 ? '🎉 你已达到最高段位！' : `📈 距离 ${RANKS[RANKS.indexOf(currentRank) + 1]?.name || ''} 还需 ${currentRank.next - (gameState.rankPoints - currentRank.points)} 胜点`}
-    </div>
-  `;
-
-  document.getElementById('attrModalContent').innerHTML = content;
-  document.getElementById('attrModal').classList.add('active');
-}
-
-function showFragmentsInfo() {
-  const content = `
-    <div class="detail-header">
-      <div class="detail-avatar" style="font-size:1.5rem">💎</div>
-      <div class="detail-name">记忆碎片</div>
-      <div class="detail-id">${gameState.fragments.length} / 39</div>
-    </div>
-    <div class="detail-bio" style="text-align:center;">
-      ${gameState.fragments.length >= 39 ? '🎉 已收集全部碎片！' : `📦 还差 ${39 - gameState.fragments.length} 块碎片`}
-    </div>
-  `;
-
-  document.getElementById('attrModalContent').innerHTML = content;
-  document.getElementById('attrModal').classList.add('active');
-}
+function toggleStatPanel() { document.getElementById('stat-panel').classList.toggle('open'); }
+function dismissGuide() { document.getElementById('guide-bar').classList.add('hidden'); }
 
 // ==================== 行动菜单 ====================
-function showActionMenu() {
-  const grid = document.getElementById('actionGrid');
-  grid.innerHTML = '';
-
-  ACTIONS.forEach(action => {
-    const div = document.createElement('div');
-    div.className = 'action-item';
-    div.innerHTML = `
-      <div class="action-icon">${action.icon}</div>
-      <div class="action-name">${action.name}</div>
-      <div class="action-cost">⚡${action.cost}</div>
-      <div class="action-desc">${action.desc}</div>
-    `;
-    div.onclick = () => doAction(action);
-    grid.appendChild(div);
-  });
-
-  document.getElementById('actionModal').classList.add('active');
-}
-
-function doAction(action) {
-  if (gameState.stamina < action.cost) {
-    showNotification('体力不足', `需要 ${action.cost} 体力`);
-    return;
-  }
-
-  closeModal('actionModal');
-  gameState.stamina -= action.cost;
-  updateStaminaUI();
-
-  switch(action.id) {
-    case 'train':
-      const stats = ['op', 'cons', 'mind', 'lead'];
-      const stat = stats[Math.floor(Math.random() * stats.length)];
-      doTraining(stat);
-      break;
-    case 'battle':
-      doRankedBattle();
-      break;
-    case 'social':
-      const member = SVT_MEMBERS[Math.floor(Math.random() * SVT_MEMBERS.length)];
-      gameState.bonds[member.id].exp += Math.floor(Math.random() * 15) + 5;
-      if (gameState.bonds[member.id].exp >= 100 && gameState.bonds[member.id].level < 5) {
-        gameState.bonds[member.id].level++;
-        gameState.bonds[member.id].exp = 0;
-        showNotification('羁绊提升', `${member.name} 羁绊等级达到 Lv.${gameState.bonds[member.id].level}`);
-      }
-      updateBondMiniUI();
-      showCheckResult(true, `与 ${member.name} 愉快地交流了！`);
-      setTimeout(showRandomScene, 1500);
-      break;
-    case 'career':
-      const gain = Math.floor(Math.random() * 20) + 10;
-      gameState.rankPoints += gain;
-      updateRankUI();
-      showCheckResult(true, `事业发展顺利！+${gain} 胜点`);
-      setTimeout(showRandomScene, 1500);
-      break;
-    case 'rest':
-      gameState.stamina = gameState.maxStamina;
-      updateStaminaUI();
-      showCheckResult(true, '充分休息，体力已满！');
-      setTimeout(showRandomScene, 1500);
-      break;
-    case 'explore':
-      showRandomScene();
-      break;
+function renderActions() {
+  const s=gs.stamina;
+  const warn = s <= 30 ? ' <span style="color:#ff5252;font-size:0.65rem;">(体力偏低)</span>' : '';
+  const btns = `
+    <div class="side-section"><div class="side-section-title">训练${warn}</div>
+      <button class="side-action" ${s<20?'disabled':''} onclick="act('A1')"><span>高强度训练</span><span class="cost">-20</span></button>
+      <div class="action-hint">或自行决定：<input class="free-input" id="freeA1" style="width:100%;margin-top:2px;" placeholder="自定义训练" onkeydown="if(event.key==='Enter')actFree('A1')"></div>
+      <button class="side-action" ${s<10?'disabled':''} onclick="act('A2')"><span>常规训练</span><span class="cost">-10</span></button>
+      <button class="side-action" ${s<10?'disabled':''} onclick="act('A3')"><span>复盘分析</span><span class="cost">-10</span></button>
+      <button class="side-action" ${s<10?'disabled':''} onclick="act('A4')"><span>心理特训</span><span class="cost">-10</span></button>
+    </div>
+    <div class="side-section"><div class="side-section-title">实战</div>
+      <button class="side-action" ${s<15?'disabled':''} onclick="act('B1')"><span>天梯单排</span><span class="cost">-15</span></button>
+      <button class="side-action" ${s<10?'disabled':''} onclick="act('B3')"><span>自定义练习</span><span class="cost">-10</span></button>
+    </div>
+    <div class="side-section"><div class="side-section-title">社交</div>
+      <button class="side-action" ${s<10?'disabled':''} onclick="openMemberModal()"><span>联系 SVT 成员</span><span class="cost">-10</span></button>
+      <button class="side-action" ${s<10?'disabled':''} onclick="act('C2')"><span>探索地图</span><span class="cost">-10</span></button>
+    </div>
+    <div class="side-section"><div class="side-section-title">休整</div>
+      <button class="side-action" onclick="act('E1')"><span>休息恢复</span><span class="cost">+30</span></button>
+      <button class="side-action" ${s<10?'disabled':''} onclick="act('E2')"><span>外出放松</span><span class="cost">-10</span></button>
+    </div>
+    <div class="side-section"><div class="side-section-title">系统</div>
+      <button class="side-action" onclick="exportSave()"><span>导出存档</span><span class="cost">↓</span></button>
+      <button class="side-action" onclick="importSave()"><span>导入存档</span><span class="cost">↑</span></button>
+    </div>
+  `;
+  document.getElementById('sideActions').innerHTML = btns;
+  // 适配抽屉和移动端面板
+  const drawerHtml = btns.replace(/side-section/g,'drawer-section').replace(/side-section-title/g,'drawer-section-title').replace(/side-action/g,'drawer-action');
+  document.getElementById('drawerContent').innerHTML = drawerHtml;
+  // 更新移动端面板
+  const sections = drawerHtml.split('<div class="drawer-section">');
+  if (sections.length >= 5) {
+    document.getElementById('mobileTrain').innerHTML = '<div class="drawer-section">'+sections[1];
+    document.getElementById('mobileMatch').innerHTML = '<div class="drawer-section">'+sections[2];
+    document.getElementById('mobileSocial').innerHTML = '<div class="drawer-section">'+sections[3];
+    document.getElementById('mobileRest').innerHTML = '<div class="drawer-section">'+sections[4];
   }
 }
 
-// ==================== 输入处理 ====================
-function handleInput(e) {
-  if (e.key === 'Enter') sendInput();
+let currentStep = 1;
+function updateStepUI() {
+  document.querySelectorAll('.cover-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('coverStep'+currentStep).classList.add('active');
+  document.querySelectorAll('.step-dot').forEach((d,i) => d.classList.toggle('active', i+1 === currentStep));
+}
+function nextStep(step) { currentStep = step; updateStepUI(); }
+function prevStep(step) { currentStep = step; updateStepUI(); }
+
+let currentMobileTab = 'train';
+function switchMobileTab(tab) {
+  currentMobileTab = tab;
+  document.querySelectorAll('.nav-tab').forEach((t,i) => t.classList.toggle('active', ['train','match','social','rest','input'][i] === tab));
+  document.querySelectorAll('.nav-panel').forEach(p => p.classList.remove('open'));
+  const pm = { train:'mobileTrain', match:'mobileMatch', social:'mobileSocial', rest:'mobileRest', input:'mobileInputPanel' };
+  document.getElementById(pm[tab]).classList.add('open');
+  if (tab === 'input') document.getElementById('input-panel').classList.add('mobile-show');
+  else document.getElementById('input-panel').classList.remove('mobile-show');
 }
 
+// ==================== 弹窗系统 ====================
+function toggleMenu(modalId) { document.getElementById(modalId).classList.toggle('active'); }
+function closeModal(modalId) { document.getElementById(modalId).classList.remove('active'); }
+
+function openMemberModal() {
+  const avail = getAvailableMembers();
+  document.getElementById('memberList').innerHTML = avail.map(m => {
+    const bond=gs.svtBonds[m.id]||0;
+    const bn=['陌生人','初识','熟人','朋友','挚友','灵魂之约'][Math.min(bond,5)];
+    return `<div class="member-chip" onclick="actWithMember(${m.id})">${m.name} <span class="bond">Lv.${bond} ${bn}</span></div>`;
+  }).join('');
+  document.getElementById('member-modal').classList.add('active');
+}
+function showBondSummary() {
+  const avail = getAvailableMembers();
+  document.getElementById('bondSummaryContent').innerHTML = avail.map(m => {
+    const bond=gs.svtBonds[m.id]||0;
+    const bn=['陌生人','初识','熟人','朋友','挚友','灵魂之约'][Math.min(bond,5)];
+    return `<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.7rem;"><span>${m.name}</span><span class="bond-tag bond-lv${bond}">Lv.${bond} ${bn}</span></div>`;
+  }).join('');
+  document.getElementById('bond-modal').classList.add('active');
+}
+function showConfirm(msg) { return new Promise(r => { document.getElementById('confirmMsg').textContent = msg; confirmCallback = r; document.getElementById('confirmModal').classList.add('active'); }); }
+function resolveConfirm(ok) { document.getElementById('confirmModal').classList.remove('active'); if (confirmCallback) { confirmCallback(ok); confirmCallback = null; } }
+
+function initFAQ() {
+  document.getElementById('faqContent').innerHTML = [
+    {q:'如何开始？',a:'封面三步设置后点击开始。'},
+    {q:'四维属性',a:'操作、意识、心态、指挥，影响行动成功率。'},
+    {q:'SVT羁绊',a:'最高Lv.5，影响剧情。'},
+    {q:'体力',a:'消耗体力行动，归零会惩罚。'},
+    {q:'反派',a:'K、苹果、Shadow、林晚。'},
+    {q:'暗线',a:'留意底部和右上角红点。'}
+  ].map(f => `<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle('open')">${f.q}</div><div class="faq-a">${f.a}</div></div>`).join('');
+}
+function initChangelog() {
+  document.getElementById('changelogContent').innerHTML = `
+    <div class="log-item"><div class="log-version">v3.2</div><div class="log-date">2026-06-16</div><div class="log-content">多API支持、超时重试、逻辑修复、CSS补全、代码规范优化。</div></div>
+    <div class="log-item"><div class="log-version">v3.1</div><div class="log-date">2026-06-16</div><div class="log-content">UI视觉升级：玻璃效果、发光边框、呼吸动画。</div></div>
+    <div class="log-item"><div class="log-version">v3.0</div><div class="log-date">2026-06-16</div><div class="log-content">全功能整合：暗线、反派、多结局、8094。</div></div>
+    <div class="log-item"><div class="log-version">v2.0</div><div class="log-date">2026-06-14</div><div class="log-content">新增暗线系统、反派剧情线。</div></div>
+    <div class="log-item"><div class="log-version">v1.0</div><div class="log-date">2026-06-01</div><div class="log-content">基础框架、SVT羁绊。</div></div>
+  `;
+}
+function openLogicModal() {
+  let html = '<div class="logic-section"><div class="logic-title">游戏状态</div>';
+  html += `<div class="logic-row"><span>游戏</span><span>${gs.game}</span></div>`;
+  html += `<div class="logic-row"><span>路线</span><span>${gs.career}</span></div>`;
+  html += `<div class="logic-row"><span>难度</span><span>${gs.difficulty}</span></div>`;
+  html += `<div class="logic-row"><span>天数</span><span>${gs.day}</span></div></div>`;
+  html += '<div class="logic-section"><div class="logic-title">属性</div>';
+  for (const [k,v] of Object.entries(gs.stats)) html += `<div class="logic-row"><span>${k}</span><span class="${v>=8?'ok':v<=3?'err':''}">${v}</span></div>`;
+  html += '</div><div class="logic-section"><div class="logic-title">羁绊</div>';
+  getAvailableMembers().forEach(m => { const b=gs.svtBonds[m.id]||0; html += `<div class="logic-row"><span>${m.name}</span><span>Lv.${b}</span></div>`; });
+  html += '</div>';
+  document.getElementById('logicContent').innerHTML = html;
+  document.getElementById('logicModal').classList.add('active');
+}
+function showReviewModal() {
+  const list = document.getElementById('reviewList');
+  list.innerHTML = reviewNodes.length === 0 ? '<div style="padding:20px;text-align:center;color:var(--text-muted);">暂无回顾节点</div>' : reviewNodes.map((n,i) => `<div class="review-item" onclick="jumpToReview(${i})"><span class="review-index">#${String(i+1).padStart(3,'0')}</span><span class="review-preview">${n.preview}</span></div>`).join('');
+  document.getElementById('reviewModal').classList.add('active');
+}
+function jumpToReview(index) { const node = reviewNodes[index]; if (node) { const t = document.getElementById(node.id); if (t) t.scrollIntoView({ behavior:'smooth', block:'start' }); } closeModal('reviewModal'); }
+function showNotification(title, msg) {
+  document.getElementById('notifTitle').textContent = title;
+  document.getElementById('notifMsg').textContent = msg;
+  const n = document.getElementById('notification');
+  n.classList.add('show');
+  setTimeout(() => n.classList.remove('show'), 3000);
+}
+
+// ==================== 指令与快速输入 ====================
 function sendInput() {
-  const input = document.getElementById('playerInput');
-  const text = input.value.trim();
+  const inp = document.getElementById('playerInput');
+  const text = inp.value.trim();
   if (!text) return;
-
-  input.value = '';
-
-  if (text.startsWith('/')) {
-    handleCommand(text.substring(1));
-    return;
-  }
-
-  processPlayerAction(text);
+  inp.value = '';
+  document.getElementById('clearBtn').style.display = 'none';
+  if (text.startsWith('/')) handleCommand(text.substring(1));
+  else processPlayerAction(text);
 }
-
+function clearInput() { document.getElementById('playerInput').value = ''; document.getElementById('clearBtn').style.display = 'none'; }
+document.getElementById('playerInput').addEventListener('input', function() { document.getElementById('clearBtn').style.display = this.value.trim() ? 'flex' : 'none'; });
 function handleCommand(cmd) {
   const parts = cmd.toLowerCase().split(' ');
   switch(parts[0]) {
-    case 'help':
-      showNotification('命令帮助', '/status /bonds /rank /save /next');
-      break;
+    case 'help': showNotification('命令', '/status /bonds /rank /save /next /map /faq /logic'); break;
     case 'status': showQuickInfo('status'); break;
-    case 'bonds': showBondsInfo(); break;
-    case 'rank': showRankingInfo(); break;
-    case 'save': saveGame(); break;
-    case 'next': nextDay(); break;
-    case 'map': toggleMenu('mapModal'); break;
-    default:
-      showNotification('未知命令', `/${parts[0]}`);
+    case 'bonds': showBondSummary(); break;
+    case 'rank': showQuickInfo('ranking'); break;
+    case 'save': exportSave(); break;
+    case 'next': act('E1'); break;
+    case 'map': act('C2'); break;
+    case 'faq': toggleMenu('faqModal'); break;
+    case 'logic': openLogicModal(); break;
+    default: showNotification('未知命令', `/${parts[0]}`);
+  }
+}
+function processPlayerAction(text) {
+  const lower = text.toLowerCase();
+  if (lower.includes('训练')) act('A1');
+  else if (lower.includes('排位')||lower.includes('比赛')) act('B1');
+  else if (lower.includes('休息')) act('E1');
+  else log('收到你的想法...', 'story');
+}
+function showQuickInfo(type) {
+  switch(type) {
+    case 'status': document.getElementById('attrModalTitle').textContent = '状态'; document.getElementById('attrModalContent').innerHTML = `<p><strong>${gs.character.name}</strong> · ${gs.career} · ${gs.game}</p><p>操作${gs.stats.mech} 意识${gs.stats.awareness} 心态${gs.stats.mental} 指挥${gs.stats.leadership}</p><p>标签：${gs.tag} (${gs.tagEffect})</p>`; break;
+    case 'ranking': document.getElementById('attrModalTitle').textContent = '排名'; document.getElementById('attrModalContent').innerHTML = `<p>天梯：#${gs.rank.ladder} (${getRankTier(gs.rank.ladder)})</p><p>人气：#${gs.rank.popularity}</p>`; break;
+    case 'fragments': document.getElementById('attrModalTitle').textContent = '碎片'; document.getElementById('attrModalContent').innerHTML = `<p>已收集：${gs.fragments.length} 片</p>`; break;
+    case 'bonds': showBondSummary(); return;
+  }
+  document.getElementById('attr-modal').classList.add('active');
+}
+
+// ==================== 核心行动逻辑 ====================
+async function actWithMember(memberId) {
+  closeModal('member-modal');
+  gs.stamina = Math.max(0, gs.stamina-10);
+  const m = SVT.find(x=>x.id===memberId);
+  if (!m) return;
+  addBond(m.id, 1);
+  gs.memberLastInteraction[m.id] = gs.day;
+  const bond=gs.svtBonds[m.id];
+  const bn=['陌生人','初识','熟人','朋友','挚友','灵魂之约'][Math.min(bond,5)];
+  setLoading('.side-action, .drawer-action', true);
+  try {
+    const data = await callDS([
+      {role:'system',content:`你是${m.name}，${m.role}。性格：${m.style}。关系：${bn}。可以质疑、调侃或唱反调，不要一味顺从。`},
+      {role:'user',content:`第${gs.day}天。请说话。`}
+    ], 150, 0.85);
+    log(`${m.name}（${bn}）：${data.choices[0].message.content.trim()}  [好感度+1]`, 'social');
+  } catch(e) { log(`${m.name}（${bn}）："正好，想找个人聊聊。"  [好感度+1]`, 'social'); }
+  setLoading('.side-action, .drawer-action', false);
+  endDay();
+}
+
+function act(id) {
+  if (!gs.started) return;
+  const r=Math.random(); let msg='', type='train';
+  switch(id) {
+    case 'A1': gs.stamina=Math.max(0,gs.stamina-20);
+      if (r<0.4) { applyStatChange('mech',1); msg='高强度训练成功，操作+1。'; gs.consecutiveSame=gs.lastTrainType==='A1'?gs.consecutiveSame+1:1; gs.lastTrainType='A1'; }
+      else if (r<0.7) { msg='高强度训练完成。'; gs.consecutiveSame=0; gs.lastTrainType='A1'; }
+      else { applyStatChange('mech',-1); msg='训练过度，操作-1。'; gs.consecutiveSame=0; gs.lastTrainType='A1'; } break;
+    case 'A2': gs.stamina=Math.max(0,gs.stamina-10);
+      if (r<0.2) { applyStatChange('mech',1); applyStatChange('awareness',1); msg='常规训练显著，操作+1，意识+1。'; gs.consecutiveSame=gs.lastTrainType==='A2'?gs.consecutiveSame+1:1; gs.lastTrainType='A2'; }
+      else if (r<0.4) { applyStatChange('mech',1); msg='常规训练完成，操作+1。'; gs.consecutiveSame=gs.lastTrainType==='A2'?gs.consecutiveSame+1:1; gs.lastTrainType='A2'; }
+      else { msg='常规训练完成。'; gs.consecutiveSame=0; gs.lastTrainType='A2'; } break;
+    case 'A3': gs.stamina=Math.max(0,gs.stamina-10);
+      if (r<0.3) { applyStatChange('awareness',1); msg='复盘有新发现，意识+1。'; gs.consecutiveSame=gs.lastTrainType==='A3'?gs.consecutiveSame+1:1; gs.lastTrainType='A3'; }
+      else { msg='仔细复盘了录像。'; gs.consecutiveSame=0; gs.lastTrainType='A3'; } break;
+    case 'A4': gs.stamina=Math.max(0,gs.stamina-10);
+      if (r<0.3) { applyStatChange('mental',1); msg='心理特训有效，心态+1。'; gs.consecutiveSame=gs.lastTrainType==='A4'?gs.consecutiveSame+1:1; gs.lastTrainType='A4'; }
+      else { msg='调整了呼吸。'; gs.consecutiveSame=0; gs.lastTrainType='A4'; } break;
+    case 'B1': type='match'; gs.stamina=Math.max(0,gs.stamina-15);
+      gs.rank.ladder=Math.max(1,gs.rank.ladder-Math.floor(Math.random()*500));
+      if (r<0.3) { gs.rank.ladder=Math.max(1,gs.rank.ladder-300); msg='天梯连胜，排名 #'+gs.rank.ladder; gs.consecutiveDrop=0; }
+      else if (r<0.7) { gs.rank.ladder+=Math.floor(Math.random()*200); msg='有输有赢，排名 #'+gs.rank.ladder; gs.consecutiveDrop=r>0.5?gs.consecutiveDrop+1:0; }
+      else { gs.rank.ladder+=Math.floor(Math.random()*400); msg='天梯连败，排名 #'+gs.rank.ladder; gs.consecutiveDrop++; } break;
+    case 'B3': gs.stamina=Math.max(0,gs.stamina-10); msg='自定义练习。'; break;
+    case 'C2': type='social'; gs.stamina=Math.max(0,gs.stamina-10);
+      const maps=['训练基地','天梯排位区','线下赛馆','网咖','直播区','商业区','休整区','社交区'];
+      triggerCoreEncounter(maps[Math.floor(Math.random()*8)]);
+      msg = `探索了 ${maps[Math.floor(Math.random()*8)]}。`; break;
+    case 'E1': type='rest'; gs.stamina=Math.min(100,gs.stamina+30); msg='休息恢复+30。'; break;
+    case 'E2': type='rest'; gs.stamina=Math.max(0,gs.stamina-10); gs.stamina=Math.min(100,gs.stamina+10); msg='外出放松。'; break;
+  }
+  log(msg, type);
+  endDay();
+}
+
+async function actFree(baseId) {
+  const inputEl = document.getElementById('free'+baseId);
+  const customText = inputEl?.value.trim();
+  if (!customText) { act(baseId); return; }
+  const costMap = { A1:20, A2:10, A3:10, A4:10, B1:15, B3:10, C2:10, E1:0, E2:10 };
+  if (baseId !== 'E1') gs.stamina = Math.max(0, gs.stamina - (costMap[baseId]||10));
+  else gs.stamina = Math.min(100, gs.stamina + 30);
+  try {
+    const data = await callDS([
+      {role:'system',content:`玩家自定义行动："${customText}"。判断主要提升哪个属性并给理由，不要一味说好话。格式：属性名 | 理由`}
+    ], 100, 0.7);
+    const text = data.choices[0].message.content.trim();
+    const parts = text.split('|');
+    const stat = (parts[0]?.trim() || 'awareness').toLowerCase();
+    if (['mech','awareness','mental','leadership'].includes(stat)) applyStatChange(stat, 1);
+    log(`自定义行动：${customText} → ${stat}+1`, 'train');
+  } catch(e) { log(`自定义行动：${customText}。`, 'train'); }
+  endDay();
+}
+
+function setLoading(selector, loading) {
+  document.querySelectorAll(selector).forEach(b => {
+    if (loading) b.classList.add('loading');
+    else b.classList.remove('loading');
+  });
+}
+
+// ==================== 每日结算 ====================
+function endDay() {
+  gs.day++; gs.seasonDay++;
+  if (gs.seasonDay > 30) { gs.seasonDay = 1; const ss=['春','夏','秋','冬']; gs.season = ss[(ss.indexOf(gs.season)+1)%4]; triggerSeasonEvent(); }
+  if (gs.staminaPenaltyActive) { gs.staminaPenaltyDays--; if (gs.staminaPenaltyDays <= 0) { gs.staminaPenaltyActive = false; log('体力惩罚结束。', 'rest'); } }
+  if (gs.stamina <= 0) { gs.stamina = 30; ['mech','awareness','mental','leadership'].forEach(k => applyStatChange(k, -2)); gs.staminaPenaltyDays = 3; gs.staminaPenaltyActive = true; log('体力归零，全属性-2，持续3天。', 'story'); }
+  gs.stamina = Math.min(100, gs.stamina + 50);
+  logDaySep();
+  checkShadow();
+  checkVillains();
+  check8094();
+  checkEndings();
+  updateUI();
+  if (gs.day >= 3) dismissGuide();
+}
+
+// ==================== 反派与策略 ====================
+function checkVillains() {
+  if (!gs.villains.K.seen && gs.rank.ladder <= 5000) { gs.villains.K.seen = true; gs.villains.K.stage = 1; log('天梯前5000中，K的名字反复出现。', 'villain'); shadowProactive('villain', 'K'); }
+  if (!gs.villains.linwan.seen && gs.rank.popularity <= 10000) { gs.villains.linwan.seen = true; gs.villains.linwan.stage = 1; log('林晚——前职业转媒体人——联系了你。', 'villain'); }
+  if (!gs.villains.apple.seen && gs.rank.ladder <= 5000 && gs.rank.popularity <= 5000) { gs.villains.apple.seen = true; gs.villains.apple.stage = 1; log('苹果——某经纪公司CEO——开始关注你。', 'villain'); }
+  if (!gs.villains.shadow.seen && gs.fragments.length >= 5) { gs.villains.shadow.seen = true; gs.villains.shadow.stage = 1; log('Shadow留下了痕迹。', 'villain'); }
+  if (allVillainsSeen() && !gs.strategyUsed) triggerStrategyEvent('四方围城');
+}
+function allVillainsSeen() { return gs.villains.K.seen && gs.villains.linwan.seen && gs.villains.apple.seen && gs.villains.shadow.seen; }
+
+async function triggerStrategyEvent(eventName) {
+  gs.strategyUsed = true;
+  document.getElementById('strategyTitle').textContent = '四方围城 · 赛前抉择';
+  const opts = [{ text:'正面迎战', check:'mech', dc:8, desc:'以最强个人能力突破' },{ text:'寻找盟友', check:'leadership', dc:7, desc:'团结一切可团结的力量' },{ text:'出奇制胜', check:'awareness', dc:8, desc:'用非对称战术破局' }];
+  document.getElementById('strategyOptions').innerHTML = opts.map((o,i) => `<div class="strategy-opt" onclick="executeStrategy(${i},'${o.check}',${o.dc},'${o.text}')">${o.text} — ${o.check.toUpperCase()} DC${o.dc}<br><small>${o.desc}</small></div>`).join('');
+  document.getElementById('strategy-modal').classList.add('active');
+}
+function executeStrategy(index, stat, dc, name) {
+  closeModal('strategy-modal');
+  const check = performCheck(stat, dc);
+  logCheckResult(check, `战术：${name}`);
+  if (check.success) { applyStatChange(stat, 1); log('战术成功！', 'match'); }
+  else log('战术失败。', 'villain');
+}
+function submitStrategyFree() { closeModal('strategy-modal'); log('自定义战术。', 'match'); }
+
+// ==================== 8094 援护 ====================
+function check8094() {
+  if (gs.n8094used >= 2) return;
+  if ((gs.consecutiveFail >= 3 && gs.n8094 < 1) || (gs.rank.ladder > 20000 && gs.day > 30 && gs.n8094 < 2) || (gs.day - gs.shadowLastDay > 15 && gs.n8094 < 2)) { gs.n8094++; gs.n8094used++; trigger8094(); }
+}
+async function trigger8094() {
+  try { const data = await callDS([{role:'system',content:'你是8094——神秘援手。留下纸条间接帮助，简短1-2句。'}], 120, 0.85); log(`[8094援护·第${gs.n8094}次] ${data.choices[0].message.content.trim()}`, 'story'); }
+  catch(e) { log('[8094援护] 桌上多了张纸条。', 'story'); }
+}
+
+// ==================== 暗线系统 ====================
+function shadowProactive(reason, context) {
+  if (reason === 'villain' && Math.random() < 0.6) {
+    const msg = `小心。${context}上次出现时我没准备好。这次——你自己看。`;
+    gs.shadowPending = { text:msg, trig:{t:'proactive'}, day:gs.day, id:Date.now(), replied:false };
+    gs.shadowHistory.push(gs.shadowPending);
+    showToast(msg); addChat('them', msg); log(`「${msg}」`, 'shadow'); showDot();
+  }
+}
+function checkShadow() {
+  if (gs.day-gs.shadowLastDay<gs.shadowCooldown) return;
+  const trigs=[];
+  if (gs.stamina===30) trigs.push({t:'stamina_30',p:1,ctx:'体力刚好30'});
+  if (gs.consecutiveSame>=2) trigs.push({t:'consecutive_train',p:2,ctx:'连续同类训练'});
+  if (Object.values(gs.stats).some(v=>v>=8)) trigs.push({t:'stat_8',p:1,ctx:'属性突破8'});
+  if (gs.rank.ladder<=5000) trigs.push({t:'rank_5000',p:2,ctx:'排名前5000'});
+  if (gs.consecutiveDrop>=3) trigs.push({t:'rank_drop',p:1,ctx:'连败'});
+  if (Math.abs(gs.rank.ladder-8094)<=100) trigs.push({t:'near_8094',p:3,ctx:'接近#8094'});
+  for (const[mid,bond]of Object.entries(gs.svtBonds)) {
+    if (bond===3) trigs.push({t:'bond_lv3',p:2,ctx:'与'+SVT.find(m=>m.id==mid)?.name+'羁绊Lv.3'});
+    if (bond===4) trigs.push({t:'bond_lv4',p:2,ctx:'与'+SVT.find(m=>m.id==mid)?.name+'羁绊Lv.4'});
+  }
+  for (const[mid,last]of Object.entries(gs.memberLastInteraction)) {
+    if (gs.day-last>=7&&last>0) trigs.push({t:'neglect',p:1,ctx:'冷落成员'});
+  }
+  const h=new Date().getHours();
+  if (h>=22||h<=5) trigs.push({t:'late',p:3,ctx:'深夜'});
+  if (gs.day-gs.shadowLastDay>=7) trigs.push({t:'long_silence',p:5,ctx:'久未触发'});
+  if (gs.shadowIgnore>=3) trigs.push({t:'ignored',p:4,ctx:'被忽略'});
+  if (!trigs.length) return;
+  trigs.sort((a,b)=>b.p-a.p);
+  const sel=trigs[0];
+  const probs={stamina_30:0.8,consecutive_train:0.3,stat_8:0.7,rank_5000:0.55,rank_drop:0.7,near_8094:0.85,bond_lv3:0.55,bond_lv4:0.65,neglect:0.4,late:0.45,long_silence:1.0,ignored:0.9};
+  if (Math.random()>(probs[sel.t]||0.3)) return;
+  gs.shadowLastDay=gs.day; gs.shadowCooldown=Math.floor(Math.random()*3)+1;
+  triggerShadow(sel);
+}
+async function triggerShadow(trig) {
+  showToast('...');
+  try {
+    const data = await callDS([
+      {role:'system',content:`你是"另一个自己"——上一次循环的回声。不要总是温和，可以质疑、嘲讽、唱反调。简短2-4句。当前：第${gs.day}天，${gs.game}，体力${gs.stamina}。${gs.shadowIgnore>=3?'玩家很久没理你。':''}`},
+      {role:'user',content:`触发：${trig.ctx}。说话。`}
+    ], 150, 0.9);
+    const msg=data.choices[0].message.content.trim();
+    gs.shadowPending={text:msg,trig,day:gs.day,id:Date.now(),replied:false};
+    gs.shadowHistory.push(gs.shadowPending);
+    showToast(msg); addChat('them', msg); log(`「${msg}」`, 'shadow');
+    if (!gs.shadowGuideShown) { document.getElementById('shadow-guide-modal').style.display = 'flex'; gs.shadowGuideShown = true; }
+    showDot();
+    if (gs.shadowIgnore >= 3) document.getElementById('shadow-dot').classList.add('blink');
+  } catch(e) {
+    const fb={stamina_30:'30了。上次我选了继续——然后输了。',ignored:'你在躲我。',long_silence:'没什么特别的。但我在。'};
+    const msg=fb[trig.t]||'我在看。';
+    gs.shadowPending={text:msg,trig,day:gs.day,id:Date.now(),replied:false};
+    gs.shadowHistory.push(gs.shadowPending);
+    showToast(msg); addChat('them', msg); log(`「${msg}」`, 'shadow');
+    if (!gs.shadowGuideShown) { document.getElementById('shadow-guide-modal').style.display = 'flex'; gs.shadowGuideShown = true; }
+    showDot();
   }
 }
 
-function processPlayerAction(text) {
-  const lowerText = text.toLowerCase();
+function showToast(t) {
+  document.getElementById('toastText').textContent=t;
+  document.getElementById('shadow-toast').classList.add('show');
+  setTimeout(()=>document.getElementById('shadow-toast').classList.remove('show'), 5000);
+}
+function showDot() { document.getElementById('shadow-dot').classList.add('show'); }
+function openShadowChat() { document.getElementById('shadow-chat').classList.add('open'); document.getElementById('chatBackdrop').classList.add('show'); document.getElementById('shadow-dot').classList.remove('show','blink'); updateChatActs(); }
+function closeShadowChat() { document.getElementById('shadow-chat').classList.remove('open'); document.getElementById('chatBackdrop').classList.remove('show'); }
+function addChat(type,text) { const c=document.getElementById('chatMsgs'); const d=document.createElement('div'); d.className='chat-msg '+type; d.textContent=text; c.appendChild(d); c.scrollTop=c.scrollHeight; }
+function updateChatActs() {
+  const acts=document.getElementById('chatActs');
+  const last=gs.shadowPending;
+  if (last&&!last.replied) {
+    acts.innerHTML=`<button class="chat-act" onclick="replyShadow(1)">1. 回应</button><button class="chat-act" onclick="replyShadow(2)">2. 追问</button><button class="chat-act" onclick="replyShadow(3)">3. 沉默</button><input class="chat-free-input" id="chatFreeInput" placeholder="或自由输入..." onkeydown="if(event.key==='Enter')replyShadowFree()">`;
+  } else { acts.innerHTML='<span style="color:rgba(255,255,255,0.15);font-size:0.65rem;">等待下一次回声</span>'; }
+}
+async function replyShadow(opt) {
+  const last=gs.shadowPending;
+  if (!last||last.replied) return;
+  last.replied=opt; gs.shadowIgnore=opt===3?gs.shadowIgnore+1:0;
+  if (opt===1) gs.shadowStyle='warm'; if (opt===2) gs.shadowStyle='sharp'; if (opt===3) gs.shadowStyle='distant';
+  addChat('me',{1:'...',2:'...',3:'（沉默）'}[opt]);
+  if (opt===3) { closeShadowChat(); updateChatActs(); return; }
+  addChat('them','...');
+  try { const data = await callDS([{role:'system',content:'你是"另一个自己"。可以反驳。'},{role:'user',content:'玩家回应了。简短回复。'}], 80, 0.9); document.getElementById('chatMsgs').lastChild.textContent=data.choices[0].message.content.trim(); }
+  catch(e) { document.getElementById('chatMsgs').lastChild.textContent='...（中断）'; }
+  updateChatActs();
+}
+async function replyShadowFree() {
+  const input = document.getElementById('chatFreeInput');
+  const text = input.value.trim();
+  if (!text) return;
+  const last=gs.shadowPending;
+  if (!last||last.replied) return;
+  last.replied=4;
+  addChat('me', text);
+  const warmWords = ['谢谢','加油','一起','相信'];
+  const sharpWords = ['为什么','骗人','假的','够了'];
+  const lower = text.toLowerCase();
+  if (warmWords.some(w=>lower.includes(w))) { gs.shadowStyle='warm'; applyStatChange('mental',1); }
+  if (sharpWords.some(w=>lower.includes(w))) { gs.shadowStyle='sharp'; }
+  addChat('them','...');
+  try { const data = await callDS([{role:'system',content:'你是"另一个自己"。可以唱反调。'},{role:'user',content:`玩家说："${text}"。回复。`}], 80, 0.9); document.getElementById('chatMsgs').lastChild.textContent=data.choices[0].message.content.trim(); }
+  catch(e) { document.getElementById('chatMsgs').lastChild.textContent='...（中断）'; }
+  input.value = '';
+  updateChatActs();
+}
 
-  if (lowerText.includes('训练') || lowerText.includes('练习')) {
-    doTraining('op');
-  } else if (lowerText.includes('排位') || lowerText.includes('比赛')) {
-    doRankedBattle();
-  } else if (lowerText.includes('休息') || lowerText.includes('睡觉')) {
-    gameState.stamina = gameState.maxStamina;
-    updateStaminaUI();
-    showCheckResult(true, '好好休息了一下！');
-    setTimeout(showRandomScene, 1500);
-  } else {
-    showCheckResult(Math.random() > 0.3, '收到你的想法...');
-    setTimeout(showRandomScene, 1500);
+// ==================== 检定与结局 ====================
+function performCheck(stat, dc) { const roll = Math.floor(Math.random()*6)+1; return { stat, dc, roll, total: gs.stats[stat] + roll, success: gs.stats[stat] + roll >= dc }; }
+function logCheckResult(check, context) {
+  log(`${context} [${check.stat} ${check.total}=${gs.stats[check.stat]}+${check.roll} vs DC${check.dc}] ${check.success?'✓':'✗'}`, check.success?'match':'villain');
+  if (check.success) { gs.consecutiveSuccess++; gs.consecutiveFail=0; } else { gs.consecutiveFail++; gs.consecutiveSuccess=0; }
+}
+
+const ENDING_CONDITIONS = [
+  { id:'peak_promise', name:'巅峰之约', check:()=>gs.rank.ladder<=200&&gs.romance&&Object.values(gs.svtBonds).some(b=>b>=5) },
+  { id:'pure_competitor', name:'纯粹的竞技者', check:()=>gs.rank.ladder<=200&&!gs.romance },
+  { id:'lonely_king', name:'孤独的王者', check:()=>gs.rank.ladder<=200&&Object.values(gs.svtBonds).filter(b=>b>=3).length<3 },
+  { id:'ordinary_light', name:'平凡之光', check:()=>gs.rank.ladder>200&&Object.values(gs.svtBonds).filter(b=>b>=4).length>=10 },
+  { id:'another_life', name:'另一种人生', check:()=>gs.day>=60&&gs.rank.ladder>10000 },
+  { id:'mirror_person', name:'镜中人', check:()=>gs.rank.ladder>10000&&gs.fragments.length>=30 },
+  { id:'four_sides', name:'四面楚歌', check:()=>allVillainsSeen()&&gs.consecutiveFail>=5 },
+  { id:'nameless_watch', name:'无名守望', check:()=>gs.n8094>=2&&gs.shadowIgnore>=5 }
+];
+function checkEndings() {
+  for (const ending of ENDING_CONDITIONS) {
+    if (!gs.endingsTriggered.includes(ending.id) && ending.check()) {
+      gs.endingsTriggered.push(ending.id);
+      triggerEnding(ending);
+    }
   }
+}
+async function triggerEnding(ending) {
+  log(`触发结局：【${ending.name}】`, 'story');
+  try {
+    const data = await callDS([{role:'system',content:`叙述结局"${ending.name}"。不要只赞美，点出遗憾与代价。100-200字。`}], 300, 0.8);
+    document.getElementById('endingContent').innerHTML = `<h3 style="color:var(--accent);">${ending.name}</h3><p style="white-space:pre-wrap;">${data.choices[0].message.content.trim()}</p><div style="margin-top:16px;display:flex;gap:8px;"><button class="modal-close-btn" onclick="continueAfterEnding()">继续前行</button><button class="modal-close-btn" onclick="closeModal('ending-modal')">在此停下</button></div>`;
+    document.getElementById('ending-modal').classList.add('active');
+  } catch(e) { log(`结局：【${ending.name}】`, 'story'); }
+}
+function continueAfterEnding() { closeModal('ending-modal'); log('你选择继续前行。', 'story'); }
+
+async function triggerSeasonEvent() {
+  const events = { '春':'春季赛开幕','夏':'夏日集训','秋':'世界赛','冬':'全明星周末' };
+  try { const data = await callDS([{role:'system',content:`扩展季节事件"${events[gs.season]}"，2-3句话。`}], 120, 0.8); log(`[${gs.season}季] ${data.choices[0].message.content.trim()}`, 'story'); }
+  catch(e) { log(`[${gs.season}季] ${events[gs.season]}`, 'story'); }
+}
+
+const CORE_ENCOUNTERS = {
+  '训练基地':['深夜的钢琴声','停电之夜'],
+  '天梯排位区':['宿命匹配'],
+  '线下赛馆':['后台迷路','熟悉的陌生人'],
+  '网咖':['通宵区的陌生人','凌晨三点的舞蹈'],
+  '直播区':['直播间乱入'],
+  '商业区':['雨天同伞'],
+  '休整区':['宿舍漏水事件'],
+  '社交区':['那一杯的味道','乐器的记忆']
+};
+function triggerCoreEncounter(map) {
+  const encounters = CORE_ENCOUNTERS[map] || [];
+  const remaining = encounters.filter(e => !gs.coreEncounters[e]);
+  if (remaining.length === 0 || Math.random() > 0.3) return false;
+  const enc = remaining[Math.floor(Math.random()*remaining.length)];
+  gs.coreEncounters[enc] = true;
+  generateEncounterText(map, enc);
+  return true;
+}
+async function generateEncounterText(map, enc) {
+  try { const data = await callDS([{role:'system',content:`奇遇"${enc}"发生在${map}。简短描述，融入玩家状态。`}], 150, 0.85); log(`[奇遇·${map}] ${data.choices[0].message.content.trim()}`, 'story'); }
+  catch(e) { log(`[奇遇·${map}] ${enc}`, 'story'); }
 }
 
 // ==================== 存档系统 ====================
-function saveGame() {
-  localStorage.setItem('svt_esports_save', JSON.stringify(gameState));
-  showNotification('存档成功', '游戏进度已保存');
+function exportSave() {
+  const save = JSON.stringify(gs, null, 2);
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([save], {type:'application/json'}));
+  a.download = `svt_save_day${gs.day}.json`;
+  a.click();
+  log('存档已导出。', 'story');
+}
+function importSave() {
+  const input = document.createElement('input');
+  input.type = 'file'; input.accept = '.json';
+  input.onchange = function(e) {
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      try { const data = JSON.parse(ev.target.result); gs = data; updateUI(); log('存档已导入。', 'story'); }
+      catch(err) { alert('无效存档'); }
+    };
+    reader.readAsText(e.target.files[0]);
+  };
+  input.click();
 }
 
-function loadGame() {
-  const saved = localStorage.getItem('svt_esports_save');
-  if (saved) {
-    gameState = JSON.parse(saved);
-    document.getElementById('cover-page').classList.add('hidden');
-    document.getElementById('game-container').classList.add('active');
-    initGameUI();
-    showNotification('读档成功', `欢迎回来，${gameState.character.name}`);
-    return true;
-  }
-  return false;
+// ==================== API 设置管理 ====================
+function loadApiSettings() {
+  const saved = JSON.parse(localStorage.getItem('svt_api_settings') || '{}');
+  gs.apiProvider = saved.provider || 'deepseek';
+  gs.apiKey = saved.key || localStorage.getItem('ds_api_key') || '';
+  gs.apiBaseUrl = saved.baseUrl || '';
+  gs.apiModel = saved.model || '';
+  document.getElementById('apiProvider').value = gs.apiProvider;
+  document.getElementById('apiKeyModal').value = gs.apiKey;
+  document.getElementById('apiBaseUrl').value = gs.apiBaseUrl;
+  document.getElementById('apiModel').value = gs.apiModel;
+  updateApiKeyLabel();
 }
-
-function restartGame() {
-  if (confirm('确定要重新开始吗？当前进度将丢失。')) {
-    localStorage.removeItem('svt_esports_save');
-    location.reload();
-  }
+function saveApiSettings() {
+  gs.apiProvider = document.getElementById('apiProvider').value;
+  gs.apiKey = document.getElementById('apiKeyModal').value;
+  gs.apiBaseUrl = document.getElementById('apiBaseUrl').value;
+  gs.apiModel = document.getElementById('apiModel').value;
+  localStorage.setItem('svt_api_settings', JSON.stringify({ provider:gs.apiProvider, key:gs.apiKey, baseUrl:gs.apiBaseUrl, model:gs.apiModel }));
+  showNotification('设置保存', 'API 设置已更新');
+  closeModal('apiModal');
 }
-
-// ==================== 通知系统 ====================
-function showNotification(title, msg) {
-  const notif = document.getElementById('notification');
-  document.getElementById('notifTitle').textContent = title;
-  document.getElementById('notifMsg').textContent = msg;
-  notif.classList.add('show');
-  setTimeout(() => notif.classList.remove('show'), 3000);
+function updateApiKeyLabel() {
+  const labels = { deepseek:'API Key (sk-...)', groq:'API Key', gemini:'API Key', siliconflow:'API Key', custom:'自定义 Base URL', none:'无需' };
+  document.getElementById('apiKeyLabel').textContent = labels[document.getElementById('apiProvider').value] || 'API Key';
 }
-
-// ==================== 每日推进 ====================
-function nextDay() {
-  gameState.day++;
-  saveGame();
-  startNewDay();
-  showNotification('新的一天', `第 ${gameState.day} 天开始了`);
+function saveApiKey() { // 封面页快速保存
+  const key = document.getElementById('apiKeyInput').value.trim();
+  if (key) { localStorage.setItem('ds_api_key', key); gs.apiKey = key; document.getElementById('apiStatus').textContent = '已保存'; }
 }
-
-// ==================== 逻辑自检 ====================
-function openLogicModal() {
-  document.getElementById('logicModal').classList.add('active');
-  runLogicCheck();
+function loadApiKeyStatus() {
+  const saved = getApiKey();
+  document.getElementById('apiKeyInput').value = saved;
+  document.getElementById('apiStatus').textContent = saved ? '已保存 (可修改)' : '请输入 DeepSeek API Key';
 }
-
-function runLogicCheck() {
-  const content = document.getElementById('logicContent');
-  let html = '';
-
-  html += '<div class="logic-section">';
-  html += `<div class="logic-title">🎮 游戏状态</div>`;
-  html += `<div class="logic-row"><span class="logic-label">游戏类型</span><span class="logic-val">${gameState.game}</span></div>`;
-  html += `<div class="logic-row"><span class="logic-label">职业路线</span><span class="logic-val">${gameState.career}</span></div>`;
-  html += `<div class="logic-row"><span class="logic-label">难度</span><span class="logic-val">${gameState.difficulty}</span></div>`;
-  html += `<div class="logic-row"><span class="logic-label">角色</span><span class="logic-val">${gameState.character.name}</span></div>`;
-  html += `<div class="logic-row"><span class="logic-label">天数</span><span class="logic-val">第 ${gameState.day} 天</span></div>`;
-  html += `<div class="logic-row"><span class="logic-label">队内恋爱</span><span class="logic-val ${gameState.romance ? 'ok' : ''}">${gameState.romance ? '开启' : '关闭'}</span></div>`;
-  html += '</div>';
-
-  html += '<div class="logic-section">';
-  html += `<div class="logic-title">⚡ 四维属性</div>`;
-  const attrs = { op: '操作', cons: '意识', mind: '心态', lead: '指挥' };
-  Object.entries(gameState.attributes).forEach(([key, val]) => {
-    const isValid = val >= 0 && val <= 100;
-    html += `<div class="logic-row"><span class="logic-label">${attrs[key]}</span><span class="logic-val ${isValid ? 'ok' : 'err'}">${val} ${isValid ? '[正常]' : '[异常]'}</span></div>`;
-  });
-  html += '</div>';
-
-  html += '<div class="logic-section">';
-  html += `<div class="logic-title">💕 SVT羁绊</div>`;
-  if (Object.keys(gameState.bonds).length === 0) {
-    html += '<div class="logic-row"><span class="logic-label">状态</span><span class="logic-val warn">暂无羁绊</span></div>';
-  } else {
-    Object.entries(gameState.bonds).forEach(([memberId, bond]) => {
-      const member = SVT_MEMBERS.find(m => m.id === parseInt(memberId));
-      const levelNames = ['陌生', '相识', '好感', '信赖', '挚友', '灵魂'];
-      html += `<div class="logic-row"><span class="logic-label">${member?.name || memberId}</span><span class="logic-val">Lv.${bond.level} ${levelNames[bond.level]}</span></div>`;
-    });
-  }
-  html += '</div>';
-
-  html += '<div class="logic-section">';
-  html += `<div class="logic-title">💎 记忆碎片</div>`;
-  html += `<div class="logic-row"><span class="logic-label">收集进度</span><span class="logic-val">${gameState.fragments.length}/39</span></div>`;
-  html += '</div>';
-
-  html += '<div class="logic-section">';
-  html += `<div class="logic-title">💾 存档</div>`;
-  const saved = localStorage.getItem('svt_esports_save');
-  html += `<div class="logic-row"><span class="logic-label">本地存档</span><span class="logic-val ${saved ? 'ok' : 'warn'}">${saved ? '存在' : '不存在'}</span></div>`;
-  html += `<div class="logic-row"><span class="logic-label">体力</span><span class="logic-val">${gameState.stamina}/${gameState.maxStamina}</span></div>`;
-  html += '</div>';
-
-  content.innerHTML = html;
-}
+window.addEventListener('load', () => { loadApiSettings(); loadApiKeyStatus(); });
 
 // ==================== 初始化 ====================
-document.addEventListener('DOMContentLoaded', () => {
-  loadApiSettings();
-
-  // 清空按钮点击事件
-  document.getElementById('clear-btn').addEventListener('click', () => {
-    const input = document.getElementById('playerInput');
-    input.value = '';
-    input.focus();
-    document.getElementById('clear-btn').style.display = 'none';
-  });
-
-  // 清空按钮显示控制
-  document.getElementById('playerInput').addEventListener('input', () => {
-    const hasText = document.getElementById('playerInput').value.trim().length > 0;
-    document.getElementById('clear-btn').style.display = hasText ? 'flex' : 'none';
-  });
-});
-
-document.querySelectorAll('.modal-overlay').forEach(modal => {
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) {
-      modal.classList.remove('active');
-    }
-  });
-});
+updateUI();
 </script>
 </body>
 </html>
