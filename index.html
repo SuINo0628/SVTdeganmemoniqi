@@ -100,6 +100,7 @@ body.theme-c {
   --chat-bg: #000;
   --shadow-dot-color: #c9a96e;
 }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { height: 100%; background: var(--bg); }
 body {
@@ -112,29 +113,33 @@ body {
   background-repeat: repeat;
 }
 
-#theme-switcher { position: fixed; bottom: 60px; right: 8px; z-index: 600; display: flex; flex-direction: column; gap: 3px; opacity: 0.5; }
+#theme-switcher {
+  position: fixed; bottom: 60px; right: 8px; z-index: 600;
+  display: flex; flex-direction: column; gap: 3px; opacity: 0.5;
+}
 #theme-switcher:hover { opacity: 1; }
-.theme-dot { width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--border); cursor: pointer; opacity: 0.5; transition: all 0.2s; }
+.theme-dot {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 1px solid var(--border); cursor: pointer;
+  opacity: 0.5; transition: all 0.2s;
+}
 .theme-dot:hover { opacity: 1; transform: scale(1.2); }
 .theme-dot.active { border-color: var(--accent); opacity: 1; box-shadow: 0 0 6px var(--accent); }
-#dot-a { background: #1a1a1a; } #dot-b { background: #0d0d1a; } #dot-c { background: #000; }
+#dot-a { background: #1a1a1a; } 
+#dot-b { background: #0d0d1a; } 
+#dot-c { background: #000; }
 
-/* ========== 新封面页 ========== */
+/* 封面页 */
 #cover-page {
-  position: fixed; inset: 0;
-  background: var(--bg);
+  position: fixed; inset: 0; background: var(--bg);
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  z-index: 1000; padding: 32px 24px; overflow-y: auto;
-  background-image: var(--noise);
+  z-index: 1000; padding: 32px 24px; overflow-y: auto; background-image: var(--noise);
 }
 #cover-page.hidden { display: none; }
-
-/* 标题特效 - 渐变发光 */
 .cover-title {
   font-family: var(--font-serif);
   font-size: clamp(1.8rem, 5vw, 2.4rem);
-  font-weight: 700;
-  letter-spacing: 8px;
+  font-weight: 700; letter-spacing: 8px;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 50%, var(--accent) 100%);
   background-size: 200% 200%;
   -webkit-background-clip: text;
@@ -142,8 +147,7 @@ body {
   background-clip: text;
   filter: drop-shadow(0 0 12px var(--accent-dim));
   animation: titleGlow 3s ease-in-out infinite, titleGradient 4s ease-in-out infinite;
-  margin-bottom: 8px;
-  text-align: center;
+  margin-bottom: 8px; text-align: center;
 }
 @keyframes titleGlow {
   0%, 100% { filter: drop-shadow(0 0 8px var(--accent-dim)); }
@@ -153,249 +157,402 @@ body {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
-
 .cover-subtitle {
   font-size: clamp(0.6rem, 2vw, 0.7rem);
-  color: var(--text-muted);
-  letter-spacing: 4px;
-  margin-bottom: 32px;
-  text-transform: uppercase;
-  text-align: center;
+  color: var(--text-muted); letter-spacing: 4px;
+  margin-bottom: 32px; text-transform: uppercase; text-align: center;
 }
-
-/* 使用说明 */
 .cover-intro {
-  max-width: 400px;
-  text-align: center;
-  margin-bottom: 28px;
-  line-height: 1.8;
+  max-width: 400px; text-align: center; margin-bottom: 28px; line-height: 1.8;
 }
-.cover-intro p {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  margin-bottom: 6px;
-}
-.cover-intro .highlight {
-  color: var(--accent);
-  font-weight: 500;
-}
-
-/* 队内恋爱开关行 */
+.cover-intro p { font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 6px; }
+.cover-intro .highlight { color: var(--accent); font-weight: 500; }
 .romance-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 20px;
 }
-.romance-label {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  letter-spacing: 1px;
-}
+.romance-label { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 1px; }
 .romance-switch {
-  width: 44px; height: 24px;
-  background: var(--border);
-  border-radius: 12px;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.3s;
+  width: 44px; height: 24px; background: var(--border); border-radius: 12px;
+  cursor: pointer; position: relative; transition: background 0.3s;
 }
 .romance-switch.on { background: var(--accent); }
 .romance-switch::after {
-  content: '';
-  position: absolute;
-  width: 20px; height: 20px;
-  background: #fff;
-  border-radius: 50%;
-  top: 2px; left: 2px;
-  transition: left 0.3s;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  content: ''; position: absolute; width: 20px; height: 20px;
+  background: #fff; border-radius: 50%; top: 2px; left: 2px;
+  transition: left 0.3s; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 .romance-switch.on::after { left: 22px; }
-
-/* 开始按钮 */
 .cover-start-btn {
-  padding: 14px 56px;
-  background: transparent;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  font-family: var(--font);
-  font-size: 0.9rem;
-  letter-spacing: 4px;
-  cursor: pointer;
-  transition: all 0.3s;
-  border-radius: var(--radius);
-  font-weight: 600;
+  padding: 14px 56px; background: transparent; color: var(--accent);
+  border: 1px solid var(--accent); font-family: var(--font);
+  font-size: 0.9rem; letter-spacing: 4px; cursor: pointer;
+  transition: all 0.3s; border-radius: var(--radius); font-weight: 600;
 }
-.cover-start-btn:hover {
-  background: var(--accent);
-  color: #000;
-  box-shadow: var(--neon-glow);
-}
+.cover-start-btn:hover { background: var(--accent); color: #000; box-shadow: var(--neon-glow); }
 
 /* API弹窗 */
 #api-modal-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.7);
-  display: none;
-  align-items: center; justify-content: center;
-  z-index: 2000;
+  position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+  display: none; align-items: center; justify-content: center; z-index: 2000;
 }
 #api-modal-overlay.active { display: flex; }
 .api-modal-box {
-  background: var(--surface);
-  border: 1px solid var(--accent);
-  padding: 24px;
-  width: 90%;
-  max-width: 380px;
-  border-radius: var(--radius);
-  box-shadow: var(--neon-glow);
-  text-align: center;
+  background: var(--surface); border: 1px solid var(--accent);
+  padding: 24px; width: 90%; max-width: 380px;
+  border-radius: var(--radius); box-shadow: var(--neon-glow); text-align: center;
 }
-.api-modal-box h3 {
-  font-size: 0.85rem;
-  margin-bottom: 6px;
-  letter-spacing: 2px;
-  color: var(--text);
-}
-.api-modal-box .api-hint {
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  margin-bottom: 16px;
-}
+.api-modal-box h3 { font-size: 0.85rem; margin-bottom: 6px; letter-spacing: 2px; color: var(--text); }
+.api-modal-box .api-hint { font-size: 0.65rem; color: var(--text-muted); margin-bottom: 16px; }
 .api-modal-box input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  border-radius: var(--radius);
-  margin-bottom: 12px;
-  outline: none;
+  width: 100%; padding: 12px; border: 1px solid var(--border);
+  background: var(--bg); color: var(--text); font-family: var(--font-mono);
+  font-size: 0.8rem; border-radius: var(--radius); margin-bottom: 12px; outline: none;
 }
-.api-modal-box input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 6px var(--accent-dim);
+.api-modal-box input:focus { border-color: var(--accent); box-shadow: 0 0 6px var(--accent-dim); }
+.api-btns { display: flex; gap: 8px; }
+.api-btn {
+  flex: 1; padding: 10px; border-radius: var(--radius);
+  cursor: pointer; font-weight: 600; font-size: 0.8rem; transition: all 0.2s;
 }
-.api-modal-box .api-btns {
-  display: flex;
-  gap: 8px;
-}
-.api-modal-box .api-btn {
-  flex: 1;
-  padding: 10px;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.8rem;
-  transition: all 0.2s;
-}
-.api-btn.confirm {
-  background: var(--accent);
-  color: #000;
-  border: none;
-}
+.api-btn.confirm { background: var(--accent); color: #000; border: none; }
 .api-btn.confirm:hover { filter: brightness(1.1); }
-.api-btn.skip {
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-}
+.api-btn.skip { background: var(--surface-alt); border: 1px solid var(--border); color: var(--text-secondary); }
 .api-btn.skip:hover { border-color: var(--accent); }
 
 /* AI引导弹窗 */
 #guide-modal-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,0.7);
-  display: none;
-  align-items: center; justify-content: center;
-  z-index: 2000;
+  position: fixed; inset: 0; background: rgba(0,0,0,0.7);
+  display: none; align-items: center; justify-content: center; z-index: 2000;
 }
 #guide-modal-overlay.active { display: flex; }
 .guide-modal-box {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 20px;
-  width: 90%;
-  max-width: 400px;
-  max-height: 80vh;
-  overflow-y: auto;
-  border-radius: var(--radius);
-  position: relative;
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 20px; width: 90%; max-width: 400px; max-height: 80vh;
+  overflow-y: auto; border-radius: var(--radius); position: relative;
 }
 .guide-modal-box::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--accent);
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 2px; background: var(--accent);
 }
-.guide-modal-box h3 {
-  font-size: 0.8rem;
-  margin-bottom: 12px;
-  letter-spacing: 1px;
-  padding-top: 4px;
+.guide-modal-box h3 { font-size: 0.8rem; margin-bottom: 12px; letter-spacing: 1px; padding-top: 4px; }
+.guide-text { font-size: 0.78rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px; }
+.guide-options { display: flex; flex-wrap: wrap; gap: 6px; }
+.guide-chip {
+  padding: 8px 14px; background: var(--surface-alt); border: 1px solid var(--border);
+  font-size: 0.72rem; color: var(--text-secondary); cursor: pointer;
+  border-radius: var(--radius); transition: all 0.2s;
 }
-.guide-modal-box .guide-text {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 14px;
+.guide-chip:hover { border-color: var(--accent); color: var(--text); background: var(--btn-hover-bg); }
+
+/* 游戏主界面 */
+#game-container {
+  display: none; flex-direction: column; height: 100vh; height: 100dvh;
+  max-width: 100%; margin: 0 auto; position: relative; overflow: hidden;
+  background: var(--bg); background-image: var(--noise);
 }
-.guide-modal-box .guide-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+#game-container.active { display: flex; }
+@media (min-width: 768px) {
+  #game-container { max-width: 960px; flex-direction: row; }
+  .main-column { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .side-column {
+    width: 240px; border-left: 1px solid var(--border);
+    background: var(--surface); display: flex; flex-direction: column;
+  }
 }
-.guide-modal-box .guide-chip {
-  padding: 8px 14px;
-  background: var(--surface-alt);
-  border: 1px solid var(--border);
-  font-size: 0.72rem;
-  color: var(--text-secondary);
-  cursor: pointer;
-  border-radius: var(--radius);
-  transition: all 0.2s;
+.top-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 12px; background: var(--glass-bg);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); z-index: 10; flex-shrink: 0;
 }
-.guide-modal-box .guide-chip:hover {
-  border-color: var(--accent);
-  color: var(--text);
-  background: var(--btn-hover-bg);
+.top-left { display: flex; align-items: center; gap: 8px; }
+.top-logo { font-family: var(--font-serif); font-size: 0.9rem; letter-spacing: 2px; color: var(--accent); }
+.top-day { font-size: 0.65rem; color: var(--text-secondary); font-family: var(--font-mono); }
+.top-rank { font-size: 0.65rem; color: var(--text-muted); font-family: var(--font-mono); }
+.top-center { display: flex; align-items: center; gap: 6px; }
+.stamina-wrap { display: flex; align-items: center; gap: 4px; }
+.stamina-icon { font-size: 0.8rem; }
+.stamina-bar { width: 50px; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.stamina-fill {
+  height: 100%; background: var(--stamina-high);
+  transition: width 0.4s ease; border-radius: 2px;
+}
+.stamina-fill.low { background: var(--stamina-low); }
+.stamina-fill.mid { background: var(--stamina-mid); }
+.stamina-text { font-size: 0.6rem; color: var(--text-muted); min-width: 40px; }
+.top-right { display: flex; gap: 4px; }
+.icon-btn {
+  background: var(--surface-alt); border: 1px solid var(--border);
+  color: var(--text-secondary); width: 26px; height: 26px; border-radius: 50%;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; transition: all 0.2s;
+}
+.icon-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+#stat-panel {
+  max-height: 0; overflow: hidden; transition: max-height 0.3s;
+  background: var(--surface-alt); border-bottom: 1px solid var(--border); flex-shrink: 0;
+}
+#stat-panel.open { max-height: 160px; }
+.stat-inner { display: flex; flex-wrap: wrap; gap: 4px; padding: 8px 12px; }
+.stat-item {
+  font-size: 0.65rem; color: var(--text-secondary); font-family: var(--font-mono);
+  padding: 4px 10px; background: var(--surface); border: 1px solid var(--border);
+  white-space: nowrap; border-radius: var(--radius);
+}
+.stat-item.flash { background: var(--accent-dim); color: var(--text); }
+#bond-summary-btn {
+  margin: 4px 12px 8px; padding: 5px 10px;
+  background: var(--surface-alt); border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 0.6rem; letter-spacing: 1px;
+  cursor: pointer; border-radius: var(--radius); display: none;
+}
+#bond-summary-btn.show { display: inline-block; }
+
+#guide-bar {
+  padding: 6px 12px; background: var(--accent-dim);
+  font-size: 0.65rem; color: var(--text-secondary);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-shrink: 0; border-bottom: 1px solid var(--border);
+}
+#guide-bar.hidden { display: none; }
+.guide-close { background: none; border: none; color: var(--text-muted); font-size: 0.9rem; cursor: pointer; }
+
+#log-area {
+  flex: 1; overflow-y: auto; padding: 16px;
+  -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+}
+.log-entry {
+  padding: 14px 0; border-bottom: 1px solid var(--border);
+  font-size: 0.8rem; line-height: 1.8; color: var(--text);
+  animation: logIn 0.3s ease; padding-left: 12px;
+  margin-bottom: 2px; border-left: 3px solid var(--log-train);
+  word-break: break-word;
+}
+.log-entry.train { border-left-color: var(--log-train); }
+.log-entry.match { border-left-color: var(--log-match); }
+.log-entry.social { border-left-color: var(--log-social); }
+.log-entry.villain { border-left-color: var(--log-villain); }
+.log-entry.shadow { border-left-color: var(--log-shadow); }
+.log-entry.rest { border-left-color: var(--log-rest); }
+.log-entry.story { border-left-color: var(--log-story); }
+.log-day-sep {
+  text-align: center; font-size: 0.6rem; color: var(--text-muted);
+  padding: 10px 0; letter-spacing: 1px; border-bottom: 1px dashed var(--border);
+}
+@keyframes logIn { from { opacity: 0; transform: translateX(-4px); } to { opacity: 1; transform: translateX(0); } }
+
+#back-to-bottom {
+  position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+  background: var(--surface); border: 1px solid var(--accent); color: var(--text);
+  padding: 4px 12px; font-size: 0.65rem; cursor: pointer; z-index: 150;
+  border-radius: var(--radius); display: none;
+}
+#back-to-bottom.show { display: block; }
+
+#mobile-nav {
+  display: none; position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--glass-bg); backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border); z-index: 100;
+  padding-bottom: var(--safe-bottom);
+}
+#mobile-nav .nav-row { display: flex; }
+.nav-tab {
+  flex: 1; text-align: center; padding: 10px 4px;
+  font-size: 0.65rem; color: var(--text-secondary);
+  cursor: pointer; border: none; background: none; position: relative;
+}
+.nav-tab.active { color: var(--accent); }
+.nav-tab.active::after {
+  content: ''; position: absolute; top: 0; left: 25%; right: 25%;
+  height: 2px; background: var(--accent);
+  border-radius: 0 0 2px 2px; box-shadow: 0 0 6px var(--accent);
+}
+.nav-panel {
+  display: none; padding: 12px; background: var(--surface);
+  border-top: 1px solid var(--border); max-height: 45vh; overflow-y: auto;
+}
+.nav-panel.open { display: block; }
+@media (max-width: 767px) {
+  #mobile-nav { display: block; }
+  .side-column { display: none; }
+  #input-panel { display: none; }
+  #input-panel.mobile-show {
+    display: block; position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+    background: var(--surface); border-top: 1px solid var(--accent);
+    padding: 10px 12px; padding-bottom: calc(12px + var(--safe-bottom));
+  }
 }
 
-/* 游戏容器等后续样式保持不变 */
-/* ... 省略（与之前完整代码一致）... */
+.side-actions { display: none; padding: 12px; overflow-y: auto; }
+.side-section { margin-bottom: 10px; }
+.side-section-title {
+  font-size: 0.55rem; color: var(--accent); text-transform: uppercase;
+  letter-spacing: 2px; margin-bottom: 6px; font-family: var(--font-mono);
+}
+.side-action {
+  display: flex; justify-content: space-between; align-items: center;
+  width: 100%; text-align: left; padding: 8px 10px;
+  background: var(--surface-alt); border: var(--btn-border);
+  font-size: 0.72rem; color: var(--text); cursor: pointer;
+  margin-bottom: 3px; border-radius: var(--btn-radius);
+}
+.side-action:hover { border-color: var(--accent); background: var(--btn-hover-bg); }
+.side-action:disabled { color: var(--text-muted); opacity: 0.4; }
+.side-action .cost { font-size: 0.6rem; color: var(--text-muted); font-family: var(--font-mono); }
+.side-action.loading { pointer-events: none; }
+.side-action.loading::after { content: '...'; }
+.action-hint { font-size: 0.55rem; color: var(--text-muted); margin-top: 2px; margin-bottom: 4px; font-style: italic; }
+
+#shadow-toast {
+  position: fixed; bottom: 100px; left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  max-width: 500px; width: 88%; padding: 14px 18px;
+  background: var(--toast-bg); color: var(--toast-text);
+  font-family: var(--font-serif); font-style: italic;
+  font-size: 0.78rem; line-height: 1.6; text-align: center;
+  z-index: 300; pointer-events: none; opacity: 0;
+  transition: opacity 0.6s, transform 0.6s;
+  border: 1px solid var(--accent); border-radius: var(--radius);
+  border-left: 3px solid var(--accent);
+}
+#shadow-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+#shadow-dot {
+  position: fixed; top: 10px; right: 10px;
+  width: 8px; height: 8px; background: var(--shadow-dot-color);
+  border-radius: 50%; z-index: 400; cursor: pointer;
+  display: none; box-shadow: 0 0 10px var(--shadow-dot-color);
+}
+#shadow-dot.show { display: block; }
+#shadow-dot.blink { animation: blink 1s infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+#shadow-chat {
+  position: fixed; top: 0; right: -100%; width: 100%; max-width: 380px;
+  height: 100dvh; background: var(--chat-bg); color: #d0d0d0;
+  z-index: 500; transition: right 0.3s; display: flex; flex-direction: column;
+  border-left: 1px solid var(--accent);
+}
+#shadow-chat.open { right: 0; }
+.chat-header {
+  padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.chat-header span { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 1px; }
+.chat-close { background: none; border: none; color: rgba(255,255,255,0.2); font-size: 1.1rem; cursor: pointer; }
+.chat-msgs {
+  flex: 1; overflow-y: auto; padding: 14px;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.chat-msg { max-width: 80%; padding: 8px 12px; font-size: 0.72rem; line-height: 1.5; }
+.chat-msg.them { background: rgba(255,255,255,0.04); align-self: flex-start; font-style: italic; }
+.chat-msg.me { background: rgba(255,255,255,0.1); align-self: flex-end; }
+.chat-actions {
+  padding: 10px 14px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; flex-direction: column; gap: 4px;
+}
+.chat-act {
+  flex: 1; padding: 8px 4px; background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08); color: #999;
+  font-size: 0.65rem; cursor: pointer; text-align: center;
+}
+.chat-free-input {
+  width: 100%; padding: 6px 8px; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1); color: #ccc;
+  font-size: 0.65rem; margin-top: 4px;
+}
+.chat-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 450; display: none; }
+.chat-backdrop.show { display: block; }
+
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+  display: none; align-items: center; justify-content: center; z-index: 2000;
+}
+.modal-overlay.active { display: flex; }
+.modal-box {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 16px; width: 90%; max-width: 400px; max-height: 80vh;
+  overflow-y: auto; border-radius: var(--radius);
+}
+.modal-box h3 { font-size: 0.75rem; margin-bottom: 10px; letter-spacing: 1px; }
+.modal-close-btn {
+  margin-top: 10px; padding: 6px 14px; background: var(--accent);
+  color: #000; border: none; cursor: pointer; font-weight: 600; border-radius: var(--radius);
+}
+.member-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.member-chip {
+  padding: 6px 10px; background: var(--surface-alt); border: 1px solid var(--border);
+  font-size: 0.68rem; cursor: pointer; color: var(--text-secondary);
+  border-radius: var(--radius); min-width: 60px; text-align: center;
+}
+.member-chip:hover { border-color: var(--accent); }
+.strategy-opt {
+  padding: 10px 14px; background: var(--surface-alt); border: 1px solid var(--border);
+  cursor: pointer; color: var(--text); font-size: 0.78rem; margin-bottom: 6px; border-radius: var(--radius);
+}
+.strategy-opt:hover { border-color: var(--accent); background: var(--btn-hover-bg); }
+
+.notification {
+  position: fixed; top: 60px; right: 12px; background: var(--surface);
+  border: 1px solid var(--accent); border-radius: var(--radius);
+  padding: 10px 14px; z-index: 5000; transform: translateX(120%);
+  transition: transform 0.3s; max-width: 260px;
+}
+.notification.show { transform: translateX(0); }
+.notif-title { font-size: 0.7rem; color: var(--accent); font-weight: 600; }
+.notif-msg { font-size: 0.7rem; color: var(--text-secondary); }
+
+#input-panel {
+  padding: 8px 12px; background: var(--glass-bg);
+  backdrop-filter: blur(12px); border-top: 1px solid var(--border);
+}
+.input-row { display: flex; gap: 6px; margin-bottom: 6px; }
+.game-input {
+  flex: 1; background: var(--bg); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 8px 10px; color: var(--text);
+  font-size: 0.8rem; outline: none;
+}
+.game-input:focus { border-color: var(--accent); }
+.send-btn {
+  background: var(--accent); color: #000; border: none;
+  padding: 0 16px; border-radius: var(--radius); cursor: pointer; font-weight: 600;
+}
+.quick-btns { display: flex; flex-wrap: wrap; gap: 4px; }
+.quick-btn {
+  background: var(--surface-alt); border: 1px solid var(--border);
+  color: var(--text-secondary); padding: 4px 10px; border-radius: 12px;
+  cursor: pointer; font-size: 0.65rem;
+}
+.quick-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+.bond-tag { font-size: 0.6rem; padding: 2px 6px; border-radius: 8px; }
+.bond-lv0 { background: #333; color: #777; }
+.bond-lv1 { background: rgba(79,195,247,0.15); color: #4fc3f7; }
+.bond-lv2 { background: rgba(0,229,255,0.15); color: #00e5ff; }
+.bond-lv3 { background: rgba(255,213,79,0.15); color: #ffd54f; }
+.bond-lv4 { background: rgba(105,240,174,0.15); color: #69f0ae; }
+.bond-lv5 { background: rgba(255,82,82,0.15); color: #ff5252; }
 </style>
 </head>
-<body>
-
-<!-- 主题切换 -->
-<div id="theme-switcher">
+<body><div id="theme-switcher">
   <div class="theme-dot active" id="dot-a" onclick="setTheme('a')"></div>
   <div class="theme-dot" id="dot-b" onclick="setTheme('b')"></div>
   <div class="theme-dot" id="dot-c" onclick="setTheme('c')"></div>
 </div>
 
-<!-- 新封面页 -->
+<!-- 封面页 -->
 <div id="cover-page">
   <div class="cover-title">SVT 电竞</div>
   <div class="cover-subtitle">电 竞 荣 光</div>
-
   <div class="cover-intro">
     <p>你是一名<span class="highlight">电竞选手</span>，在追逐冠军的路上，</p>
     <p>与<span class="highlight">SVT十三位成员</span>相遇、并肩、成长。</p>
     <p>但有一个声音，来自<span class="highlight">上一次循环</span>——</p>
     <p>它在看着你，偶尔帮你，偶尔唱反调。</p>
   </div>
-
   <div class="romance-row">
     <span class="romance-label">队内恋爱</span>
     <div class="romance-switch" id="romanceCoverSwitch" onclick="toggleCoverRomance()"></div>
   </div>
-
   <button class="cover-start-btn" onclick="openApiModal()">开 始 游 戏</button>
 </div>
 
@@ -421,33 +578,336 @@ body {
   </div>
 </div>
 
-<script>
-// ==================== 主题 ====================
+<!-- 主游戏界面 -->
+<div id="game-container">
+  <div class="main-column">
+    <div class="top-bar" onclick="toggleStatPanel()">
+      <div class="top-left">
+        <span class="top-logo">SVT</span>
+        <span class="top-day" id="dayDisplay">第 1 天</span>
+        <span class="top-rank" id="rankDisplay">未定级</span>
+      </div>
+      <div class="top-center">
+        <div class="stamina-wrap">
+          <span class="stamina-icon">⚡</span>
+          <div class="stamina-bar">
+            <div class="stamina-fill" id="staminaFill" style="width:100%"></div>
+          </div>
+          <span class="stamina-text" id="staminaText">100/100</span>
+        </div>
+      </div>
+      <div class="top-right">
+        <button class="icon-btn" onclick="toggleMenu('faqModal')">?</button>
+        <button class="icon-btn" onclick="toggleMenu('apiModal')">⚙</button>
+        <button class="icon-btn" onclick="openLogicModal()">🔧</button>
+      </div>
+    </div>
+    <div id="stat-panel">
+      <div class="stat-inner" id="statInner"></div>
+      <button id="bond-summary-btn" onclick="showBondSummary()">羁 绊 总 览</button>
+    </div>
+    <div id="guide-bar">
+      <span>选择行动，开始你的电竞生涯。</span>
+      <button class="guide-close" onclick="dismissGuide()">&times;</button>
+    </div>
+    <div id="log-area"></div>
+    <div id="input-panel">
+      <div class="input-row">
+        <input type="text" class="game-input" id="playerInput" placeholder="输入指令或自由行动..." onkeypress="if(event.key==='Enter')sendInput()">
+        <button class="send-btn" onclick="sendInput()">发送</button>
+      </div>
+      <div class="quick-btns">
+        <button class="quick-btn" onclick="showQuickInfo('status')">状态</button>
+        <button class="quick-btn" onclick="showQuickInfo('bonds')">羁绊</button>
+        <button class="quick-btn" onclick="showQuickInfo('ranking')">排名</button>
+        <button class="quick-btn" onclick="showQuickInfo('fragments')">碎片</button>
+        <button class="quick-btn" onclick="exportSave()">存档</button>
+      </div>
+    </div>
+  </div>
+  <div class="side-column side-actions" id="sideActions"></div>
+  <div id="mobile-nav">
+    <div class="nav-row">
+      <button class="nav-tab active" onclick="switchMobileTab('train')">训练</button>
+      <button class="nav-tab" onclick="switchMobileTab('match')">实战</button>
+      <button class="nav-tab" onclick="switchMobileTab('social')">社交</button>
+      <button class="nav-tab" onclick="switchMobileTab('rest')">休整</button>
+      <button class="nav-tab" onclick="switchMobileTab('input')">输入</button>
+    </div>
+    <div class="nav-panel open" id="mobileTrain"></div>
+    <div class="nav-panel" id="mobileMatch"></div>
+    <div class="nav-panel" id="mobileSocial"></div>
+    <div class="nav-panel" id="mobileRest"></div>
+    <div class="nav-panel" id="mobileInputPanel"></div>
+  </div>
+</div>
+
+<!-- 暗线：底部浮现 -->
+<div id="shadow-toast"><span id="toastText"></span></div>
+<!-- 暗线：私信红点 -->
+<div id="shadow-dot" onclick="openShadowChat()"></div>
+<div class="chat-backdrop" id="chatBackdrop" onclick="closeShadowChat()"></div>
+<!-- 暗线：私信弹窗 -->
+<div id="shadow-chat">
+  <div class="chat-header">
+    <span>未 知 发 件 人</span>
+    <button class="chat-close" onclick="closeShadowChat()">&times;</button>
+  </div>
+  <div class="chat-msgs" id="chatMsgs"></div>
+  <div class="chat-actions" id="chatActs"></div>
+</div>
+<!-- 暗线：首次引导弹窗 -->
+<div id="shadow-guide-modal" style="position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:3000;display:none;align-items:center;justify-content:center;">
+  <div style="background:var(--surface);border:1px solid var(--accent);padding:24px;max-width:340px;text-align:center;border-radius:var(--radius);">
+    <p style="font-family:var(--font-serif);font-style:italic;color:var(--text);margin-bottom:16px;">你感觉到有什么在看着你。<br>点击右上角的红点。</p>
+    <button style="padding:8px 24px;background:var(--accent);color:#000;border:none;cursor:pointer;font-weight:600;" onclick="document.getElementById('shadow-guide-modal').style.display='none';openShadowChat();">知道了</button>
+  </div>
+</div>
+
+<!-- 各弹窗 -->
+<div class="modal-overlay" id="faqModal">
+  <div class="modal-box">
+    <h3>FAQ 帮助</h3>
+    <div id="faqContent"></div>
+    <button class="modal-close-btn" onclick="closeModal('faqModal')">关闭</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="apiModal">
+  <div class="modal-box">
+    <h3>API 设置</h3>
+    <div>
+      <label style="font-size:0.7rem;color:var(--text-muted);">API Key</label>
+      <input type="password" id="apiKeyModal" placeholder="输入 API Key" style="width:100%;padding:8px;margin:8px 0;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:var(--radius);">
+    </div>
+    <button class="send-btn" onclick="saveApiSettings()" style="width:100%;">保存</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="member-modal">
+  <div class="modal-box">
+    <h3>选择联系的成员</h3>
+    <div class="member-list" id="memberList"></div>
+    <button class="modal-close-btn" onclick="closeModal('member-modal')">取消</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="bond-modal">
+  <div class="modal-box">
+    <h3>羁绊总览</h3>
+    <div id="bondSummaryContent"></div>
+    <button class="modal-close-btn" onclick="closeModal('bond-modal')">关闭</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="strategy-modal">
+  <div class="modal-box">
+    <h3 id="strategyTitle">赛前战术会议</h3>
+    <div id="strategyOptions"></div>
+    <input type="text" id="strategyFreeInput" placeholder="或输入自己的战术思路" style="width:100%;padding:8px;margin-top:8px;background:var(--bg);color:var(--text);border:1px solid var(--border);border-radius:var(--radius);">
+    <button class="send-btn" onclick="submitStrategyFree()" style="width:100%;margin-top:8px;">执行</button>
+    <button class="modal-close-btn" onclick="closeModal('strategy-modal')" style="margin-top:8px;">取消</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="ending-modal">
+  <div class="modal-box" id="endingContent" style="max-width:500px;font-family:var(--font-serif);line-height:1.8;"></div>
+</div>
+
+<div class="modal-overlay" id="logicModal">
+  <div class="modal-box">
+    <h3>逻辑自检</h3>
+    <div id="logicContent"></div>
+    <button class="modal-close-btn" onclick="closeModal('logicModal')">关闭</button>
+  </div>
+</div>
+
+<!-- 通知消息 -->
+<div class="notification" id="notification">
+  <div class="notif-title" id="notifTitle"></div>
+  <div class="notif-msg" id="notifMsg"></div>
+</div><script>
+// ==================== 主题管理 ====================
 const THEME_KEY = 'svt_theme';
 function setTheme(t) {
-  document.body.classList.remove('theme-a','theme-b','theme-c');
-  if (t !== 'a') document.body.classList.add('theme-'+t);
+  document.body.classList.remove('theme-a', 'theme-b', 'theme-c');
+  if (t !== 'a') document.body.classList.add('theme-' + t);
   document.querySelectorAll('.theme-dot').forEach(d => d.classList.remove('active'));
-  document.getElementById('dot-'+t).classList.add('active');
+  document.getElementById('dot-' + t).classList.add('active');
   localStorage.setItem(THEME_KEY, t);
 }
-(function(){ setTheme(localStorage.getItem(THEME_KEY) || 'a'); })();
+(function() {
+  const saved = localStorage.getItem(THEME_KEY) || 'a';
+  setTheme(saved);
+})();
 
-// ==================== 封面逻辑 ====================
+// ==================== API 调用 ====================
+const DS_URL = 'https://api.deepseek.com/chat/completions';
+const MODEL = 'deepseek-chat';
+
+function getApiKey() {
+  return gs.apiKey || localStorage.getItem('ds_api_key') || '';
+}
+
+async function callDS(messages, maxTokens = 150, temp = 0.9, retries = 2) {
+  const key = getApiKey();
+  if (!key) {
+    return { choices: [{ message: { content: getFallbackText(messages) } }] };
+  }
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 15000);
+
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      const resp = await fetch(DS_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + key
+        },
+        body: JSON.stringify({
+          model: MODEL,
+          messages: messages,
+          max_tokens: maxTokens,
+          temperature: temp
+        }),
+        signal: controller.signal
+      });
+      clearTimeout(timeout);
+
+      if (!resp.ok) {
+        if (attempt < retries) {
+          await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
+          continue;
+        }
+        return { choices: [{ message: { content: getFallbackText(messages) } }] };
+      }
+      return await resp.json();
+    } catch (e) {
+      clearTimeout(timeout);
+      if (attempt < retries) {
+        await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
+        continue;
+      }
+      return { choices: [{ message: { content: getFallbackText(messages) } }] };
+    }
+  }
+}
+
+function getFallbackText(messages) {
+  const userMsg = messages.find(m => m.role === 'user')?.content || '';
+  if (userMsg.includes('触发')) return '我在看。';
+  if (userMsg.includes('说话')) return '"今天训练怎么样？"';
+  return '继续前行。';
+}
+
+// ==================== SVT 成员数据 ====================
+const SVT = [
+  { id: 1, name: 'S.COUPS', role: '可靠的队长', style: '沉稳有担当，偶尔露出疲惫' },
+  { id: 2, name: 'JEONGHAN', role: '温柔的战略家', style: '温和洞察力强，偶尔腹黑' },
+  { id: 3, name: 'JOSHUA', role: '优雅的绅士', style: '温柔有礼，偶尔开玩笑' },
+  { id: 4, name: 'JUN', role: '神秘的美学追求者', style: '沉默观察敏锐，偶尔说大实话' },
+  { id: 5, name: 'HOSHI', role: '热情的能量体', style: '充满活力，独处时安静' },
+  { id: 6, name: 'WONWOO', role: '沉静的思考者', style: '话少精准，偶尔冷幽默' },
+  { id: 7, name: 'WOOZI', role: '音乐与天才', style: '专注忘我，嘴硬心软' },
+  { id: 8, name: 'DK', role: '阳光的治愈者', style: '开朗爱笑，受伤时自己扛' },
+  { id: 9, name: 'MINGYU', role: '全能的多面手', style: '什么都能做，偶尔焦虑' },
+  { id: 10, name: 'THE 8', role: '自由的舞者', style: '自由随性，偶尔深刻' },
+  { id: 11, name: 'SEUNGKWAN', role: '综艺感与真诚', style: '幽默活跃，敏感细腻' },
+  { id: 12, name: 'VERNON', role: '四次元的艺术家', style: '脑回路独特，价值观坚定' },
+  { id: 13, name: 'DINO', role: '努力的成长者', style: '认真努力，对自己太严' }
+];
+
+function getRankTier(ladder) {
+  if (ladder <= 200) return '传奇';
+  if (ladder <= 1000) return '宗师';
+  if (ladder <= 5000) return '大师';
+  if (ladder <= 20000) return '白金';
+  return '黄金';
+}
+
+// ==================== 游戏状态 ====================
+let gs = {
+  started: false,
+  romance: false,
+  game: '王者荣耀',
+  career: '竞技者',
+  difficulty: '标准',
+  day: 1,
+  season: '春',
+  seasonDay: 1,
+  stamina: 100,
+  maxStamina: 100,
+  stats: { mech: 5, awareness: 5, mental: 5, leadership: 5 },
+  tag: '',
+  tagEffect: '',
+  age: 20,
+  ageEffect: '',
+  secondIdentity: '',
+  initialAcquaintance: null,
+  character: { type: 'svt', id: null, name: '' },
+  rank: { ladder: 99999, popularity: 99999 },
+  svtBonds: {},
+  memberLastInteraction: {},
+  fragments: [],
+  villains: {
+    K: { seen: false, stage: 0 },
+    apple: { seen: false, stage: 0 },
+    shadow: { seen: false, stage: 0 },
+    linwan: { seen: false, stage: 0 }
+  },
+  n8094: 0,
+  n8094used: 0,
+  n8094history: [],
+  shadowLastDay: 0,
+  shadowCooldown: 0,
+  shadowPending: null,
+  shadowHistory: [],
+  shadowStyle: 'neutral',
+  shadowIgnore: 0,
+  shadowGuideShown: false,
+  consecutiveSame: 0,
+  lastTrainType: null,
+  consecutiveDrop: 0,
+  consecutiveSuccess: 0,
+  consecutiveFail: 0,
+  staminaPenaltyDays: 0,
+  staminaPenaltyActive: false,
+  endingsTriggered: [],
+  lockedMemberId: null,
+  apiKey: '',
+  gameOrgs: [],
+  coreEncounters: {},
+  strategyUsed: false
+};
+
 let coverRomance = false;
+let currentMobileTab = 'train';
+let isUserScrollingUp = false;
+
+function getAvailableMembers() {
+  if (gs.character.type === 'svt' && gs.lockedMemberId) {
+    return SVT.filter(m => m.id !== gs.lockedMemberId);
+  }
+  return SVT;
+}
+
+// ==================== 封面与引导 ====================
 function toggleCoverRomance() {
   coverRomance = !coverRomance;
   document.getElementById('romanceCoverSwitch').classList.toggle('on', coverRomance);
 }
 
-// API弹窗
 function openApiModal() {
   document.getElementById('api-modal-overlay').classList.add('active');
   document.getElementById('apiModalInput').focus();
 }
+
 function closeApiModal() {
   document.getElementById('api-modal-overlay').classList.remove('active');
 }
+
 function confirmApi() {
   const key = document.getElementById('apiModalInput').value.trim();
   if (key) {
@@ -457,12 +917,12 @@ function confirmApi() {
   closeApiModal();
   startAiGuide();
 }
+
 function skipApi() {
   closeApiModal();
   startAiGuide();
 }
 
-// AI引导流程
 let guideStep = 0;
 const guideSteps = [
   {
@@ -479,8 +939,8 @@ const guideSteps = [
   },
   {
     title: '选择你的角色',
-    text: '你想成为哪位SVT成员？（选择后该成员锁定为主角）',
-    options: ['S.COUPS', 'JEONGHAN', 'JOSHUA', 'JUN', 'HOSHI', 'WONWOO', 'WOOZI', 'DK', 'MINGYU', 'THE 8', 'SEUNGKWAN', 'VERNON', 'DINO'],
+    text: '你想成为哪位SVT成员？',
+    options: SVT.map(m => m.name),
     key: 'character'
   },
   {
@@ -499,95 +959,1130 @@ function startAiGuide() {
 
 function showGuideStep() {
   const step = guideSteps[guideStep];
-  document.getElementById('guideTitle').textContent = `第 ${guideStep + 1} 步 · ${step.title}`;
+  document.getElementById('guideTitle').textContent = '第 ' + (guideStep + 1) + ' 步 · ' + step.title;
   document.getElementById('guideText').textContent = step.text;
-  document.getElementById('guideOptions').innerHTML = step.options.map(opt =>
-    `<div class="guide-chip" onclick="selectGuideOption('${opt}')">${opt}</div>`
-  ).join('');
+  document.getElementById('guideOptions').innerHTML = step.options.map(function(opt) {
+    return '<div class="guide-chip" onclick="selectGuideOption(\'' + opt + '\')">' + opt + '</div>';
+  }).join('');
 }
 
 function selectGuideOption(value) {
   const step = guideSteps[guideStep];
   switch (step.key) {
-    case 'game': gs.game = value; break;
-    case 'career': gs.career = value; break;
+    case 'game':
+      gs.game = value;
+      break;
+    case 'career':
+      gs.career = value;
+      break;
     case 'character':
-      const member = SVT.find(m => m.name === value);
+      const member = SVT.find(function(x) { return x.name === value; });
       if (member) {
         gs.character = { type: 'svt', id: member.id, name: member.name };
         gs.lockedMemberId = member.id;
       }
       break;
-    case 'difficulty': gs.difficulty = value; break;
+    case 'difficulty':
+      gs.difficulty = value;
+      break;
   }
-
   guideStep++;
   if (guideStep < guideSteps.length) {
     showGuideStep();
   } else {
     document.getElementById('guide-modal-overlay').classList.remove('active');
     gs.romance = coverRomance;
-    gs.started = true;
-    finishStartup();
+    startGame();
   }
 }
 
-// ==================== 游戏状态（简化为引导所需） ====================
-const SVT = [
-  { id:1, name:'S.COUPS', role:'可靠的队长', style:'沉稳有担当' },
-  { id:2, name:'JEONGHAN', role:'温柔的战略家', style:'温和洞察力强' },
-  { id:3, name:'JOSHUA', role:'优雅的绅士', style:'温柔有礼' },
-  { id:4, name:'JUN', role:'神秘的美学追求者', style:'沉默观察敏锐' },
-  { id:5, name:'HOSHI', role:'热情的能量体', style:'充满活力' },
-  { id:6, name:'WONWOO', role:'沉静的思考者', style:'话少精准' },
-  { id:7, name:'WOOZI', role:'音乐与天才', style:'专注忘我' },
-  { id:8, name:'DK', role:'阳光的治愈者', style:'开朗爱笑' },
-  { id:9, name:'MINGYU', role:'全能的多面手', style:'什么都能做' },
-  { id:10, name:'THE 8', role:'自由的舞者', style:'自由随性' },
-  { id:11, name:'SEUNGKWAN', role:'综艺感与真诚', style:'幽默活跃' },
-  { id:12, name:'VERNON', role:'四次元的艺术家', style:'脑回路独特' },
-  { id:13, name:'DINO', role:'努力的成长者', style:'认真努力' }
-];
+// ==================== 开局 ====================
+function startGame() {
+  gs.started = true;
 
-let gs = {
-  started: false, romance: false, game: '', career: '', difficulty: '标准',
-  day: 1, season: '春', seasonDay: 1,
-  stamina: 100, maxStamina: 100,
-  stats: { mech:5, awareness:5, mental:5, leadership:5 }, tag: null, tagEffect: '',
-  age: 20, ageEffect: '', secondIdentity: '', initialAcquaintance: null,
-  character: { type:'svt', id:null, name:'' },
-  rank: { ladder:99999, popularity:99999, team:99999 },
-  svtBonds: {}, memberLastInteraction: {},
-  fragments: [], villains: { K:{seen:false}, apple:{seen:false}, shadow:{seen:false}, linwan:{seen:false} },
-  n8094: 0, n8094used: 0, n8094history: [],
-  shadowLastDay:0, shadowCooldown:0, shadowPending:null,
-  shadowHistory:[], shadowStyle:'neutral', shadowIgnore:0, shadowGuideShown:false,
-  consecutiveSame:0, lastTrainType:null, consecutiveDrop:0,
-  lastMap:null, consecutiveSuccess:0, consecutiveFail:0,
-  endingsTriggered: [], staminaPenaltyDays:0, staminaPenaltyActive:false,
-  gameOrgs: [], coreEncounters: {}, strategyUsed: false,
-  lockedMemberId: null,
-  apiProvider: 'deepseek', apiKey: localStorage.getItem('ds_api_key') || '', apiBaseUrl: '', apiModel: ''
-};
+  const bonusMap = { '休闲': 3, '标准': 2, '硬核': 1, '地狱': 1 };
+  const bonus = bonusMap[gs.difficulty] || 2;
 
-function finishStartup() {
-  // Roll属性
-  const b = {'休闲':3,'标准':2,'硬核':1,'地狱':1}[gs.difficulty]||2;
-  gs.stats.mech = 5 + Math.floor(Math.random()*b)+1;
-  gs.stats.awareness = 5 + Math.floor(Math.random()*b)+1;
-  gs.stats.mental = 5 + Math.floor(Math.random()*b)+1;
-  gs.stats.leadership = 5 + Math.floor(Math.random()*b)+1;
-  // 初始相识
-  const avail = SVT.filter(m => m.id !== gs.lockedMemberId);
-  gs.initialAcquaintance = avail[Math.floor(Math.random()*avail.length)];
+  gs.stats.mech = 5 + Math.floor(Math.random() * bonus) + 1;
+  gs.stats.awareness = 5 + Math.floor(Math.random() * bonus) + 1;
+  gs.stats.mental = 5 + Math.floor(Math.random() * bonus) + 1;
+  gs.stats.leadership = 5 + Math.floor(Math.random() * bonus) + 1;
+
+  const s = gs.stats;
+  const arr = [s.mech, s.awareness, s.mental, s.leadership];
+  const max = Math.max(...arr);
+
+  if (arr.every(function(v) { return v <= 6; })) {
+    gs.tag = '平平淡淡才是真';
+    gs.tagEffect = '永远稳定';
+  } else if (s.mech === max && s.mental <= 4) {
+    gs.tag = '神经刀';
+    gs.tagEffect = '优势+20%，劣势-20%';
+  } else if (s.mech >= 8 && s.mental <= 3) {
+    gs.tag = '玻璃大炮';
+    gs.tagEffect = '优势+25%，逆风-15%';
+  } else if (s.mental <= 3) {
+    gs.tag = '大赛软脚虾';
+    gs.tagEffect = '关键局-10%，可突破';
+  } else if (s.mental >= 8 && arr.some(function(v) { return v <= 3; })) {
+    gs.tag = '绝境战神';
+    gs.tagEffect = '绝境全属性+20%';
+  } else if (s.mech === max && arr.filter(function(v) { return v === max; }).length === 1) {
+    gs.tag = '天才操作怪';
+    gs.tagEffect = '1v1成功率+15%';
+  } else if (s.awareness === max && arr.filter(function(v) { return v === max; }).length === 1) {
+    gs.tag = '上帝视角';
+    gs.tagEffect = '埋伏规避率+20%';
+  } else if (s.mental === max && arr.filter(function(v) { return v === max; }).length === 1) {
+    gs.tag = '大心脏先生';
+    gs.tagEffect = '关键局失误率-25%';
+  } else if (s.leadership === max && arr.filter(function(v) { return v === max; }).length === 1) {
+    gs.tag = '泉水指挥官';
+    gs.tagEffect = '队友响应+10%';
+  } else {
+    gs.tag = '水桶型选手';
+    gs.tagEffect = '稳定无修正';
+  }
+
+  gs.age = 16 + Math.floor(Math.random() * 15);
+
+  const avail = getAvailableMembers();
+  gs.initialAcquaintance = avail[Math.floor(Math.random() * avail.length)];
   gs.svtBonds[gs.initialAcquaintance.id] = 1;
   gs.memberLastInteraction[gs.initialAcquaintance.id] = 1;
 
   document.getElementById('cover-page').classList.add('hidden');
   document.getElementById('game-container').classList.add('active');
-  // 此处调用原有的 updateUI() 和初始log...
-  // ...（后续游戏核心逻辑保持不变）
+
+  updateUI();
+  switchMobileTab('train');
+  initFAQ();
+
+  log('========== 开局档案 ==========', 'story');
+  log('主攻：' + gs.game + ' | 路线：' + gs.career + ' | 难度：' + gs.difficulty, 'story');
+  log('年龄：' + gs.age + '岁', 'story');
+  log('属性：操作' + s.mech + ' | 意识' + s.awareness + ' | 心态' + s.mental + ' | 指挥' + s.leadership, 'train');
+  log('标签：' + gs.tag + ' — ' + gs.tagEffect, 'story');
+  log('初始相识：' + gs.initialAcquaintance.name + ' — Lv.1 初识', 'social');
+  log('================================', 'story');
+
+  gs.shadowCooldown = 1;
 }
+
+// ==================== UI 更新 ====================
+function updateUI() {
+  document.getElementById('dayDisplay').textContent = '第 ' + gs.day + ' 天';
+  var tier = getRankTier(gs.rank.ladder);
+  document.getElementById('rankDisplay').textContent = gs.rank.ladder < 99999
+    ? '#' + gs.rank.ladder + ' ' + tier
+    : '未定级';
+
+  updateStaminaUI();
+
+  var inner = document.getElementById('statInner');
+  inner.innerHTML =
+    '<div class="stat-item" id="stat-stamina">体力 ' + gs.stamina + '/' + gs.maxStamina + '</div>' +
+    '<div class="stat-item" id="stat-mech">操作 ' + gs.stats.mech + '</div>' +
+    '<div class="stat-item" id="stat-awareness">意识 ' + gs.stats.awareness + '</div>' +
+    '<div class="stat-item" id="stat-mental">心态 ' + gs.stats.mental + '</div>' +
+    '<div class="stat-item" id="stat-leadership">指挥 ' + gs.stats.leadership + '</div>' +
+    '<div class="stat-item">' + gs.tag + '</div>';
+
+  if (Object.keys(gs.svtBonds).length > 0) {
+    document.getElementById('bond-summary-btn').classList.add('show');
+  }
+  renderActions();
+}
+
+function updateStaminaUI() {
+  var pct = (gs.stamina / gs.maxStamina) * 100;
+  var fill = document.getElementById('staminaFill');
+  var text = document.getElementById('staminaText');
+  fill.style.width = pct + '%';
+  text.textContent = gs.stamina + '/' + gs.maxStamina;
+  fill.classList.remove('low', 'mid');
+  if (pct < 30) fill.classList.add('low');
+  else if (pct < 60) fill.classList.add('mid');
+}
+
+function log(text, type) {
+  type = type || 'train';
+  var area = document.getElementById('log-area');
+  var div = document.createElement('div');
+  div.className = 'log-entry ' + type;
+  div.textContent = text;
+  area.appendChild(div);
+  area.scrollTop = area.scrollHeight;
+}
+
+function logDaySep() {
+  var area = document.getElementById('log-area');
+  var sep = document.createElement('div');
+  sep.className = 'log-day-sep';
+  sep.textContent = '— 第 ' + gs.day + ' 天结束 | 体力 ' + gs.stamina + ' | 排名 #' + gs.rank.ladder + ' —';
+  area.appendChild(sep);
+  area.scrollTop = area.scrollHeight;
+}
+
+function toggleStatPanel() {
+  document.getElementById('stat-panel').classList.toggle('open');
+}
+
+function dismissGuide() {
+  document.getElementById('guide-bar').classList.add('hidden');
+}
+
+// ==================== 行动菜单 ====================
+function renderActions() {
+  var s = gs.stamina;
+  var btns =
+    '<div class="side-section"><div class="side-section-title">训练</div>' +
+      '<button class="side-action" ' + (s < 20 ? 'disabled' : '') + ' onclick="act(\'A1\')"><span>高强度训练</span><span class="cost">-20</span></button>' +
+      '<button class="side-action" ' + (s < 10 ? 'disabled' : '') + ' onclick="act(\'A2\')"><span>常规训练</span><span class="cost">-10</span></button>' +
+      '<button class="side-action" ' + (s < 10 ? 'disabled' : '') + ' onclick="act(\'A3\')"><span>复盘分析</span><span class="cost">-10</span></button>' +
+      '<button class="side-action" ' + (s < 10 ? 'disabled' : '') + ' onclick="act(\'A4\')"><span>心理特训</span><span class="cost">-10</span></button>' +
+    '</div>' +
+    '<div class="side-section"><div class="side-section-title">实战</div>' +
+      '<button class="side-action" ' + (s < 15 ? 'disabled' : '') + ' onclick="act(\'B1\')"><span>天梯单排</span><span class="cost">-15</span></button>' +
+      '<button class="side-action" ' + (s < 10 ? 'disabled' : '') + ' onclick="act(\'B3\')"><span>自定义练习</span><span class="cost">-10</span></button>' +
+    '</div>' +
+    '<div class="side-section"><div class="side-section-title">社交</div>' +
+      '<button class="side-action" ' + (s < 10 ? 'disabled' : '') + ' onclick="openMemberModal()"><span>联系SVT成员</span><span class="cost">-10</span></button>' +
+      '<button class="side-action" ' + (s < 10 ? 'disabled' : '') + ' onclick="act(\'C2\')"><span>探索地图</span><span class="cost">-10</span></button>' +
+    '</div>' +
+    '<div class="side-section"><div class="side-section-title">休整</div>' +
+      '<button class="side-action" onclick="act(\'E1\')"><span>休息恢复</span><span class="cost">+30</span></button>' +
+      '<button class="side-action" ' + (s < 10 ? 'disabled' : '') + ' onclick="act(\'E2\')"><span>外出放松</span><span class="cost">-10</span></button>' +
+    '</div>' +
+    '<div class="side-section"><div class="side-section-title">系统</div>' +
+      '<button class="side-action" onclick="exportSave()"><span>导出存档</span></button>' +
+      '<button class="side-action" onclick="importSave()"><span>导入存档</span></button>' +
+    '</div>';
+
+  document.getElementById('sideActions').innerHTML = btns;
+
+  var sections = btns.split('<div class="side-section">');
+  if (sections.length >= 5) {
+    document.getElementById('mobileTrain').innerHTML = '<div class="side-section">' + sections[1];
+    document.getElementById('mobileMatch').innerHTML = '<div class="side-section">' + sections[2];
+    document.getElementById('mobileSocial').innerHTML = '<div class="side-section">' + sections[3];
+    document.getElementById('mobileRest').innerHTML = '<div class="side-section">' + sections[4];
+  }
+}
+
+function switchMobileTab(tab) {
+  currentMobileTab = tab;
+  var tabs = ['train', 'match', 'social', 'rest', 'input'];
+  document.querySelectorAll('.nav-tab').forEach(function(t, i) {
+    t.classList.toggle('active', tabs[i] === tab);
+  });
+  document.querySelectorAll('.nav-panel').forEach(function(p) {
+    p.classList.remove('open');
+  });
+  var panelMap = { train: 'mobileTrain', match: 'mobileMatch', social: 'mobileSocial', rest: 'mobileRest', input: 'mobileInputPanel' };
+  document.getElementById(panelMap[tab]).classList.add('open');
+  if (tab === 'input') {
+    document.getElementById('input-panel').classList.add('mobile-show');
+  } else {
+    document.getElementById('input-panel').classList.remove('mobile-show');
+  }
+}
+
+// ==================== 弹窗系统 ====================
+function toggleMenu(modalId) {
+  document.getElementById(modalId).classList.toggle('active');
+}
+
+function closeModal(modalId) {
+  document.getElementById(modalId).classList.remove('active');
+}
+
+function openMemberModal() {
+  var avail = getAvailableMembers();
+  var bondNames = ['陌生人', '初识', '熟人', '朋友', '挚友', '灵魂之约'];
+  document.getElementById('memberList').innerHTML = avail.map(function(m) {
+    var bond = gs.svtBonds[m.id] || 0;
+    var bn = bondNames[Math.min(bond, 5)];
+    return '<div class="member-chip" onclick="actWithMember(' + m.id + ')">' + m.name + ' <span class="bond-tag bond-lv' + bond + '">Lv.' + bond + '</span></div>';
+  }).join('');
+  document.getElementById('member-modal').classList.add('active');
+}
+
+function showBondSummary() {
+  var avail = getAvailableMembers();
+  var bondNames = ['陌生人', '初识', '熟人', '朋友', '挚友', '灵魂之约'];
+  document.getElementById('bondSummaryContent').innerHTML = avail.map(function(m) {
+    var bond = gs.svtBonds[m.id] || 0;
+    var bn = bondNames[Math.min(bond, 5)];
+    return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.7rem;"><span>' + m.name + '</span><span class="bond-tag bond-lv' + bond + '">Lv.' + bond + ' ' + bn + '</span></div>';
+  }).join('');
+  document.getElementById('bond-modal').classList.add('active');
+}
+
+function initFAQ() {
+  var faqs = [
+    { q: '如何开始？', a: '完成四步引导后自动进入游戏。' },
+    { q: '四维属性', a: '操作、意识、心态、指挥，影响行动成功率。' },
+    { q: '体力', a: '消耗体力行动，归零会惩罚。' },
+    { q: '暗线', a: '留意底部文字和右上角红点。' },
+    { q: '反派', a: 'K、苹果、Shadow、林晚，在排名和事件中遇到。' }
+  ];
+  document.getElementById('faqContent').innerHTML = faqs.map(function(f) {
+    return '<div class="faq-item"><div class="faq-q" onclick="this.parentElement.classList.toggle(\'open\')">' + f.q + '</div><div class="faq-a">' + f.a + '</div></div>';
+  }).join('');
+}
+
+function openLogicModal() {
+  var html = '<div style="margin-bottom:12px;"><strong style="color:var(--accent);">游戏状态</strong></div>';
+  html += '<p>游戏: ' + gs.game + ' | 路线: ' + gs.career + ' | 难度: ' + gs.difficulty + '</p>';
+  html += '<p>天数: ' + gs.day + ' | 体力: ' + gs.stamina + '/' + gs.maxStamina + '</p>';
+  html += '<p>属性: 操作' + gs.stats.mech + ' 意识' + gs.stats.awareness + ' 心态' + gs.stats.mental + ' 指挥' + gs.stats.leadership + '</p>';
+  html += '<p>标签: ' + gs.tag + ' (' + gs.tagEffect + ')</p>';
+  document.getElementById('logicContent').innerHTML = html;
+  document.getElementById('logicModal').classList.add('active');
+}
+
+function showNotification(title, msg) {
+  document.getElementById('notifTitle').textContent = title;
+  document.getElementById('notifMsg').textContent = msg;
+  var n = document.getElementById('notification');
+  n.classList.add('show');
+  setTimeout(function() { n.classList.remove('show'); }, 3000);
+}
+
+// ==================== 指令与快速输入 ====================
+function sendInput() {
+  var inp = document.getElementById('playerInput');
+  var text = inp.value.trim();
+  if (!text) return;
+  inp.value = '';
+  if (text.startsWith('/')) {
+    handleCommand(text.substring(1));
+  } else {
+    processPlayerAction(text);
+  }
+}
+
+function handleCommand(cmd) {
+  var parts = cmd.toLowerCase().split(' ');
+  switch (parts[0]) {
+    case 'help':
+      showNotification('命令', '/status /bonds /rank /save /next /map');
+      break;
+    case 'status':
+      showQuickInfo('status');
+      break;
+    case 'bonds':
+      showBondSummary();
+      break;
+    case 'rank':
+      showQuickInfo('ranking');
+      break;
+    case 'save':
+      exportSave();
+      break;
+    case 'next':
+      act('E1');
+      break;
+    case 'map':
+      act('C2');
+      break;
+    default:
+      showNotification('未知命令', '/' + parts[0]);
+  }
+}
+
+function processPlayerAction(text) {
+  var lower = text.toLowerCase();
+  if (lower.includes('训练')) act('A1');
+  else if (lower.includes('排位') || lower.includes('比赛')) act('B1');
+  else if (lower.includes('休息')) act('E1');
+  else log('收到你的想法...', 'story');
+}
+
+function showQuickInfo(type) {
+  switch (type) {
+    case 'status':
+      alert(gs.character.name + ' · ' + gs.career + ' · ' + gs.game + '\n操作' + gs.stats.mech + ' 意识' + gs.stats.awareness + ' 心态' + gs.stats.mental + ' 指挥' + gs.stats.leadership);
+      break;
+    case 'ranking':
+      alert('天梯排名：#' + gs.rank.ladder + ' (' + getRankTier(gs.rank.ladder) + ')');
+      break;
+    case 'bonds':
+      showBondSummary();
+      break;
+    case 'fragments':
+      alert('记忆碎片：' + gs.fragments.length + '片');
+      break;
+  }
+}// ==================== 核心行动执行 ====================
+async function actWithMember(memberId) {
+  closeModal('member-modal');
+  gs.stamina = Math.max(0, gs.stamina - 10);
+
+  var m = SVT.find(function(x) { return x.id === memberId; });
+  if (!m) return;
+
+  var currentBond = gs.svtBonds[m.id] || 0;
+  gs.svtBonds[m.id] = Math.min(5, currentBond + 1);
+  gs.memberLastInteraction[m.id] = gs.day;
+
+  var bond = gs.svtBonds[m.id];
+  var bondNames = ['陌生人', '初识', '熟人', '朋友', '挚友', '灵魂之约'];
+  var bn = bondNames[Math.min(bond, 5)];
+
+  try {
+    var data = await callDS([
+      {
+        role: 'system',
+        content: '你是' + m.name + '，' + m.role + '。性格：' + m.style + '。关系：' + bn + '。可以质疑、调侃或唱反调，不要一味顺从。'
+      },
+      {
+        role: 'user',
+        content: '第' + gs.day + '天。请说话。'
+      }
+    ], 150, 0.85);
+    log(m.name + '（' + bn + '）：' + data.choices[0].message.content.trim() + '  [好感度+1]', 'social');
+  } catch (e) {
+    log(m.name + '（' + bn + '）："正好，想找个人聊聊。"  [好感度+1]', 'social');
+  }
+  endDay();
+}
+
+function act(id) {
+  if (!gs.started) return;
+
+  var r = Math.random();
+  var msg = '';
+  var type = 'train';
+
+  switch (id) {
+    case 'A1':
+      gs.stamina = Math.max(0, gs.stamina - 20);
+      if (r < 0.4) {
+        gs.stats.mech = Math.min(10, gs.stats.mech + 1);
+        msg = '高强度训练成功，操作+1。';
+        gs.consecutiveSame = gs.lastTrainType === 'A1' ? gs.consecutiveSame + 1 : 1;
+        gs.lastTrainType = 'A1';
+      } else if (r < 0.7) {
+        msg = '高强度训练完成，属性未提升。';
+        gs.consecutiveSame = 0;
+        gs.lastTrainType = 'A1';
+      } else {
+        gs.stats.mech = Math.max(1, gs.stats.mech - 1);
+        msg = '训练过度，操作-1。';
+        gs.consecutiveSame = 0;
+        gs.lastTrainType = 'A1';
+      }
+      break;
+
+    case 'A2':
+      gs.stamina = Math.max(0, gs.stamina - 10);
+      if (r < 0.2) {
+        gs.stats.mech = Math.min(10, gs.stats.mech + 1);
+        gs.stats.awareness = Math.min(10, gs.stats.awareness + 1);
+        msg = '常规训练效果显著，操作+1，意识+1。';
+        gs.consecutiveSame = gs.lastTrainType === 'A2' ? gs.consecutiveSame + 1 : 1;
+        gs.lastTrainType = 'A2';
+      } else if (r < 0.4) {
+        gs.stats.mech = Math.min(10, gs.stats.mech + 1);
+        msg = '常规训练完成，操作+1。';
+        gs.consecutiveSame = gs.lastTrainType === 'A2' ? gs.consecutiveSame + 1 : 1;
+        gs.lastTrainType = 'A2';
+      } else {
+        msg = '常规训练完成。';
+        gs.consecutiveSame = 0;
+        gs.lastTrainType = 'A2';
+      }
+      break;
+
+    case 'A3':
+      gs.stamina = Math.max(0, gs.stamina - 10);
+      if (r < 0.3) {
+        gs.stats.awareness = Math.min(10, gs.stats.awareness + 1);
+        msg = '复盘有新发现，意识+1。';
+        gs.consecutiveSame = gs.lastTrainType === 'A3' ? gs.consecutiveSame + 1 : 1;
+        gs.lastTrainType = 'A3';
+      } else {
+        msg = '仔细复盘了录像。';
+        gs.consecutiveSame = 0;
+        gs.lastTrainType = 'A3';
+      }
+      break;
+
+    case 'A4':
+      gs.stamina = Math.max(0, gs.stamina - 10);
+      if (r < 0.3) {
+        gs.stats.mental = Math.min(10, gs.stats.mental + 1);
+        msg = '心理特训有效，心态+1。';
+        gs.consecutiveSame = gs.lastTrainType === 'A4' ? gs.consecutiveSame + 1 : 1;
+        gs.lastTrainType = 'A4';
+      } else {
+        msg = '调整了呼吸，心态更稳了。';
+        gs.consecutiveSame = 0;
+        gs.lastTrainType = 'A4';
+      }
+      break;
+
+    case 'B1':
+      type = 'match';
+      gs.stamina = Math.max(0, gs.stamina - 15);
+      gs.rank.ladder = Math.max(1, gs.rank.ladder - Math.floor(Math.random() * 500));
+      if (r < 0.3) {
+        gs.rank.ladder = Math.max(1, gs.rank.ladder - 300);
+        msg = '天梯连胜，排名 #' + gs.rank.ladder;
+        gs.consecutiveDrop = 0;
+      } else if (r < 0.7) {
+        gs.rank.ladder += Math.floor(Math.random() * 200);
+        msg = '有输有赢，排名 #' + gs.rank.ladder;
+        gs.consecutiveDrop = r > 0.5 ? gs.consecutiveDrop + 1 : 0;
+      } else {
+        gs.rank.ladder += Math.floor(Math.random() * 400);
+        msg = '天梯连败，排名 #' + gs.rank.ladder;
+        gs.consecutiveDrop++;
+      }
+      break;
+
+    case 'B3':
+      gs.stamina = Math.max(0, gs.stamina - 10);
+      msg = '自定义练习。手感有所提升。';
+      break;
+
+    case 'C2':
+      type = 'social';
+      gs.stamina = Math.max(0, gs.stamina - 10);
+      var maps = ['训练基地', '天梯排位区', '线下赛馆', '网咖', '直播区', '商业区', '休整区', '社交区'];
+      var map = maps[Math.floor(Math.random() * 8)];
+      triggerCoreEncounter(map);
+      msg = '探索了 ' + map + '。';
+      break;
+
+    case 'E1':
+      type = 'rest';
+      gs.stamina = Math.min(100, gs.stamina + 30);
+      msg = '休息了一天，体力恢复+30。';
+      break;
+
+    case 'E2':
+      type = 'rest';
+      gs.stamina = Math.max(0, gs.stamina - 10);
+      gs.stamina = Math.min(100, gs.stamina + 10);
+      msg = '外出散步放松。';
+      break;
+  }
+
+  log(msg, type);
+  endDay();
+}
+
+// ==================== 每日结算 ====================
+function endDay() {
+  gs.day++;
+  gs.seasonDay++;
+
+  if (gs.seasonDay > 30) {
+    gs.seasonDay = 1;
+    var seasons = ['春', '夏', '秋', '冬'];
+    var idx = seasons.indexOf(gs.season);
+    gs.season = seasons[(idx + 1) % 4];
+    triggerSeasonEvent();
+  }
+
+  if (gs.staminaPenaltyActive) {
+    gs.staminaPenaltyDays--;
+    if (gs.staminaPenaltyDays <= 0) {
+      gs.staminaPenaltyActive = false;
+      log('体力惩罚结束，你的状态恢复了。', 'rest');
+    }
+  }
+
+  if (gs.stamina <= 0) {
+    gs.stamina = 30;
+    ['mech', 'awareness', 'mental', 'leadership'].forEach(function(k) {
+      gs.stats[k] = Math.max(1, gs.stats[k] - 2);
+    });
+    gs.staminaPenaltyDays = 3;
+    gs.staminaPenaltyActive = true;
+    log('体力归零。强制休息，全属性-2，持续3天。', 'story');
+  }
+
+  gs.stamina = Math.min(100, gs.stamina + 50);
+  logDaySep();
+
+  checkShadow();
+  checkVillains();
+  check8094();
+  checkEndings();
+
+  updateUI();
+  if (gs.day >= 3) dismissGuide();
+}
+
+// ==================== 赛季事件 ====================
+async function triggerSeasonEvent() {
+  var events = {
+    '春': '春季赛即将开幕，训练基地里的气氛紧张了起来。',
+    '夏': '夏日集训营开始了。所有人都在为赛季冲刺。',
+    '秋': '世界赛的大门正在打开。这是证明自己的最佳时机。',
+    '冬': '全明星周末。一年的努力即将迎来盘点。'
+  };
+  var base = events[gs.season] || '';
+
+  try {
+    var data = await callDS([
+      {
+        role: 'system',
+        content: '季节事件：' + base + ' 请用简练文字扩展这个事件描述（2-3句话），融入玩家当前的状态。玩家主攻' + gs.game + '，排名#' + gs.rank.ladder + '。'
+      }
+    ], 120, 0.8);
+    log('[' + gs.season + '季事件] ' + data.choices[0].message.content.trim(), 'story');
+  } catch (e) {
+    log('[' + gs.season + '季事件] ' + base, 'story');
+  }
+}
+
+// ==================== 反派系统 ====================
+function checkVillains() {
+  if (!gs.villains.K.seen && gs.rank.ladder <= 5000) {
+    gs.villains.K.seen = true;
+    gs.villains.K.stage = 1;
+    log('天梯前5000中，一个名字反复出现——K。顶级战队的明星选手。', 'villain');
+    shadowProactive('villain', 'K');
+  }
+  if (!gs.villains.linwan.seen && gs.rank.popularity <= 10000) {
+    gs.villains.linwan.seen = true;
+    gs.villains.linwan.stage = 1;
+    log('林晚——前职业转媒体人——联系了你。她以犀利评论著称。', 'villain');
+  }
+  if (!gs.villains.apple.seen && gs.rank.ladder <= 5000 && gs.rank.popularity <= 5000) {
+    gs.villains.apple.seen = true;
+    gs.villains.apple.stage = 1;
+    log('苹果——某经纪公司CEO——开始关注你的商业价值。', 'villain');
+  }
+  if (!gs.villains.shadow.seen && gs.fragments.length >= 5) {
+    gs.villains.shadow.seen = true;
+    gs.villains.shadow.stage = 1;
+    log('账号异常登录。Shadow——匿名黑客——留下了痕迹。', 'villain');
+  }
+  if (allVillainsSeen() && !gs.strategyUsed) {
+    triggerStrategyEvent();
+  }
+}
+
+function allVillainsSeen() {
+  return gs.villains.K.seen && gs.villains.linwan.seen && gs.villains.apple.seen && gs.villains.shadow.seen;
+}
+
+async function triggerStrategyEvent() {
+  gs.strategyUsed = true;
+  document.getElementById('strategyTitle').textContent = '四方围城 · 赛前抉择';
+
+  var opts = [
+    { text: '正面迎战', desc: '以最强个人能力突破包围' },
+    { text: '寻找盟友', desc: '团结一切可以团结的力量' },
+    { text: '出奇制胜', desc: '用非对称战术打破僵局' }
+  ];
+
+  document.getElementById('strategyOptions').innerHTML = opts.map(function(o) {
+    return '<div class="strategy-opt" onclick="executeStrategy(\'' + o.text + '\')">' + o.text + '<br><small>' + o.desc + '</small></div>';
+  }).join('');
+
+  document.getElementById('strategy-modal').classList.add('active');
+}
+
+function executeStrategy(name) {
+  closeModal('strategy-modal');
+  log('战术选择：' + name, 'match');
+
+  if (Math.random() < 0.5) {
+    gs.stats.mech = Math.min(10, gs.stats.mech + 1);
+    log('战术成功！' + name + '执行完美。', 'match');
+  } else {
+    log('战术失败。' + name + '未能如愿，但学到了教训。', 'villain');
+  }
+}
+
+function submitStrategyFree() {
+  var text = document.getElementById('strategyFreeInput').value.trim();
+  if (!text) return;
+  closeModal('strategy-modal');
+  log('自定义战术：' + text + '。这是一次大胆的尝试。', 'match');
+}
+
+// ==================== 奇遇系统 ====================
+var CORE_ENCOUNTERS = {
+  '训练基地': ['深夜的钢琴声', '停电之夜'],
+  '天梯排位区': ['宿命匹配'],
+  '线下赛馆': ['后台迷路', '熟悉的陌生人'],
+  '网咖': ['通宵区的陌生人', '凌晨三点的舞蹈'],
+  '直播区': ['直播间乱入'],
+  '商业区': ['雨天同伞'],
+  '休整区': ['宿舍漏水事件'],
+  '社交区': ['那一杯的味道', '乐器的记忆']
+};
+
+function triggerCoreEncounter(map) {
+  var encounters = CORE_ENCOUNTERS[map] || [];
+  var remaining = encounters.filter(function(e) {
+    return !gs.coreEncounters[e];
+  });
+
+  if (remaining.length === 0 || Math.random() > 0.3) return false;
+
+  var enc = remaining[Math.floor(Math.random() * remaining.length)];
+  gs.coreEncounters[enc] = true;
+  generateEncounterText(map, enc);
+  return true;
+}
+
+async function generateEncounterText(map, enc) {
+  try {
+    var data = await callDS([
+      {
+        role: 'system',
+        content: '你是游戏叙述者。玩家在' + gs.game + '的地图"' + map + '"触发了奇遇"' + enc + '"。当前第' + gs.day + '天，排名#' + gs.rank.ladder + '。请用简练文字描述这个奇遇（2-3句话），让它和当前剧情有些关联。'
+      }
+    ], 150, 0.85);
+    log('[奇遇·' + map + '] ' + data.choices[0].message.content.trim(), 'story');
+  } catch (e) {
+    log('[奇遇·' + map + '] ' + enc + '。你隐约觉得这不是最后一次遇到这样的事。', 'story');
+  }
+}
+
+// ==================== 8094 援护系统 ====================
+function check8094() {
+  if (gs.n8094used >= 2) return;
+
+  var trigger = false;
+  if (gs.consecutiveFail >= 3 && gs.n8094 < 1) trigger = true;
+  if (gs.rank.ladder > 20000 && gs.day > 30 && gs.n8094 < 2) trigger = true;
+  if (gs.day - gs.shadowLastDay > 15 && gs.n8094 < 2) trigger = true;
+
+  if (!trigger) return;
+
+  gs.n8094++;
+  gs.n8094used++;
+  trigger8094();
+}
+
+async function trigger8094() {
+  try {
+    var reason = gs.consecutiveFail >= 3 ? '玩家连续检定失败' :
+                 gs.rank.ladder > 20000 ? '玩家面临淘汰危机' :
+                 '玩家停滞太久';
+
+    var data = await callDS([
+      {
+        role: 'system',
+        content: '你是8094——神秘的无名援手。你的身份永不完全揭示。你这次出现是因为：' + reason + '。你留下一张纸条或一个线索，间接帮助玩家。简短（1-2句话）。'
+      }
+    ], 120, 0.85);
+
+    var text = data.choices[0].message.content.trim();
+    log('[8094援护·第' + gs.n8094 + '次] ' + text, 'story');
+    gs.n8094history.push({ day: gs.day, text: text });
+  } catch (e) {
+    log('[8094援护] 桌上多了一张纸条。上面只有一行字。', 'story');
+  }
+}// ==================== 暗线系统 ====================
+function shadowProactive(reason, context) {
+  if (reason === 'villain' && Math.random() < 0.6) {
+    var msg = '小心。' + context + '上次出现的时候，我没准备好。你这次——自己看。';
+    gs.shadowPending = {
+      text: msg,
+      trig: { t: 'proactive' },
+      day: gs.day,
+      id: Date.now(),
+      replied: false
+    };
+    gs.shadowHistory.push(gs.shadowPending);
+    showToast(msg);
+    addChat('them', msg);
+    log('「' + msg + '」', 'shadow');
+    showDot();
+  }
+}
+
+function checkShadow() {
+  if (gs.day - gs.shadowLastDay < gs.shadowCooldown) return;
+
+  var trigs = [];
+
+  if (gs.stamina === 30) trigs.push({ t: 'stamina_30', p: 1, ctx: '体力刚好30' });
+  if (gs.consecutiveSame >= 2) trigs.push({ t: 'consecutive_train', p: 2, ctx: '连续同类训练' });
+  if (Object.values(gs.stats).some(function(v) { return v >= 8; })) trigs.push({ t: 'stat_8', p: 1, ctx: '属性突破8' });
+  if (gs.rank.ladder <= 5000) trigs.push({ t: 'rank_5000', p: 2, ctx: '排名前5000' });
+  if (gs.consecutiveDrop >= 3) trigs.push({ t: 'rank_drop', p: 1, ctx: '连败' });
+  if (Math.abs(gs.rank.ladder - 8094) <= 100) trigs.push({ t: 'near_8094', p: 3, ctx: '接近#8094' });
+
+  for (var mid in gs.svtBonds) {
+    if (gs.svtBonds[mid] === 3) {
+      var m3 = SVT.find(function(x) { return x.id == mid; });
+      trigs.push({ t: 'bond_lv3', p: 2, ctx: '与' + (m3 ? m3.name : '成员') + '羁绊Lv.3' });
+    }
+    if (gs.svtBonds[mid] === 4) {
+      var m4 = SVT.find(function(x) { return x.id == mid; });
+      trigs.push({ t: 'bond_lv4', p: 2, ctx: '与' + (m4 ? m4.name : '成员') + '羁绊Lv.4' });
+    }
+  }
+
+  for (var mid2 in gs.memberLastInteraction) {
+    if (gs.day - gs.memberLastInteraction[mid2] >= 7 && gs.memberLastInteraction[mid2] > 0) {
+      trigs.push({ t: 'neglect', p: 1, ctx: '冷落成员' });
+    }
+  }
+
+  var hour = new Date().getHours();
+  if (hour >= 22 || hour <= 5) trigs.push({ t: 'late', p: 3, ctx: '深夜' });
+  if (gs.day - gs.shadowLastDay >= 7) trigs.push({ t: 'long_silence', p: 5, ctx: '久未触发' });
+  if (gs.shadowIgnore >= 3) trigs.push({ t: 'ignored', p: 4, ctx: '被忽略' });
+
+  if (!trigs.length) return;
+
+  trigs.sort(function(a, b) { return b.p - a.p; });
+  var sel = trigs[0];
+
+  var probs = {
+    stamina_30: 0.8, consecutive_train: 0.3, stat_8: 0.7,
+    rank_5000: 0.55, rank_drop: 0.7, near_8094: 0.85,
+    bond_lv3: 0.55, bond_lv4: 0.65, neglect: 0.4,
+    late: 0.45, long_silence: 1.0, ignored: 0.9
+  };
+
+  if (Math.random() > (probs[sel.t] || 0.3)) return;
+
+  gs.shadowLastDay = gs.day;
+  gs.shadowCooldown = Math.floor(Math.random() * 3) + 1;
+  triggerShadow(sel);
+}
+
+async function triggerShadow(trig) {
+  showToast('...');
+
+  try {
+    var data = await callDS([
+      {
+        role: 'system',
+        content: '你是"另一个自己"——玩家在上一次时间循环里的回声。不要总是温和鼓励，可以质疑、嘲讽、唱反调，但出发点是为了让玩家看清自己。简短2-4句。当前：第' + gs.day + '天，' + gs.game + '，体力' + gs.stamina + '。' + (gs.shadowIgnore >= 3 ? '玩家已经很久没回应你了。' : '')
+      },
+      {
+        role: 'user',
+        content: '触发情境：' + trig.ctx + '。请以"另一个自己"的身份说一段话。'
+      }
+    ], 150, 0.9);
+
+    var msg = data.choices[0].message.content.trim();
+
+    gs.shadowPending = {
+      text: msg,
+      trig: trig,
+      day: gs.day,
+      id: Date.now(),
+      replied: false
+    };
+    gs.shadowHistory.push(gs.shadowPending);
+
+    showToast(msg);
+    addChat('them', msg);
+    log('「' + msg + '」', 'shadow');
+
+    if (!gs.shadowGuideShown) {
+      document.getElementById('shadow-guide-modal').style.display = 'flex';
+      gs.shadowGuideShown = true;
+    }
+
+    showDot();
+
+    if (gs.shadowIgnore >= 3) {
+      document.getElementById('shadow-dot').classList.add('blink');
+    }
+  } catch (e) {
+    var fb = {
+      stamina_30: '30了。上次我选了继续——然后输了。',
+      ignored: '你在躲我。',
+      long_silence: '最近没什么特别的。但我在。'
+    };
+    var msg = fb[trig.t] || '我在看。';
+
+    gs.shadowPending = {
+      text: msg,
+      trig: trig,
+      day: gs.day,
+      id: Date.now(),
+      replied: false
+    };
+    gs.shadowHistory.push(gs.shadowPending);
+
+    showToast(msg);
+    addChat('them', msg);
+    log('「' + msg + '」', 'shadow');
+
+    if (!gs.shadowGuideShown) {
+      document.getElementById('shadow-guide-modal').style.display = 'flex';
+      gs.shadowGuideShown = true;
+    }
+    showDot();
+  }
+}
+
+function showToast(text) {
+  document.getElementById('toastText').textContent = text;
+  document.getElementById('shadow-toast').classList.add('show');
+  setTimeout(function() {
+    document.getElementById('shadow-toast').classList.remove('show');
+  }, 5000);
+}
+
+function showDot() {
+  document.getElementById('shadow-dot').classList.add('show');
+}
+
+function openShadowChat() {
+  document.getElementById('shadow-chat').classList.add('open');
+  document.getElementById('chatBackdrop').classList.add('show');
+  document.getElementById('shadow-dot').classList.remove('show', 'blink');
+  updateChatActs();
+}
+
+function closeShadowChat() {
+  document.getElementById('shadow-chat').classList.remove('open');
+  document.getElementById('chatBackdrop').classList.remove('show');
+}
+
+function addChat(type, text) {
+  var container = document.getElementById('chatMsgs');
+  var div = document.createElement('div');
+  div.className = 'chat-msg ' + type;
+  div.textContent = text;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function updateChatActs() {
+  var acts = document.getElementById('chatActs');
+  var last = gs.shadowPending;
+
+  if (last && !last.replied) {
+    acts.innerHTML =
+      '<button class="chat-act" onclick="replyShadow(1)">1. 回应</button>' +
+      '<button class="chat-act" onclick="replyShadow(2)">2. 追问</button>' +
+      '<button class="chat-act" onclick="replyShadow(3)">3. 沉默</button>' +
+      '<input class="chat-free-input" id="chatFreeInput" placeholder="或自由输入..." onkeydown="if(event.key===\'Enter\')replyShadowFree()">';
+  } else {
+    acts.innerHTML = '<span style="color:rgba(255,255,255,0.15);font-size:0.65rem;">等待下一次回声</span>';
+  }
+}
+
+async function replyShadow(opt) {
+  var last = gs.shadowPending;
+  if (!last || last.replied) return;
+
+  last.replied = opt;
+  gs.shadowIgnore = opt === 3 ? gs.shadowIgnore + 1 : 0;
+
+  if (opt === 1) gs.shadowStyle = 'warm';
+  if (opt === 2) gs.shadowStyle = 'sharp';
+  if (opt === 3) gs.shadowStyle = 'distant';
+
+  var labels = { 1: '...', 2: '...', 3: '（沉默）' };
+  addChat('me', labels[opt]);
+
+  if (opt === 3) {
+    closeShadowChat();
+    updateChatActs();
+    return;
+  }
+
+  addChat('them', '...');
+
+  try {
+    var data = await callDS([
+      { role: 'system', content: '你是"另一个自己"。可以反驳玩家，不要一味附和。简短回复1-2句。' },
+      { role: 'user', content: '玩家回应了。请简短回复。' }
+    ], 80, 0.9);
+    document.getElementById('chatMsgs').lastChild.textContent = data.choices[0].message.content.trim();
+  } catch (e) {
+    document.getElementById('chatMsgs').lastChild.textContent = '...（信号中断）';
+  }
+  updateChatActs();
+}
+
+async function replyShadowFree() {
+  var input = document.getElementById('chatFreeInput');
+  var text = input.value.trim();
+  if (!text) return;
+
+  var last = gs.shadowPending;
+  if (!last || last.replied) return;
+
+  last.replied = 4;
+  addChat('me', text);
+
+  var warmWords = ['谢谢', '加油', '一起', '相信'];
+  var sharpWords = ['为什么', '骗人', '假的', '够了'];
+  var lower = text.toLowerCase();
+
+  if (warmWords.some(function(w) { return lower.includes(w); })) {
+    gs.shadowStyle = 'warm';
+  }
+  if (sharpWords.some(function(w) { return lower.includes(w); })) {
+    gs.shadowStyle = 'sharp';
+  }
+
+  addChat('them', '...');
+
+  try {
+    var data = await callDS([
+      { role: 'system', content: '你是"另一个自己"。可以唱反调。简短回复。' },
+      { role: 'user', content: '玩家说："' + text + '"。回复。' }
+    ], 80, 0.9);
+    document.getElementById('chatMsgs').lastChild.textContent = data.choices[0].message.content.trim();
+  } catch (e) {
+    document.getElementById('chatMsgs').lastChild.textContent = '...（信号中断）';
+  }
+
+  input.value = '';
+  updateChatActs();
+}
+
+// ==================== 结局系统 ====================
+var ENDING_CONDITIONS = [
+  {
+    id: 'peak_promise',
+    name: '巅峰之约',
+    check: function() {
+      return gs.rank.ladder <= 200 && gs.romance && Object.values(gs.svtBonds).some(function(b) { return b >= 5; });
+    }
+  },
+  {
+    id: 'pure_competitor',
+    name: '纯粹的竞技者',
+    check: function() {
+      return gs.rank.ladder <= 200 && !gs.romance;
+    }
+  },
+  {
+    id: 'lonely_king',
+    name: '孤独的王者',
+    check: function() {
+      return gs.rank.ladder <= 200 && Object.values(gs.svtBonds).filter(function(b) { return b >= 3; }).length < 3;
+    }
+  },
+  {
+    id: 'ordinary_light',
+    name: '平凡之光',
+    check: function() {
+      return gs.rank.ladder > 200 && Object.values(gs.svtBonds).filter(function(b) { return b >= 4; }).length >= 10;
+    }
+  },
+  {
+    id: 'another_life',
+    name: '另一种人生',
+    check: function() {
+      return gs.day >= 60 && gs.rank.ladder > 10000;
+    }
+  },
+  {
+    id: 'nameless_watch',
+    name: '无名守望',
+    check: function() {
+      return gs.n8094 >= 2 && gs.shadowIgnore >= 5;
+    }
+  }
+];
+
+function checkEndings() {
+  for (var i = 0; i < ENDING_CONDITIONS.length; i++) {
+    var ending = ENDING_CONDITIONS[i];
+    if (gs.endingsTriggered.indexOf(ending.id) === -1 && ending.check()) {
+      gs.endingsTriggered.push(ending.id);
+      triggerEnding(ending);
+    }
+  }
+}
+
+async function triggerEnding(ending) {
+  log('你触发了结局：【' + ending.name + '】', 'story');
+
+  try {
+    var summary = '主攻游戏：' + gs.game + ' | 职业路线：' + gs.career + ' | 难度：' + gs.difficulty + ' | 第' + gs.day + '天 | 排名：#' + gs.rank.ladder;
+
+    var data = await callDS([
+      {
+        role: 'system',
+        content: '你是这个电竞故事的叙述者。玩家触发了一个结局："' + ending.name + '"。"。以下是他/她的完整旅程摘要：' + summary + '请用诗意、深沉的文字写出这个结局的叙述（100-200字），让这个结局独一无二。'
+      }
+    ], 300, 0.8);
+
+    var text = data.choices[0].message.content.trim();
+
+    document.getElementById('endingContent').innerHTML =
+      '<h3 style="color:var(--accent);">' + ending.name + '</h3>' +
+      '<p style="white-space:pre-wrap;">' + text + '</p>' +
+      '<div style="margin-top:16px;display:flex;gap:8px;">' +
+        '<button class="modal-close-btn" onclick="continueAfterEnding()">继续前行</button>' +
+        '<button class="modal-close-btn" onclick="closeModal(\'ending-modal\')">在此停下</button>' +
+      '</div>';
+
+    document.getElementById('ending-modal').classList.add('active');
+  } catch (e) {
+    log('结局：【' + ending.name + '】。你走到了一个终点。', 'story');
+  }
+}
+
+function continueAfterEnding() {
+  closeModal('ending-modal');
+  log('你选择继续前行。这条路还没有走完。', 'story');
+}
+
+// ==================== 存档系统 ====================
+function exportSave() {
+  var save = JSON.stringify(gs, null, 2);
+  var blob = new Blob([save], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'svt_save_day' + gs.day + '.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  log('存档已导出。', 'story');
+}
+
+function importSave() {
+  var input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.json';
+  input.onchange = function(e) {
+    var file = e.target.files[0];
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      try {
+        var data = JSON.parse(ev.target.result);
+        gs = data;
+        updateUI();
+        log('存档已导入。欢迎回来。', 'story');
+      } catch (err) {
+        alert('存档文件无效');
+      }
+    };
+    reader.readAsText(file);
+  };
+  input.click();
+}
+
+// ==================== API 设置管理 ====================
+function saveApiSettings() {
+  var key = document.getElementById('apiKeyModal').value.trim();
+  if (key) {
+    localStorage.setItem('ds_api_key', key);
+    gs.apiKey = key;
+    showNotification('已保存', 'API Key 已更新');
+  }
+  closeModal('apiModal');
+}
+
+// ==================== 初始化 ====================
+updateUI();
 </script>
 </body>
 </html>
